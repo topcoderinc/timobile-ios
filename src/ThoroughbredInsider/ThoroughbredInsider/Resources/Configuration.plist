@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>testEmail</key>
-	<string>t@t.tt</string>
+	<string>abc@gmail.com</string>
 	<key>testPassword</key>
-	<string>tt</string>
+	<string>123456</string>
 </dict>
 </plist>
