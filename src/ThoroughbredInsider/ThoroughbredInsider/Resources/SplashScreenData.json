@@ -1,0 +1,27 @@
+[
+  {
+    "title": "A self-guide app with fun interactions",
+    "contentText": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    "imageName": "pic3"
+  },
+  {
+    "title": "Play more to unlock badges and cards!",
+    "contentText": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    "imageName": "pic2"
+  },
+  {
+    "title": "Gather points to gain more rewards!",
+    "contentText": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    "imageName": "pic1"
+  },
+ {
+ "title": "Page 4",
+ "contentText": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. ",
+ "imageName": "pic3"
+ },
+ {
+ "title": "Page 5!",
+ "contentText": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. ",
+ "imageName": "pic2"
+ }
+]

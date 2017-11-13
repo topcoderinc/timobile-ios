@@ -1,0 +1,14 @@
+{
+	"chapter2": [
+		{
+			"chapterId": 2,
+			"title": "chapter2",
+			"race": {
+				"id": 1,
+				"kode": "CA",
+				"name": "Barrets"
+					}
+			"content": "something"
+		}
+ ]
+}

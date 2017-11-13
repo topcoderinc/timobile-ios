@@ -1,0 +1,52 @@
+{
+	"stories": [
+		{
+			"id": 1,
+			"image": "http://mock.img/horse1.jpg",
+			"name": "Story1",
+			"race": {
+				"id": 1,
+				"code": "CA",
+				"name": "Barrets"
+			},
+			"content": "Ut wisi enim ad minim veniam quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea...",
+			"chapters": 8,
+			"cards": 3,
+			"miles": 250,
+			"lat": 53.899419,
+			"long": 27.507618
+		},
+		{
+			"id": 2,
+			"image": "http://mock.img/horse2.jpg",
+			"name": "Story2",
+			"race": {
+				"id": 1,
+				"code": "CA",
+				"name": "Barrets"
+			},
+			"content": "Ut wisi enim ad minim veniam quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea...",
+			"chapters": 6,
+			"cards": 2,
+			"miles": 250,
+			"lat": 53.899419,
+			"long": 27.517618
+		},
+		{
+			"id": 3,
+			"image": "http://mock.img/horse3.jpg",
+			"name": "Story3",
+			"race": {
+				"id": 1,
+				"code": "CA",
+				"name": "Barrets"
+			},
+			"content": "Ut wisi enim ad minim veniam quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea...",
+			"chapters": 4,
+			"cards": 2,
+			"miles": 250,
+			"lat": 53.898319,
+			"long": 27.527618
+		}
+ ]
+}

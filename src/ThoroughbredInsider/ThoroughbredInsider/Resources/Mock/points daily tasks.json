@@ -1,0 +1,27 @@
+{
+			"achivements": [
+				{
+				"id": 11,
+				"isDaily": true,
+				"name": "Completed 1 storyline",
+				"content": "Eodem modo typi qui nunc nobis videntur parum clari fiant.",
+				"pts": 50,
+				"completed": true
+				},
+				{
+				"id": 12,
+				"isDaily": true,
+				"name": "Watch ad",
+				"content": "Eodem modo typi qui nunc nobis videntur parum clari fiant.",
+				"pts": 50,
+				"completed": true
+				},
+				{
+				"id": 13,
+				"isDaily": true,
+				"name": "Sleep a bit",
+				"content": "Eodem modo typi qui nunc nobis videntur parum clari fiant.",
+				"pts": 50
+				}
+	]
+}

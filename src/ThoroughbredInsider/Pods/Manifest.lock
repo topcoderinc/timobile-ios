@@ -1,0 +1,47 @@
+PODS:
+  - Differentiator (3.0.1)
+  - IQKeyboardManagerSwift (5.0.4)
+  - NSObject+Rx (4.2.0):
+    - RxSwift (~> 4.0)
+  - Realm (3.0.1):
+    - Realm/Headers (= 3.0.1)
+  - Realm/Headers (3.0.1)
+  - RealmSwift (3.0.1):
+    - Realm (= 3.0.1)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.1):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxRealm (0.7.4):
+    - RealmSwift (~> 3.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - NSObject+Rx
+  - RealmSwift
+  - RxCocoa
+  - RxDataSources
+  - RxRealm
+  - RxSwift
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
+  IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
+  NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
+  Realm: ba6144c74f835f7497791f6599d63a7755377b83
+  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
+  RxRealm: 9e203070a6adadd8f2592b58bbc9c8cc40aa35ec
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: 5617dfc1e80f917b359b71b8b3a3deef9f127c67
+
+COCOAPODS: 1.3.1

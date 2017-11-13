@@ -1,0 +1,6 @@
+framework module Pods_ThoroughbredInsider {
+  umbrella header "Pods-ThoroughbredInsider-umbrella.h"
+
+  export *
+  module * { export * }
+}

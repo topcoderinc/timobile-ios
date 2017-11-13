@@ -1,0 +1,10 @@
+{
+	"badge": [
+		{
+			"id": 1,
+			"image": "http://logo1.jpg",
+			"name": "Badge",
+			"content": "something"
+		}
+ ]
+}
