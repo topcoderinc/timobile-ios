@@ -24,6 +24,6 @@ class StoryProgress: Object {
     @objc dynamic var completed = false
     @objc dynamic var cardsAndRewardsReceived = false
     @objc dynamic var additionalTaskCompleted = false
-    var chaptersUserProgress = List<ChapterStoryProgress>()
+    var chaptersUserProgress = List<ChapterProgress>()
 }
 

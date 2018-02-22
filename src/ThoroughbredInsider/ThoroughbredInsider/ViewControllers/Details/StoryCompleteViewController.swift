@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -40,7 +40,7 @@ class StoryCompleteViewController: UIViewController {
             cell.titleLabel.text = value.name
             cell.rewardImage.load(url: value.image)
         }
-        let rewards = story.rewards.toArray()
+        let rewards = story.cards.toArray()
         let font = cardsDescription.font!
         let bold = UIFont(name: "OpenSans-Bold", size: 14.0)!
         let attributedString = NSMutableAttributedString(string: "Wow! You have unlocked ", attributes: [.font: font])

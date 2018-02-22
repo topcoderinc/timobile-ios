@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//Copyright © 2017 Topcoder. All rights reserved.
+//Copyright © 2018  topcoder. All rights reserved.
 //
 
 import Foundation
@@ -19,21 +19,40 @@ class Story: Object {
     
     /// fields
     @objc dynamic var id = 0
-    @objc dynamic var code = ""
-    @objc dynamic var name = ""
-    @objc dynamic var image = ""
-    @objc dynamic var race: Racetrack?
-    @objc dynamic var content = ""
-    @objc dynamic var chapters = 0
-    @objc dynamic var cards = 0
-    @objc dynamic var miles = 0
-    @objc dynamic var lat: Double = 0
-    @objc dynamic var long: Double = 0
+    @objc dynamic var title = ""
+    @objc dynamic var subtitle = ""
+    @objc dynamic var largeImageURL = ""
+    @objc dynamic var smallImageURL = ""
     @objc dynamic var bookmarked = false
+    @objc dynamic var rewardsReceived = false
+    @objc dynamic var completed = false
+    @objc dynamic var racetrack: Racetrack!
+    @objc dynamic var badge: Badge?
+    @objc dynamic var additionalTask: AdditionalTask?
+    var cards = List<Card>()
+    var chapters = List<Chapter>()
+    var tags = List<Tag>()    
     
     /// primary key
     override class func primaryKey() -> String? {
         return "id"
+    }
+    
+    /// ignored properties
+    ///
+    /// - Returns: ignored properties
+    override static func ignoredProperties() -> [String] {
+        return ["summary"]
+    }
+    
+}
+
+// MARK: - ignored fields
+extension Story {
+    
+    /// summary text
+    var summary: String {
+        return chapters.map { $0.content }.joined(separator: " ")
     }
     
 }

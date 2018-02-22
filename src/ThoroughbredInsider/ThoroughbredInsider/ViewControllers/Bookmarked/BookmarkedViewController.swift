@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -38,14 +38,14 @@ class BookmarkedViewController: RootViewController {
     func setupVM() {
         vm = RealmTableViewModel<Story, StoryCell>()
         vm.configureCell = { _, value, _, cell in
-            cell.storyImage.load(url: value.image)
-            cell.titleLabel.text = value.name
-            cell.racetrackLabel.text = value.race?.name
-            cell.shortDescriptionLabel.text = value.content
+            cell.storyImage.load(url: value.smallImageURL)
+            cell.titleLabel.text = value.title
+            cell.racetrackLabel.text = value.racetrack?.name
+            cell.shortDescriptionLabel.text = value.subtitle
             cell.shortDescriptionLabel.setLineHeight(16)
             cell.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
             cell.cardsLabel.text = "\(value.cards) \("cards".localized)"
-            cell.milesLabel.text = "\(value.miles) \("miles".localized)"
+            cell.milesLabel.text = value.racetrack.distanceText
         }
         vm.onSelect = { [weak self] idx, value in
             guard let vc = self?.create(viewController: StoryDetailsViewController.self, storyboard: .details) else { return }
@@ -53,7 +53,7 @@ class BookmarkedViewController: RootViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
             self?.tableView.deselectRow(at: IndexPath.init(row: idx, section: 0), animated: true)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: NSPredicate(format: "bookmarked = true"))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "title")], predicate: NSPredicate(format: "bookmarked = true"))
     }
 
 }

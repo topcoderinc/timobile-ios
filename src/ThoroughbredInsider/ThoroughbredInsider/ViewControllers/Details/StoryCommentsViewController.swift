@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -93,10 +93,10 @@ class StoryCommentsViewController: UIViewController {
     /// Load data
     private func loadData() {
         noDataLabel.isHidden = true
-        RestDataSource.getStoryComments(id: story.id)
+        RestDataSource.getStoryComments(trackStoryId: story.id)
             .showLoading(on: view)
             .subscribe(onNext: { [weak self] value in
-                self?.vm.entries.value.append(contentsOf: value)
+                self?.vm.entries.value.append(contentsOf: value.items)
                 self?.noDataLabel.isHidden = self?.vm.entries.value.isEmpty == false
             }).disposed(by: rx.bag)
     }
@@ -115,7 +115,6 @@ class StoryCommentsViewController: UIViewController {
         keyboardTF.resignFirstResponder()
         fakeInputView.resignFirstResponder()
         let comment = Comment.create()
-        comment.timestamp = Date().timeIntervalSince1970
         comment.text = keyboardTF.textValue
         vm.entries.value.insert(comment, at: 0)
         noDataLabel.isHidden = true
@@ -198,10 +197,10 @@ class CommentCell: UITableViewCell {
     ///   - comment: the comment
     func configure(_ comment: Comment) {
         item = comment
-        nameLabel.text = comment.name
+        nameLabel.text = comment.user?.name
         messageLabel.text = comment.text
-        userImage.load(url: comment.image)
-        timeLabel.text = Date(timeIntervalSince1970: comment.timestamp).timeAgo()
+        userImage.load(url: comment.user?.image ?? "")
+        timeLabel.text = comment.updatedAt.timeAgo()
     }
     
     /// delete button tap handler

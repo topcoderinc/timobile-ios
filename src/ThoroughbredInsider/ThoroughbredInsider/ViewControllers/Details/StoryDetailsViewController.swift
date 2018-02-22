@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -82,14 +82,14 @@ class StoryDetailsViewController: UIViewController {
     ///
     /// - Parameter value: details
     private func setupUI(value: StoryDetails) {
-        storyImage.load(url: value.image)
-        titleLabel.text = value.name
+        storyImage.load(url: value.largeImageURL)
+        titleLabel.text = value.title
         summaryLabel.text = value.summary
         chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
         cardsLabel.text = "\(value.cards) \("cards".localized)"
-        rewardsVM.entries.value = value.rewards.toArray()
+        rewardsVM.entries.value = value.cards.toArray()
         tagsVM.entries.value = value.tags.toArray()
-        additionalRewardLabel.text = "\(value.additionalRewards) pts"
+        additionalRewardLabel.text = "\(value.additionalTask?.points ?? 0) pts"
         additionalRewardView.isHidden = value.rewardsReceived
         rewardsButton.isEnabled = value.completed
         bookmarkButton.image = value.bookmarked ? #imageLiteral(resourceName: "navIconStarSelected") : #imageLiteral(resourceName: "navIconStar")

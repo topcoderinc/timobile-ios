@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -32,6 +32,7 @@ class StoryProgressViewController: UIViewController {
     
     /// viewmodel
     var vm = TableViewModel<Chapter, ChapterCell>()
+    var progress = Variable<StoryProgress?>(nil)
     
     /// rewards tap handler
     var onRewardsTap: (()->())?
@@ -50,10 +51,11 @@ class StoryProgressViewController: UIViewController {
                 
             }).disposed(by: rx.bag)
         
-        vm.entries.asObservable()
-            .map { value -> CGFloat in
-                let current = value.map { CGFloat($0.current) }.reduce(0, +)
-                let total = value.map { CGFloat($0.total) }.reduce(0, +)
+        Observable.combineLatest(vm.entries.asObservable(), progress.asObservable())
+            .map { chapters, progress -> CGFloat in
+                guard let progress = progress else { return 0 }
+                let current = progress.chaptersUserProgress.map { CGFloat($0.wordsRead) }.reduce(0, +)
+                let total = chapters.map { CGFloat($0.wordsCount) }.reduce(0, +)
                 return total > 0 ? current / total : 0
             }
             .subscribe(onNext: { [weak self] value in
@@ -67,16 +69,25 @@ class StoryProgressViewController: UIViewController {
     /// - Parameter filter: current filter
     private func setupVM() {
         guard let realm = try? Realm() else { return }
-        let objects = Observable.array(from: realm.objects(Chapter.self).filter("storyId = %d", story.id).sorted(by: [SortDescriptor(keyPath: "id")])).share(replay: 1)
+        let objects = Observable.array(from: realm.objects(Chapter.self).filter("trackStoryId = %d", story.id).sorted(by: [SortDescriptor(keyPath: "id")])).share(replay: 1)
+        StoryProgress.fetch(predicate: NSPredicate(format: "trackStoryId = %d", story.id), realm: realm)
+            .map { $0.last }
+            .subscribe(onNext: { [weak self] value in
+            
+        }).disposed(by: rx.bag)
+//            .bind(to: progress)
+//            .disposed(by: rx.bag)
         objects.bind(to: vm.entries)
             .disposed(by: rx.bag)
-        vm.configureCell = { _, value, _, cell in
+        vm.configureCell = { [weak self] _, value, _, cell in
+            let current = self?.progress.value?.chaptersUserProgress.filter { $0.chapterId == value.id }.first
+            let read = current?.wordsRead ?? 0
             cell.titleLabel.text = value.title
-            cell.currentLabel.text = "\(value.current)"
-            cell.totalLabel.text = "/\(value.total)"
-            cell.progress.innerValue = CGFloat(value.current) / CGFloat(value.total)
+            cell.currentLabel.text = "\(read)"
+            cell.totalLabel.text = "/\(value.wordsCount)"
+            cell.progress.innerValue = CGFloat(read) / CGFloat(value.wordsCount)
             
-            if value.current > 0 {
+            if read > 0 {
                 cell.contentView.backgroundColor = UIColor.white
                 cell.numberLabel.backgroundColor = UIColor.cerulean
                 cell.currentLabel.textColor = UIColor.tealGreen

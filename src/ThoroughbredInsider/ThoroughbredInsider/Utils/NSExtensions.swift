@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -155,6 +155,20 @@ extension JSON {
         return object
     }
     
+    /// same as .object but with all 'description' replaced with descrName
+    func objectWithDescriptionMapped(to descrName: String) -> Any {
+        if let dict = dictionary {
+            var resultDict = [String: JSON]()
+            for (k, v) in dict {
+                resultDict[k.lowercased() == "description" ? descrName : k] = v
+            }
+        }
+        else if let array = array {
+            return array.map { $0.objectWithDescriptionMapped(to: descrName) }
+        }
+        return object
+    }
+    
 }
 
 
@@ -169,6 +183,8 @@ extension Dictionary {
         }
         return resultDict
     }
+    
+    
 }
 
 // MARK: - date extension

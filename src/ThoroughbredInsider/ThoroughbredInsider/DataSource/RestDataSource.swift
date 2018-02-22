@@ -2,8 +2,8 @@
 //  RestDataSource.swift
 //  ThoroughbredInsider
 //
-//  Created by TCCODER on 10/29/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Created by TCCODER on 2/22/18.
+//  Copyright © 2018 topcoder. All rights reserved.
 //
 
 import UIKit
@@ -37,9 +37,6 @@ let kDefaultLimit = 10
  * - version: 1.0
  */
 class RestDataSource {
-    
-    /// mock user id
-    static private let mockUserId = 1
     
     /// performs login
     ///
@@ -78,48 +75,17 @@ class RestDataSource {
             .restSend()
     }
     
-    /// gets story progress
-    ///
-    /// - Returns: call observable
-    static func getStoryProgress(id: Int) -> Observable<[Chapter]> {
-        return load(json: "story progress")
-            .map { json in
-                let items = json["story"]["chapters"].arrayValue
-                return items.map { Chapter.create(json: $0) }
-        }
-    }
-    
-    /// gets story chapters
-    ///
-    /// - Returns: call observable
-    static func getStoryChapters(id: Int) -> Observable<[Chapter]> {
-        return load(json: "story chapter")
-            .map { json in
-                let items = json["chapter"].arrayValue
-                return items.map { Chapter.create(json: $0) }
-        }
-    }
-    
-    /// gets story comments
-    ///
-    /// - Returns: call observable
-    static func getStoryComments(id: Int) -> Observable<[Comment]> {
-        return load(json: "comments")
-            .map { json in
-                let items = json["comments"].arrayValue
-                return items.map { Comment(value: $0.object) }
-        }
-    }    
-    
-    /// gets story comments
+    /// gets current user
     ///
     /// - Returns: call observable
     static func getUser() -> Observable<User> {
-        return load(json: "profile")
+        return json(.get, "currentUser")
             .map { json in
-                User(value: json["profile"].object)
+                User(value: json.object)
         }
     }
+    
+    // MARK: - mock methods
     
     /// gets story comments
     ///
@@ -143,14 +109,14 @@ class RestDataSource {
         }
     }
     
+    // MARK: - private
+
     /// API configuration
     static private let baseURL = Configuration.apiBaseUrl.hasSuffix("/") ? Configuration.apiBaseUrl : Configuration.apiBaseUrl+"/"
     static private var accessToken: String? {
         return TokenUtil.accessToken
     }
 
-    
-    // MARK: - private
     
     /// loads json
     ///

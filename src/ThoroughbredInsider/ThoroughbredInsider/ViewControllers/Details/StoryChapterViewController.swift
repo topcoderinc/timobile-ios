@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -46,17 +46,13 @@ class StoryChapterViewController: UIViewController {
         navigationItem.title = "Chapters".localized
         addBackButton()
         guard let realm = try? Realm() else { return }
-        let objects = Observable.array(from: realm.objects(Chapter.self).filter("storyId = %d", story.id).sorted(by: [SortDescriptor(keyPath: "id")])).share(replay: 1)
+        let objects = Observable.array(from: realm.objects(Chapter.self).filter("trackStoryId = %d", story.id).sorted(by: [SortDescriptor(keyPath: "id")])).share(replay: 1)
         objects.bind(to: vm)
             .disposed(by: rx.bag)
         createPageViewController()
         pageViewController?.setSelectedPageIndex(initial)
         pageControl.selected = initial
-        RestDataSource.getStoryChapters(id: story.id)
-            .showLoading(on: view)
-            .subscribe(onNext: { value in
-                
-            }).disposed(by: rx.bag)
+        
         vm.asObservable().subscribe(onNext: { [weak self] value in
             let idx = self?.pageViewController?.currentIndex ?? 0
             let vc = self?.pageViewController?.currentViewController as? ChapterViewController
@@ -68,7 +64,7 @@ class StoryChapterViewController: UIViewController {
     
     /// inits the page controller
     private func createPageViewController() {
-        pageControl.count = story.chapters
+        pageControl.count = story.chapters.count
         
         guard let pageController = create(viewController: PagingController.self) else { return }
         pageViewController = pageController
@@ -130,7 +126,7 @@ extension StoryChapterViewController: PagingControllerDelegate {
     func pagingController(_ pagingController: PagingController, didTransitionTo viewController: UIViewController, atIndex index: Int) {
         pageControl?.selected = index
         leftButton.isEnabled = index > 0
-        rightButton.isEnabled = index < story.chapters
+        rightButton.isEnabled = index < story.chapters.count
         if index < vm.value.count {
             navigationItem.title = vm.value[index].title
             let vc = viewController as? ChapterViewController

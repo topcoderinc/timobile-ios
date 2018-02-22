@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//Copyright © 2017 Topcoder. All rights reserved.
+//Copyright © 2018  topcoder. All rights reserved.
 //
 
 import Foundation

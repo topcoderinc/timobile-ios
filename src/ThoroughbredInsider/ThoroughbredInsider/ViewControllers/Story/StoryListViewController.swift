@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/1/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -39,7 +39,7 @@ class StoryListViewController: UIViewController {
             .subscribe(onNext: { [weak self] value in
                 guard let strongSelf = self else { return }
                 strongSelf.setupVM(filter: value)
-                strongSelf.loadData(from: RestDataSource.getStories(query: value))
+                strongSelf.loadData(from: RestDataSource.getStories(title: value))
             }).disposed(by: rx.bag)
     }
     
@@ -49,14 +49,14 @@ class StoryListViewController: UIViewController {
     func setupVM(filter: String = "") {
         vm = RealmTableViewModel<Story, StoryCell>()
         vm.configureCell = { _, value, _, cell in
-            cell.storyImage.load(url: value.image)
-            cell.titleLabel.text = value.name
-            cell.racetrackLabel.text = value.race?.name
-            cell.shortDescriptionLabel.text = value.content
+            cell.storyImage.load(url: value.smallImageURL)
+            cell.titleLabel.text = value.title
+            cell.racetrackLabel.text = value.racetrack?.name
+            cell.shortDescriptionLabel.text = value.subtitle
             cell.shortDescriptionLabel.setLineHeight(16)
             cell.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
             cell.cardsLabel.text = "\(value.cards) \("cards".localized)"
-            cell.milesLabel.text = "\(value.miles) \("miles".localized)"
+            cell.milesLabel.text = value.racetrack.distanceText
         }
         vm.onSelect = { [weak self] idx, value in
             guard let vc = self?.create(viewController: StoryDetailsViewController.self, storyboard: .details) else { return }
@@ -64,7 +64,7 @@ class StoryListViewController: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
             self?.tableView.deselectRow(at: IndexPath.init(row: idx, section: 0), animated: true)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")],
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "title")],
                     predicate: filter.trim().isEmpty ? nil : NSCompoundPredicate.init(orPredicateWithSubpredicates: [
                         NSPredicate(format: "name CONTAINS[cd] %@", filter),
                         NSPredicate(format: "content CONTAINS[cd] %@", filter),

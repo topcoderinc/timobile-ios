@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/1/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -70,14 +70,14 @@ class StoryMapViewController: UIViewController {
     /// - Parameter value: selected story
     fileprivate func configureSelected(value: Story) {
         selected = value
-        storyView.storyImage.load(url: value.image)
-        storyView.titleLabel.text = value.name
-        storyView.racetrackLabel.text = value.race?.name
-        storyView.shortDescriptionLabel.text = value.content
+        storyView.storyImage.load(url: value.smallImageURL)
+        storyView.titleLabel.text = value.title
+        storyView.racetrackLabel.text = value.racetrack?.name
+        storyView.shortDescriptionLabel.text = value.subtitle
         storyView.shortDescriptionLabel.setLineHeight(16)
         storyView.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
         storyView.cardsLabel.text = "\(value.cards) \("cards".localized)"
-        storyView.milesLabel.text = "\(value.miles) \("miles".localized)"
+        storyView.milesLabel.text = value.racetrack.distanceText
     }
     
 }
@@ -133,7 +133,7 @@ class StoryAnnotation: NSObject, MKAnnotation {
     
     /// initializer
     init(story: Story) {
-        self.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(story.lat), longitude: CLLocationDegrees(story.long))
+        self.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(story.racetrack.locationLat), longitude: CLLocationDegrees(story.racetrack.locationLng))
         self.story = story
     }
     

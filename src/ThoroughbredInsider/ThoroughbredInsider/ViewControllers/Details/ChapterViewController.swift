@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -55,7 +55,7 @@ class ChapterViewController: UIViewController {
         setupUI()
         Story.get(with: story.id)
             .subscribe(onNext: { [weak self] (value: Story) in
-                self?.raceLabel.text = value.race?.name ?? ""
+                self?.raceLabel.text = value.racetrack?.name ?? ""
             }).disposed(by: rx.bag)
         
         scrollView.rx.didScroll.subscribe(onNext: { [weak self] value in
@@ -64,9 +64,10 @@ class ChapterViewController: UIViewController {
             let old = self?.sliderView.value ?? 0
             let new = Float(max(0, min(1, offset / size)))
             self?.sliderView.value = max(old, new)
-            try? self?.chapter?.realm?.write {
-                self?.chapter.current = Int(round(max(old, new) * Float(self?.chapter.total ?? 0)))
-            }
+            //TODO: throttle & update progress
+//            try? self?.chapter?.realm?.write {
+//                self?.chapter.current = Int(round(max(old, new) * Float(self?.chapter.total ?? 0)))
+//            }
         }).disposed(by: rx.bag)
     }
     

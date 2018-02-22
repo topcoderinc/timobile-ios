@@ -3,11 +3,12 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//Copyright © 2017 Topcoder. All rights reserved.
+//Copyright © 2018  topcoder. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
+import CoreLocation
 
 /**
  * racetrack
@@ -19,11 +20,41 @@ class Racetrack: Object {
     
     /// fields
     @objc dynamic var id = 0
-    @objc dynamic var value = ""
     @objc dynamic var name = ""
+    @objc dynamic var state: State!
+    @objc dynamic var locality = ""
+    @objc dynamic var street = ""
+    @objc dynamic var locationLat = 0.0
+    @objc dynamic var locationLng = 0.0
+    
     
     /// primary key
     override class func primaryKey() -> String? {
         return "id"
     }
+    
+    /// ignored properties
+    ///
+    /// - Returns: ignored properties
+    override static func ignoredProperties() -> [String] {
+        return ["distance", "distanceText"]
+    }
+}
+
+// MARK: - ignored fields
+extension Racetrack {
+    
+    /// distance text
+    var distance: CLLocationDistance? {
+        guard let currentLocation = LocationManager.shared.currentLocation else { return nil }
+        let location = CLLocation(latitude: locationLat, longitude: locationLng)
+        return location.distance(from: currentLocation)
+    }
+    
+    /// distance text
+    var distanceText: String {
+        guard let distance = self.distance else { return "N/A miles".localized }
+        return "\(String(format: "%.1f", distance)) miles"
+    }
+    
 }

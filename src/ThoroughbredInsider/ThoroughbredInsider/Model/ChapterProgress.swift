@@ -1,5 +1,5 @@
 //
-//  ChapterStoryProgress.swift
+//  ChapterProgress.swift
 //  ThoroughbredInsider
 //
 //  Created by Nikita Rodin on 2/22/18.
@@ -15,7 +15,7 @@ import RealmSwift
  * - author: TCCODER
  * - version: 1.0
  */
-class ChapterStoryProgress: Object {
+class ChapterProgress: Object {
     
     /// fields
     @objc dynamic var id = 0
