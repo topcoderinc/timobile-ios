@@ -195,3 +195,21 @@ extension Date {
     }
     
 }
+
+// MARK: - dictionary extension
+extension Dictionary where Value: Optionable {
+    
+    /// flattens dictionary values
+    ///
+    /// - Returns: flattened dictionary
+    func flattenValues() -> [Key: Value.Wrapped] {
+        var result = [Key: Value.Wrapped]()
+        for (k, v) in self {
+            if let v = v.value {
+                result[k] = v
+            }
+        }
+        return result
+    }
+    
+}

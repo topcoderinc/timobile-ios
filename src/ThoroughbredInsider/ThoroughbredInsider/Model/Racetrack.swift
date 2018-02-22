@@ -19,7 +19,7 @@ class Racetrack: Object {
     
     /// fields
     @objc dynamic var id = 0
-    @objc dynamic var code = ""
+    @objc dynamic var value = ""
     @objc dynamic var name = ""
     
     /// primary key

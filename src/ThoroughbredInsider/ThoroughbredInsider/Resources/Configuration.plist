@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>apiBaseUrl</key>
-	<string>https://polar-ti-mobile.herokuapp.com/</string>
+	<string>https://polar-ti-mobile.herokuapp.com/api/v1</string>
 </dict>
 </plist>

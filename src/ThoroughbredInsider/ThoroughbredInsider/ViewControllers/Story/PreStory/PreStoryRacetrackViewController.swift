@@ -49,7 +49,7 @@ class PreStoryRacetrackViewController: UIViewController {
         selected.removeAll()
         vm = RealmTableViewModel<Racetrack, SelectCell>()
         vm.configureCell = { [weak self] _, value, _, cell in
-            cell.titleLabel.text = "\(value.code) - \(value.name)"
+            cell.titleLabel.text = "\(value.value) - \(value.name)"
             cell.itemSelected = self?.selected.contains(value) == true
         }
         vm.onSelect = { [weak self] idx, value in
@@ -61,7 +61,7 @@ class PreStoryRacetrackViewController: UIViewController {
             }
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "code"), SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "value"), SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
     }
 
 }

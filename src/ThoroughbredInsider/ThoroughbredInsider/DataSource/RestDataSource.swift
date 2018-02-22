@@ -27,6 +27,8 @@ enum ErrorMessages: String {
     }
 }
 
+/// default limit
+let kDefaultLimit = 10
 
 /**
  * REST data source implementation
@@ -74,49 +76,6 @@ class RestDataSource {
             })
             .toVoid()
             .restSend()
-    }
-    
-    /// gets states
-    ///
-    /// - Returns: call observable
-    static func getStates() -> Observable<[State]> {
-        return load(json: "states")
-            .map { json in
-                let items = json["items"].arrayValue
-                return items.map { State(value: $0.object) }
-        }
-    }
-    
-    /// gets racetracks
-    ///
-    /// - Returns: call observable
-    static func getRacetracks() -> Observable<[Racetrack]> {
-        return load(json: "racetracks")
-            .map { json in
-                let items = json["items"].arrayValue
-                return items.map { Racetrack(value: $0.object) }
-        }
-    }
-    
-    /// gets stories
-    ///
-    /// - Returns: call observable
-    static func getStories(query: String = "") -> Observable<[Story]> {
-        return load(json: "story list")
-            .map { json in
-                let items = json["stories"].arrayValue
-                return items.map { Story(value: $0.object) }
-        }
-    }
-    
-    /// gets story details
-    ///
-    /// - Returns: call observable
-    static func getStory(id: Int) -> Observable<StoryDetails> {
-        return load(json: "story")
-            .map { json in
-                return StoryDetails(value: json["story"].object)
-        }
     }
     
     /// gets story progress
