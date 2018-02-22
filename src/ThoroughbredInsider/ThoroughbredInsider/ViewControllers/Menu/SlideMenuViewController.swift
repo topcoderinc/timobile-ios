@@ -210,7 +210,7 @@ class SlideMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     /// confirms logout and logouts if confirmed
     func confirmLogout() {
         confirm(action: "Logout".localized, message: "Are you sure you want to logout?".localized, confirmHandler: {
-            MockDataSource.logout()
+            RestDataSource.logout()
                 .subscribe(onNext: { [weak self] value in
                     self?.dismiss(animated: true, completion: nil)
                 }).disposed(by: self.rx.bag)

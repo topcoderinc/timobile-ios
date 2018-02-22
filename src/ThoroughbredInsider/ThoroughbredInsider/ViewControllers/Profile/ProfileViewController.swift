@@ -72,7 +72,7 @@ class ProfileViewController: BasePagedViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        loadData(from: MockDataSource.getUser())
+        loadData(from: RestDataSource.getUser())
         User.get(with: UserDefaults.loggedUserId)
             .subscribe(onNext: { [weak self] (value: User) in
                 self?.usernameLabel.text = value.name

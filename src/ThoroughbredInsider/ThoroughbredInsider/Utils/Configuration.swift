@@ -21,15 +21,10 @@ final class Configuration: NSObject {
     
     // singleton
     static let sharedInstance = Configuration()
-
-    // test email
-    static var testEmail: String {
-        return sharedInstance.dict!["testEmail"] as! String
+    
+    // apiBaseUrl
+    static var apiBaseUrl: String {
+        return sharedInstance.dict!["apiBaseUrl"] as! String
     }
     
-    // test password
-    static var testPassword: String {
-        return sharedInstance.dict!["testPassword"] as! String
-    }
-
 }

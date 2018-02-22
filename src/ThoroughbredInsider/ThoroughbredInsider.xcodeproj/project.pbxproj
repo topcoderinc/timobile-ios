@@ -63,7 +63,7 @@
 		0C7844351FA7C5EE002FC79F /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7844341FA7C5EE002FC79F /* SlideMenuViewController.swift */; };
 		0C7844371FA7C663002FC79F /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C7844361FA7C663002FC79F /* Login.storyboard */; };
 		0C78443A1FA7C6C1002FC79F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7844391FA7C6C1002FC79F /* SignInViewController.swift */; };
-		0C78443E1FA7C925002FC79F /* MockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78443C1FA7C853002FC79F /* MockDataSource.swift */; };
+		0C78443E1FA7C925002FC79F /* RestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78443C1FA7C853002FC79F /* RestDataSource.swift */; };
 		0C79BFDB1FAB965700E8C63F /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79BFDA1FAB965700E8C63F /* Achievement.swift */; };
 		0C79BFDD1FAB997600E8C63F /* HelpSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79BFDC1FAB997600E8C63F /* HelpSectionViewController.swift */; };
 		0C79BFDF1FABAD5A00E8C63F /* HelpSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79BFDE1FABAD5A00E8C63F /* HelpSection.swift */; };
@@ -218,7 +218,7 @@
 		0C7844341FA7C5EE002FC79F /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		0C7844361FA7C663002FC79F /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		0C7844391FA7C6C1002FC79F /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		0C78443C1FA7C853002FC79F /* MockDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataSource.swift; sourceTree = "<group>"; };
+		0C78443C1FA7C853002FC79F /* RestDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestDataSource.swift; sourceTree = "<group>"; };
 		0C79BFDA1FAB965700E8C63F /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		0C79BFDC1FAB997600E8C63F /* HelpSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSectionViewController.swift; sourceTree = "<group>"; };
 		0C79BFDE1FABAD5A00E8C63F /* HelpSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSection.swift; sourceTree = "<group>"; };
@@ -427,7 +427,7 @@
 		0C78443B1FA7C853002FC79F /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				0C78443C1FA7C853002FC79F /* MockDataSource.swift */,
+				0C78443C1FA7C853002FC79F /* RestDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -842,11 +842,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ThoroughbredInsider/Pods-ThoroughbredInsider-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
@@ -855,11 +858,14 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
@@ -946,7 +952,7 @@
 			files = (
 				0CAB07A21FAB528000390A57 /* ProfileSettingsViewController.swift in Sources */,
 				0CAB07A41FAB528800390A57 /* Badge.swift in Sources */,
-				0C78443E1FA7C925002FC79F /* MockDataSource.swift in Sources */,
+				0C78443E1FA7C925002FC79F /* RestDataSource.swift in Sources */,
 				0C78440E1FA795C3002FC79F /* SplashScreen.swift in Sources */,
 				0C3497871FAB76EE0004C880 /* ShopViewController.swift in Sources */,
 				0CAB07B01FAB67A600390A57 /* BookmarkedViewController.swift in Sources */,

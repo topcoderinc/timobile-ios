@@ -43,7 +43,7 @@ class ShopViewController: RootViewController {
         let layout = collection.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.itemSize.width = SCREEN_SIZE.width / 2
         
-        loadData(from: MockDataSource.getShopItems())
+        loadData(from: RestDataSource.getShopItems())
         
         query.asObservable()
             .subscribe(onNext: { [weak self] value in

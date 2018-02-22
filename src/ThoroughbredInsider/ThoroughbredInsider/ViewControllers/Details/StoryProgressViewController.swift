@@ -44,7 +44,7 @@ class StoryProgressViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupVM()
-        MockDataSource.getStoryProgress(id: story.id)
+        RestDataSource.getStoryProgress(id: story.id)
             .showLoading(on: view)
             .subscribe(onNext: { value in
                 

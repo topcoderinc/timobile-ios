@@ -2,9 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>testEmail</key>
-	<string>abc@gmail.com</string>
-	<key>testPassword</key>
-	<string>123456</string>
+	<key>apiBaseUrl</key>
+	<string>https://polar-ti-mobile.herokuapp.com/</string>
 </dict>
 </plist>

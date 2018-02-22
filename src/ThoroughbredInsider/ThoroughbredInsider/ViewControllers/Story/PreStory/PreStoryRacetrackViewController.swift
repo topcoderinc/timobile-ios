@@ -39,7 +39,7 @@ class PreStoryRacetrackViewController: UIViewController {
                 strongSelf.setupVM(filter: value)
             }).disposed(by: rx.bag)
         
-        loadData(from: MockDataSource.getRacetracks())
+        loadData(from: RestDataSource.getRacetracks())
     }
     
     /// configure vm

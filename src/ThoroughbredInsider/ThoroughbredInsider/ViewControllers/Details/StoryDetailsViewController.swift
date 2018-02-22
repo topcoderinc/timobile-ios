@@ -51,7 +51,7 @@ class StoryDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         addBackButton()
-        loadData(from: MockDataSource.getStory(id: story.id))
+        loadData(from: RestDataSource.getStory(id: story.id))
         StoryDetails.get(with: story.id)
             .bind(to: details)
             .disposed(by: rx.bag)

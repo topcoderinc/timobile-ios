@@ -42,7 +42,7 @@ class PointsListViewController: UIViewController {
             cell.ptsLabel.text = "\(value.pts) pts"
         }
         vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "completed", ascending: false)], predicate: NSPredicate(format: "isDaily = \(tab == .tasks ? "true" : "false")"))
-        loadData(from: MockDataSource.getAchievements(tab: tab))
+        loadData(from: RestDataSource.getAchievements(tab: tab))
     }
 
     /// go shop button tap handler

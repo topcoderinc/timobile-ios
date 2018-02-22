@@ -52,7 +52,7 @@ class StoryChapterViewController: UIViewController {
         createPageViewController()
         pageViewController?.setSelectedPageIndex(initial)
         pageControl.selected = initial
-        MockDataSource.getStoryChapters(id: story.id)
+        RestDataSource.getStoryChapters(id: story.id)
             .showLoading(on: view)
             .subscribe(onNext: { value in
                 

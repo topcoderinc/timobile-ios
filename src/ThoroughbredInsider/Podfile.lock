@@ -1,4 +1,7 @@
 PODS:
+  - Alamofire (4.6.0)
+  - AlamofireImage (3.3.0):
+    - Alamofire (~> 4.5)
   - Differentiator (3.0.1)
   - IQKeyboardManagerSwift (5.0.4)
   - NSObject+Rx (4.2.0):
@@ -8,6 +11,11 @@ PODS:
   - Realm/Headers (3.0.1)
   - RealmSwift (3.0.1):
     - Realm (= 3.0.1)
+  - RxAlamofire (4.0.0):
+    - RxAlamofire/Core (= 4.0.0)
+  - RxAlamofire/Core (4.0.0):
+    - Alamofire (~> 4.5)
+    - RxSwift (~> 4.0)
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
   - RxDataSources (3.0.1):
@@ -21,9 +29,11 @@ PODS:
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
+  - AlamofireImage
   - IQKeyboardManagerSwift
   - NSObject+Rx
   - RealmSwift
+  - RxAlamofire
   - RxCocoa
   - RxDataSources
   - RxRealm
@@ -31,17 +41,20 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   Realm: ba6144c74f835f7497791f6599d63a7755377b83
   RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
+  RxAlamofire: 6ea579ac53bf14cb4bc7049a3866e5a769989b1d
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
   RxRealm: 9e203070a6adadd8f2592b58bbc9c8cc40aa35ec
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 5617dfc1e80f917b359b71b8b3a3deef9f127c67
+PODFILE CHECKSUM: 1fc02edfd23135e59e6c4a685ed840ab8d4de7ac
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0.rc.1

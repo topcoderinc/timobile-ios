@@ -1,5 +1,5 @@
 //
-//  MockDataSource.swift
+//  RestDataSource.swift
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/29/17.
@@ -12,14 +12,29 @@ import RxSwift
 import RealmSwift
 import SwiftyJSON
 import RxRealm
+import Alamofire
+import RxAlamofire
+
+/// Errors
+enum ErrorMessages: String {
+    case resourceNotFound = "Resource not found"
+    case sessionExpired = "Your session has expired, please log in again"
+    case unknown = "Unknown error"
+    
+    /// localized text
+    var text: String {
+        return rawValue.localized
+    }
+}
+
 
 /**
- * mock data source implementation
+ * REST data source implementation
  *
  * - author: TCCODER
  * - version: 1.0
  */
-class MockDataSource {
+class RestDataSource {
     
     /// mock user id
     static private let mockUserId = 1
@@ -36,7 +51,7 @@ class MockDataSource {
         if allGood {
             UserDefaults.loggedUserId = mockUserId
         }
-        return send(result: result)
+        return result.restSend()
     }
     
     /// restore session
@@ -44,13 +59,13 @@ class MockDataSource {
     /// - Parameter id: session id
     static func restoreSession(id: Int) -> Observable<Void> {
         guard id > 0 else { return Observable.error("Invalid session") }
-        return send(result: Observable.just(()))
+        return Observable.just(()).restSend()
     }
     
     /// logout
     static func logout() -> Observable<Void> {
         UserDefaults.loggedUserId = -1
-        return send(result: Observable.just(()))
+        return Observable.just(()).restSend()
     }
     
     /// gets states
@@ -161,6 +176,11 @@ class MockDataSource {
         }
     }
     
+    /// API configuration
+    static private let baseURL = Configuration.apiBaseURL.hasSuffix("/") ? Configuration.apiBaseURL : Configuration.apiBaseURL+"/"
+    static private var accessToken: String?
+
+    
     // MARK: - private
     
     /// loads json
@@ -169,20 +189,87 @@ class MockDataSource {
     /// - Returns: json as observable
     private static func load(json name: String) -> Observable<JSON> {
         if let json = JSON.resource(named: name) {
-            return send(result: Observable.just(json))
+            return Observable.just(json).restSend()
         }
         else {
             return Observable.error("No such resource")
         }
     }
     
-    /// mocks remote call
+    /// json call shortcut
     ///
-    /// - Parameter result: call result
-    /// - Returns: delayed call
-    private static func send<T>(result: Observable<T>) -> Observable<T> {
-        return result.delaySubscription(1.25, scheduler: MainScheduler.instance)
-            .share(replay: 1)
+    /// - Parameters:
+    ///   - method: request method
+    ///   - url: relative url
+    ///   - parameters: parameters
+    ///   - encoding: parameters encoding
+    ///   - headers: additional headers
+    /// - Returns: request observable
+    static func json(_ method: Alamofire.HTTPMethod,
+                     _ url: URLConvertible,
+                     parameters: [String: Any]? = nil,
+                     encoding: ParameterEncoding = URLEncoding.default,
+                     headers: [String: String]? = nil,
+                     addAuthHeader: Bool = true
+        )
+        -> Observable<JSON>
+    {
+        var headers = headers ?? [:]
+        if let token = accessToken, addAuthHeader {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        return RxAlamofire
+            .request(method, "\(baseURL)\(url)", parameters: parameters, encoding: encoding, headers: headers)
+            .responseJSON()
+            .observeOn(ConcurrentDispatchQueueScheduler.init(qos: .default)) // process everything in background
+            .flatMap { (result: DataResponse<Any>) -> Observable<Any> in
+                
+                #if HANDLE_LOGOUT
+                    //                // If token expired
+                    //                if result.response?.statusCode == 401 {
+                    //                    AuthenticationUtil.shared.cleanUp()
+                    //
+                    //                    // notify
+                    //                    if let rootVc = RootViewControllerInstance {
+                    //                        rootVc.logout()
+                    //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    //                            UIApplication.shared.keyWindow?.rootViewController?.showAlert("", ErrorMessages.sessionExpired.text)
+                    //                        }
+                    //                    }
+                    //
+                    //                    // do not trigger regular UI alert
+                    //                    return Observable.just([:])
+                    //                }
+                    //                    // response value received
+                    //                else
+                #endif
+                if let value = result.value {
+                    #if DEBUG
+                        print(value)
+                    #endif
+                    
+                    // guard from error messages
+                    guard let statusCode = result.response?.statusCode, 200...205 ~= statusCode else {
+                        let message: Error? = JSON(value)["message"].string
+                        return Observable.error(message ?? result.error ?? ErrorMessages.resourceNotFound.text)
+                    }
+                    // successful response
+                    return Observable.just(value)
+                }
+                // no value even
+                return Observable.error(result.error ?? ErrorMessages.resourceNotFound.text)
+            }
+            .map { JSON($0) }
     }
     
+}
+
+// MARK: - shortcut for REST service
+extension Observable {
+    
+    /// wrap remote call in shareReplay & observe on main thread
+    func restSend() -> Observable<Element> {
+        return self.observeOn(MainScheduler.instance)
+            .share(replay: 1)
+    }
 }

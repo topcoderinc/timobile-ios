@@ -11,6 +11,8 @@ target 'ThoroughbredInsider' do
   pod 'RxDataSources'
   pod 'RxRealm'
   pod 'NSObject+Rx'
+  pod 'RxAlamofire'
+  pod 'AlamofireImage'
   pod 'RealmSwift'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'

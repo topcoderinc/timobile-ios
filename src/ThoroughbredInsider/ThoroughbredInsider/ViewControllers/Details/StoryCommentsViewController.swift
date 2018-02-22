@@ -93,7 +93,7 @@ class StoryCommentsViewController: UIViewController {
     /// Load data
     private func loadData() {
         noDataLabel.isHidden = true
-        MockDataSource.getStoryComments(id: story.id)
+        RestDataSource.getStoryComments(id: story.id)
             .showLoading(on: view)
             .subscribe(onNext: { [weak self] value in
                 self?.vm.entries.value.append(contentsOf: value)

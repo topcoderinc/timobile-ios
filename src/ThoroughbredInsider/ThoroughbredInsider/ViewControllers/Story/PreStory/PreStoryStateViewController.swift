@@ -40,7 +40,7 @@ class PreStoryStateViewController: UIViewController {
                 strongSelf.setupVM(filter: value)
             }).disposed(by: rx.bag)
         
-        loadData(from: MockDataSource.getStates())
+        loadData(from: RestDataSource.getStates())
     }
     
     /// configure vm

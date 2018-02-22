@@ -57,7 +57,7 @@ class SignInViewController: UIViewController {
         
         cleanNavigationStack()
         if UserDefaults.loggedUserId > 0 {
-            MockDataSource.restoreSession(id: UserDefaults.loggedUserId)
+            RestDataSource.restoreSession(id: UserDefaults.loggedUserId)
                 .showLoading(on: view)
                 .subscribe(onNext: { value in
                     Storyboards.showHome()
@@ -78,7 +78,7 @@ class SignInViewController: UIViewController {
         loginField.resignFirstResponder()
         passwordField.resignFirstResponder()
         
-        MockDataSource.login(username: loginField.textValue, password: passwordField.textValue)
+        RestDataSource.login(username: loginField.textValue, password: passwordField.textValue)
             .showLoading(on: view, showAlertOnError: false)
             .subscribe(onNext: { [weak self] value in
                 Storyboards.showHome()

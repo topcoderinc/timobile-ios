@@ -108,7 +108,7 @@ class MenuViewController: UIViewController {
         ]
         selected = IndexPath.init(row: 0, section: 0)
         
-        MockDataSource.getUser()
+        RestDataSource.getUser()
             .showLoading(on: userImage)
             .store()
             .disposed(by: rx.bag)

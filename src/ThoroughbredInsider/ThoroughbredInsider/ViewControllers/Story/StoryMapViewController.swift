@@ -38,7 +38,7 @@ class StoryMapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupVM()
-        loadData(from: MockDataSource.getStories())
+        loadData(from: RestDataSource.getStories())
     }
     
     /// configure vm
