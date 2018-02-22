@@ -94,6 +94,14 @@ extension Date {
         return df
     }()
     
+    /// full date formatter
+    static let FullFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "MM-dd-yyyy'T'HH:mm:ss.SSSZ"
+        df.timeZone = TimeZone(secondsFromGMT: 0)
+        return df
+    }()
+    
     /// default formatted string
     var defaultFormat: String {
         return Date.DefaultFormatter.string(from: self)
@@ -102,6 +110,11 @@ extension Date {
     /// medium formatted string
     var mediumFormat: String {
         return Date.MediumFormatter.string(from: self)
+    }
+    
+    /// full formatted string
+    var fullFormat: String {
+        return Date.FullFormatter.string(from: self)
     }
     
 }

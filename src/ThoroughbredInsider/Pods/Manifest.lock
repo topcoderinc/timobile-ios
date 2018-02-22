@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.5)
   - Differentiator (3.0.1)
   - IQKeyboardManagerSwift (5.0.4)
+  - KeychainAccess (3.1.0)
   - NSObject+Rx (4.2.0):
     - RxSwift (~> 4.0)
   - Realm (3.0.1):
@@ -31,6 +32,7 @@ PODS:
 DEPENDENCIES:
   - AlamofireImage
   - IQKeyboardManagerSwift
+  - KeychainAccess
   - NSObject+Rx
   - RealmSwift
   - RxAlamofire
@@ -45,6 +47,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
+  KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   Realm: ba6144c74f835f7497791f6599d63a7755377b83
   RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
@@ -55,6 +58,6 @@ SPEC CHECKSUMS:
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 1fc02edfd23135e59e6c4a685ed840ab8d4de7ac
+PODFILE CHECKSUM: 18aebfc296dd2bd370d39cec076d415d26ae2c4a
 
 COCOAPODS: 1.4.0.rc.1

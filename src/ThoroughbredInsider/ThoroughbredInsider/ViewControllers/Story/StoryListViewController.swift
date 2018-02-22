@@ -39,7 +39,7 @@ class StoryListViewController: UIViewController {
             .subscribe(onNext: { [weak self] value in
                 guard let strongSelf = self else { return }
                 strongSelf.setupVM(filter: value)
-                strongSelf.loadData(from: MockDataSource.getStories(query: value))
+                strongSelf.loadData(from: RestDataSource.getStories(query: value))
             }).disposed(by: rx.bag)
     }
     

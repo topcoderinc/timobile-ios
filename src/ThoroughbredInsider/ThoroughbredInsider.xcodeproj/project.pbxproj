@@ -10,6 +10,7 @@
 		0C198E091FA7CF4C0040A190 /* SplashScreenData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C87E07B1FA78B7B00EBEFFF /* SplashScreenData.json */; };
 		0C198E0B1FA7D1780040A190 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C198E0A1FA7D1780040A190 /* CircleView.swift */; };
 		0C26C1C81FAAB55B00E24FFD /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C26C1C71FAAB55B00E24FFD /* ChapterViewController.swift */; };
+		0C30984F203ED163007E8009 /* TokenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C30984E203ED163007E8009 /* TokenUtil.swift */; };
 		0C3497831FAB76CA0004C880 /* TIPointsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3497821FAB76CA0004C880 /* TIPointsViewController.swift */; };
 		0C3497851FAB76E60004C880 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3497841FAB76E60004C880 /* HelpViewController.swift */; };
 		0C3497871FAB76EE0004C880 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3497861FAB76EE0004C880 /* ShopViewController.swift */; };
@@ -166,6 +167,7 @@
 /* Begin PBXFileReference section */
 		0C198E0A1FA7D1780040A190 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		0C26C1C71FAAB55B00E24FFD /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
+		0C30984E203ED163007E8009 /* TokenUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUtil.swift; sourceTree = "<group>"; };
 		0C3497821FAB76CA0004C880 /* TIPointsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIPointsViewController.swift; sourceTree = "<group>"; };
 		0C3497841FAB76E60004C880 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		0C3497861FAB76EE0004C880 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				0C87E0801FA790C000EBEFFF /* Colors.swift */,
 				0C3C14971FA8B9ED000443E6 /* LocationManager.swift */,
 				0C56F8101FA917BD0004AE3F /* FileUtil.swift */,
+				0C30984E203ED163007E8009 /* TokenUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -862,6 +866,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -971,6 +976,7 @@
 				0CB5A8371FA7651B000563E4 /* RealmExtensions.swift in Sources */,
 				0CAB07AE1FAB609300390A57 /* ProfileCardsViewController.swift in Sources */,
 				0CB5A8311FA76507000563E4 /* MenuTableViewCell.swift in Sources */,
+				0C30984F203ED163007E8009 /* TokenUtil.swift in Sources */,
 				0C56F8111FA917BD0004AE3F /* FileUtil.swift in Sources */,
 				0CAB07AC1FAB5E5600390A57 /* ProfileBagdesViewController.swift in Sources */,
 				0C3C14921FA8A418000443E6 /* PreStoryLocationViewController.swift in Sources */,

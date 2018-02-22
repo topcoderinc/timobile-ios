@@ -46,26 +46,34 @@ class RestDataSource {
     ///   - password: password
     /// - Returns: call observable
     static func login(username: String, password: String) -> Observable<Void> {
-        let allGood = username == Configuration.testEmail && password == Configuration.testPassword
-        let result = allGood  ? Observable.just(()) : Observable.error("Wrong credentials")
-        if allGood {
-            UserDefaults.loggedUserId = mockUserId
-        }
-        return result.restSend()
+        return json(.post, "login", parameters: [
+            "email": username,
+            "password": password
+            ])
+            .do(onNext: { (json) in
+                TokenUtil.store(accessToken: json["accessToken"].stringValue, until: json["accessTokenValidUntil"].stringValue)
+            })
+            .toVoid()
+            .restSend()
     }
     
     /// restore session
     ///
     /// - Parameter id: session id
-    static func restoreSession(id: Int) -> Observable<Void> {
-        guard id > 0 else { return Observable.error("Invalid session") }
-        return Observable.just(()).restSend()
+    static func restoreSession() -> Observable<Void> {
+        guard let _ = accessToken else { return Observable.error("Invalid session") }
+        return Observable.just(())
     }
     
     /// logout
     static func logout() -> Observable<Void> {
-        UserDefaults.loggedUserId = -1
-        return Observable.just(()).restSend()
+        return json(.post, "logout")
+            .do(onNext: { (_) in
+                UserDefaults.loggedUserId = -1
+                TokenUtil.cleanup()
+            })
+            .toVoid()
+            .restSend()
     }
     
     /// gets states
@@ -177,8 +185,10 @@ class RestDataSource {
     }
     
     /// API configuration
-    static private let baseURL = Configuration.apiBaseURL.hasSuffix("/") ? Configuration.apiBaseURL : Configuration.apiBaseURL+"/"
-    static private var accessToken: String?
+    static private let baseURL = Configuration.apiBaseUrl.hasSuffix("/") ? Configuration.apiBaseUrl : Configuration.apiBaseUrl+"/"
+    static private var accessToken: String? {
+        return TokenUtil.accessToken
+    }
 
     
     // MARK: - private
@@ -224,26 +234,22 @@ class RestDataSource {
             .observeOn(ConcurrentDispatchQueueScheduler.init(qos: .default)) // process everything in background
             .flatMap { (result: DataResponse<Any>) -> Observable<Any> in
                 
-                #if HANDLE_LOGOUT
-                    //                // If token expired
-                    //                if result.response?.statusCode == 401 {
-                    //                    AuthenticationUtil.shared.cleanUp()
-                    //
-                    //                    // notify
-                    //                    if let rootVc = RootViewControllerInstance {
-                    //                        rootVc.logout()
-                    //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    //                            UIApplication.shared.keyWindow?.rootViewController?.showAlert("", ErrorMessages.sessionExpired.text)
-                    //                        }
-                    //                    }
-                    //
-                    //                    // do not trigger regular UI alert
-                    //                    return Observable.just([:])
-                    //                }
-                    //                    // response value received
-                    //                else
-                #endif
-                if let value = result.value {
+                if result.response?.statusCode == 401 {
+                    TokenUtil.cleanup()
+                    
+                    // notify
+                    if let vc = UIApplication.shared.delegate?.window??.rootViewController {
+                        vc.dismiss(animated: true, completion: nil)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            vc.showAlert(title: "", message: ErrorMessages.sessionExpired.text)
+                        }
+                    }
+                    
+                    // do not trigger regular UI alert
+                    return Observable.just([:])
+                }
+                // response value received
+                else if let value = result.value {
                     #if DEBUG
                         print(value)
                     #endif
@@ -271,5 +277,10 @@ extension Observable {
     func restSend() -> Observable<Element> {
         return self.observeOn(MainScheduler.instance)
             .share(replay: 1)
+    }
+    
+    /// discard result type
+    func toVoid() -> Observable<Void> {
+        return self.map { _ in }
     }
 }

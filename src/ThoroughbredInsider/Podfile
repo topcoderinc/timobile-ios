@@ -16,6 +16,7 @@ target 'ThoroughbredInsider' do
   pod 'RealmSwift'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'
+  pod 'KeychainAccess'
 
 end
 

@@ -56,8 +56,8 @@ class SignInViewController: UIViewController {
         super.viewDidAppear(animated)
         
         cleanNavigationStack()
-        if UserDefaults.loggedUserId > 0 {
-            RestDataSource.restoreSession(id: UserDefaults.loggedUserId)
+        if let _ = TokenUtil.accessToken {
+            RestDataSource.restoreSession()
                 .showLoading(on: view)
                 .subscribe(onNext: { value in
                     Storyboards.showHome()
