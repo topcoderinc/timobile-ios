@@ -47,10 +47,9 @@ class PreStoryStateViewController: UIViewController {
     ///
     /// - Parameter filter: current filter
     func setupVM(filter: String = "") {
-        selected.removeAll()
         vm = RealmTableViewModel<State, SelectCell>()
         vm.configureCell = { [weak self] _, value, _, cell in
-            cell.titleLabel.text = value.name
+            cell.titleLabel.text = value.value
             cell.itemSelected = self?.selected.contains(value) == true
         }
         vm.onSelect = { [weak self] idx, value in
@@ -62,7 +61,7 @@ class PreStoryStateViewController: UIViewController {
             }
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "value")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "value CONTAINS[cd] %@", filter))
     }
 
 }

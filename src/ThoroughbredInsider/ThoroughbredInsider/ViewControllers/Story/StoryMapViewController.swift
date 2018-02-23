@@ -73,10 +73,10 @@ class StoryMapViewController: UIViewController {
         storyView.storyImage.load(url: value.smallImageURL)
         storyView.titleLabel.text = value.title
         storyView.racetrackLabel.text = value.racetrack?.name
-        storyView.shortDescriptionLabel.text = value.subtitle
+        storyView.shortDescriptionLabel.text = "\(value.subtitle)\n\n\(value.summary)"
         storyView.shortDescriptionLabel.setLineHeight(16)
-        storyView.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
-        storyView.cardsLabel.text = "\(value.cards) \("cards".localized)"
+        storyView.chaptersLabel.text = "\(value.chapters.count) \("chapters".localized)"
+        storyView.cardsLabel.text = "\(value.cards.count) \("cards".localized)"
         storyView.milesLabel.text = value.racetrack.distanceText
     }
     

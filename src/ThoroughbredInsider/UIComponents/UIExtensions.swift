@@ -131,7 +131,7 @@ public extension UIColor {
      - returns: the UIColor instance or nil
      */
     public class func from(hexString: String) -> UIColor? {
-        if hexString.characters.count == 6 {
+        if hexString.count == 6 {
             let redStr = hexString.substring(to: 2)
             let greenStr = hexString.substring(with: 2..<4)
             let blueStr = hexString.substring(from: 4)

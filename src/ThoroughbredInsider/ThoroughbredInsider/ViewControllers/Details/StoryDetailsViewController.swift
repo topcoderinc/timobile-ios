@@ -85,8 +85,8 @@ class StoryDetailsViewController: UIViewController {
         storyImage.load(url: value.largeImageURL)
         titleLabel.text = value.title
         summaryLabel.text = value.summary
-        chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
-        cardsLabel.text = "\(value.cards) \("cards".localized)"
+        chaptersLabel.text = "\(value.chapters.count) \("chapters".localized)"
+        cardsLabel.text = "\(value.cards.count) \("cards".localized)"
         rewardsVM.entries.value = value.cards.toArray()
         tagsVM.entries.value = value.tags.toArray()
         additionalRewardLabel.text = "\(value.additionalTask?.points ?? 0) pts"

@@ -39,7 +39,7 @@ class StoryListViewController: UIViewController {
             .subscribe(onNext: { [weak self] value in
                 guard let strongSelf = self else { return }
                 strongSelf.setupVM(filter: value)
-                strongSelf.loadData(from: RestDataSource.getStories(title: value))
+                strongSelf.loadData(from: RestDataSource.getStories(title: value.isEmpty ? nil : value))
             }).disposed(by: rx.bag)
     }
     
@@ -52,10 +52,10 @@ class StoryListViewController: UIViewController {
             cell.storyImage.load(url: value.smallImageURL)
             cell.titleLabel.text = value.title
             cell.racetrackLabel.text = value.racetrack?.name
-            cell.shortDescriptionLabel.text = value.subtitle
+            cell.shortDescriptionLabel.text = "\(value.subtitle)\n\n\(value.summary)"
             cell.shortDescriptionLabel.setLineHeight(16)
-            cell.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
-            cell.cardsLabel.text = "\(value.cards) \("cards".localized)"
+            cell.chaptersLabel.text = "\(value.chapters.count) \("chapters".localized)"
+            cell.cardsLabel.text = "\(value.cards.count) \("cards".localized)"
             cell.milesLabel.text = value.racetrack.distanceText
         }
         vm.onSelect = { [weak self] idx, value in

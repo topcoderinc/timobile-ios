@@ -83,6 +83,7 @@ class RestDataSource {
             .map { json in
                 User(value: json.object)
         }
+        .restSend()
     }
     
     // MARK: - mock methods
@@ -155,8 +156,8 @@ class RestDataSource {
         }
         return RxAlamofire
             .request(method, "\(baseURL)\(url)", parameters: parameters, encoding: encoding, headers: headers)
-            .responseJSON()
             .observeOn(ConcurrentDispatchQueueScheduler.init(qos: .default)) // process everything in background
+            .responseJSON()
             .flatMap { (result: DataResponse<Any>) -> Observable<Any> in
                 
                 if result.response?.statusCode == 401 {

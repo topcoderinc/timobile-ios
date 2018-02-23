@@ -46,7 +46,6 @@ class PreStoryRacetrackViewController: UIViewController {
     ///
     /// - Parameter filter: current filter
     func setupVM(filter: String = "") {
-        selected.removeAll()
         vm = RealmTableViewModel<Racetrack, SelectCell>()
         vm.configureCell = { [weak self] _, value, _, cell in
             cell.titleLabel.text = "\(value.locality) - \(value.name)"

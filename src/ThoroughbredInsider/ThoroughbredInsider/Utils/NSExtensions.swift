@@ -97,7 +97,7 @@ extension Date {
     /// full date formatter
     static let FullFormatter: DateFormatter = {
         let df = DateFormatter()
-        df.dateFormat = "MM-dd-yyyy'T'HH:mm:ss.SSSZ"
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         df.timeZone = TimeZone(secondsFromGMT: 0)
         return df
     }()

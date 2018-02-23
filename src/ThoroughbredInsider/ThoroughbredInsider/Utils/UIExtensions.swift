@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 /// convenience shortcut
 func showAlert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
@@ -366,7 +367,7 @@ extension UIImageView {
     /// - Parameter url: url
     func load(url: String) {
         if let imageUrl = URL(string: url), !(imageUrl.scheme ?? "").isEmpty {
-            image = UIImage(named: imageUrl.deletingPathExtension().lastPathComponent)
+            af_setImage(withURL: imageUrl)
         }
         else {
             image = UIImage(contentsOfFile: FileUtil.getLocalFileURL(url).path)

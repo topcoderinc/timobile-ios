@@ -70,7 +70,7 @@ extension Object {
                 .share(replay: 1)
     }
     
-    /// fetch objects
+    /// fetch object by id
     class func get<T: Object>(with id: Int, realm: Realm? = nil) -> Observable<T> {
         guard let realm = realm ?? (try? Realm()) else { return Observable.error("Cannot initialize Realm") }
         var object = realm.object(ofType: T.self, forPrimaryKey: id)
@@ -83,6 +83,21 @@ extension Object {
         return Observable.from(object: object!)
             .share(replay: 1)
     }
+}
+
+// MARK: - compiler-friendly fetches
+extension Realm {
+    
+    /// fetch objects in a compiler-friendly way
+    func fetch<T: Object>(type: T.Type, predicate: NSPredicate? = nil) -> Observable<[T]> {
+        return T.fetch(predicate: predicate, realm: self)
+    }
+    
+    /// fetch object by id in a compiler-friendly way
+    func get<T: Object>(type: T.Type, with id: Int) -> Observable<T> {
+        return T.get(with: id, realm: self)
+    }
+    
 }
 
 // MARK: - serialization

@@ -173,15 +173,21 @@ extension Observable {
         let loader = LoadingView(parentView: view).show()
         return self.do(onNext: { _ in
             if stopOnNext {
-                loader.terminate()
+                DispatchQueue.main.async {
+                    loader.terminate()
+                }
             }
         }, onError: { (error) in
-            if showAlertOnError {
-                showAlert(title: "Error".localized, message: error as? String ?? error.localizedDescription)
+            DispatchQueue.main.async {
+                if showAlertOnError {
+                    showAlert(title: "Error".localized, message: error as? String ?? error.localizedDescription)
+                }
+                loader.terminate()
             }
-            loader.terminate()
         }, onCompleted: {
-            loader.terminate()
+            DispatchQueue.main.async {
+                loader.terminate()
+            }
         })
     }
     

@@ -41,10 +41,10 @@ class BookmarkedViewController: RootViewController {
             cell.storyImage.load(url: value.smallImageURL)
             cell.titleLabel.text = value.title
             cell.racetrackLabel.text = value.racetrack?.name
-            cell.shortDescriptionLabel.text = value.subtitle
+            cell.shortDescriptionLabel.text = "\(value.subtitle)\n\n\(value.summary)"
             cell.shortDescriptionLabel.setLineHeight(16)
-            cell.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
-            cell.cardsLabel.text = "\(value.cards) \("cards".localized)"
+            cell.chaptersLabel.text = "\(value.chapters.count) \("chapters".localized)"
+            cell.cardsLabel.text = "\(value.cards.count) \("cards".localized)"
             cell.milesLabel.text = value.racetrack.distanceText
         }
         vm.onSelect = { [weak self] idx, value in

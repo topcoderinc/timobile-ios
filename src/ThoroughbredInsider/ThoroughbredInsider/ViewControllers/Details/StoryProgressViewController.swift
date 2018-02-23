@@ -70,13 +70,10 @@ class StoryProgressViewController: UIViewController {
     private func setupVM() {
         guard let realm = try? Realm() else { return }
         let objects = Observable.array(from: realm.objects(Chapter.self).filter("trackStoryId = %d", story.id).sorted(by: [SortDescriptor(keyPath: "id")])).share(replay: 1)
-        StoryProgress.fetch(predicate: NSPredicate(format: "trackStoryId = %d", story.id), realm: realm)
-            .map { $0.last }
-            .subscribe(onNext: { [weak self] value in
-            
-        }).disposed(by: rx.bag)
-//            .bind(to: progress)
-//            .disposed(by: rx.bag)
+        realm.fetch(type: StoryProgress.self, predicate: NSPredicate(format: "trackStoryId = %d", story.id))
+            .map { $0.last }        
+            .bind(to: progress)
+            .disposed(by: rx.bag)
         objects.bind(to: vm.entries)
             .disposed(by: rx.bag)
         vm.configureCell = { [weak self] _, value, _, cell in
