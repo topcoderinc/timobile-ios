@@ -154,12 +154,12 @@ class RestDataSource {
         if let token = accessToken, addAuthHeader {
             headers["Authorization"] = "Bearer \(token)"
         }
+        
         return RxAlamofire
             .request(method, "\(baseURL)\(url)", parameters: parameters, encoding: encoding, headers: headers)
             .observeOn(ConcurrentDispatchQueueScheduler.init(qos: .default)) // process everything in background
-            .responseJSON()
-            .flatMap { (result: DataResponse<Any>) -> Observable<Any> in
-                
+            .responseData()
+            .flatMap { (result: DataResponse<Data>) -> Observable<Data> in                
                 if result.response?.statusCode == 401 {
                     TokenUtil.cleanup()
                     
@@ -172,14 +172,11 @@ class RestDataSource {
                     }
                     
                     // do not trigger regular UI alert
-                    return Observable.just([:])
+                    return Observable<Data>.empty()
                 }
-                // response value received
+                    // response value received
                 else if let value = result.value {
-                    #if DEBUG
-                        print(value)
-                    #endif
-                    
+
                     // guard from error messages
                     guard let statusCode = result.response?.statusCode, 200...205 ~= statusCode else {
                         let message: Error? = JSON(value)["message"].string
@@ -191,7 +188,13 @@ class RestDataSource {
                 // no value even
                 return Observable.error(result.error ?? ErrorMessages.resourceNotFound.text)
             }
-            .map { JSON($0) }
+            .map { data in
+                let json = JSON(data)
+                #if DEBUG
+                    print(json)
+                #endif
+                return json
+        }
     }
     
 }
@@ -209,4 +212,38 @@ extension Observable {
     func toVoid() -> Observable<Void> {
         return self.map { _ in }
     }
+}
+
+
+// MARK: - shortcut for observable chain
+extension ObservableType where E == DataRequest {
+    /// shortcut for observable chain
+    public func responseData() -> Observable<DataResponse<Data>> {
+        return self.flatMap { $0.rx.responseData() }
+    }
+}
+
+// MARK: - data request reactive extension
+extension Reactive where Base: DataRequest {
+
+    /// shortcut for data response wrap
+    public func responseData() -> Observable<DataResponse<Data>> {
+        return Observable.create { observer in
+            let request = self.base
+            
+            request.responseData { response in
+                if let error = response.result.error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(response))
+                    observer.on(.completed)
+                }
+            }
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        }
+    }
+    
 }
