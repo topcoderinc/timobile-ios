@@ -78,6 +78,21 @@ extension RestDataSource {
             .restSend()
     }
     
+    /// updates password
+    ///
+    /// - Parameters:
+    ///   - oldPassword: old password
+    ///   - newPassword: new password
+    /// - Returns: call observable
+    static func updatePassword(oldPassword: String, newPassword: String) -> Observable<Void> {
+        return json(.put, "updatePassword", parameters: [
+            "oldPassword": oldPassword,
+            "newPassword": newPassword,
+            ])
+            .toVoid()
+            .restSend()
+    }
+    
     /// restore session
     ///
     /// - Parameter id: session id
@@ -105,6 +120,9 @@ extension RestDataSource {
             .map { json in
                 User(value: json.object)
             }
+            .do(onNext: { user in
+                UserDefaults.loggedUserId = user.id
+            })
             .restSend()
     }
     

@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         if !UserDefaults.firstLaunch {
             UserDefaults.firstLaunch = true
+            TokenUtil.cleanup()
             let vc = Storyboards.landing.instantiate.instantiateInitialViewController()
             window?.rootViewController = vc
         }
@@ -52,6 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().barTintColor = UIColor.purple
+        
+        UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "navIconBack")
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "navIconBack")
         return true
     }
 

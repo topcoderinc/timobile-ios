@@ -199,7 +199,7 @@ class CommentCell: UITableViewCell {
         item = comment
         nameLabel.text = comment.user?.name
         messageLabel.text = comment.text
-        userImage.load(url: comment.user?.image ?? "")
+        userImage.load(url: comment.user?.profilePhotoURL ?? "")
         timeLabel.text = comment.updatedAt.timeAgo()
     }
     

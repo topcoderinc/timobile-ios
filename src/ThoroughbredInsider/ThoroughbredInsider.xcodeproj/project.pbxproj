@@ -83,6 +83,7 @@
 		0C866ADE2041ADAF0008FF59 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866ADD2041ADAF0008FF59 /* LoginDataSource.swift */; };
 		0C866AE02041AECB0008FF59 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */; };
 		0C866AE22041BD740008FF59 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866AE12041BD740008FF59 /* ForgotPasswordViewController.swift */; };
+		0C866AE42041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866AE32041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift */; };
 		0C87E0681FA78ADB00EBEFFF /* PagingController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */; };
 		0C87E06A1FA78AE900EBEFFF /* PagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E0691FA78AE900EBEFFF /* PagingController.swift */; };
 		0C87E06C1FA78B0E00EBEFFF /* BasePagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */; };
@@ -253,6 +254,7 @@
 		0C866ADD2041ADAF0008FF59 /* LoginDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
 		0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0C866AE12041BD740008FF59 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		0C866AE32041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdatePasswordViewController.swift; sourceTree = "<group>"; };
 		0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagingController.storyboard; sourceTree = "<group>"; };
 		0C87E0691FA78AE900EBEFFF /* PagingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingController.swift; sourceTree = "<group>"; };
 		0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePagedViewController.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 			children = (
 				0CAB079F1FAB4FAA00390A57 /* ProfileViewController.swift */,
 				0CAB07A11FAB528000390A57 /* ProfileSettingsViewController.swift */,
+				0C866AE32041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift */,
 				0CAB07AB1FAB5E5600390A57 /* ProfileBagdesViewController.swift */,
 				0CAB07AD1FAB609300390A57 /* ProfileCardsViewController.swift */,
 				0CAB07B11FAB6B6100390A57 /* BadgePopupViewController.swift */,
@@ -1046,6 +1049,7 @@
 				0CE924791FA786930066DC65 /* RealmCollectionViewModel.swift in Sources */,
 				0C87E0731FA78B3400EBEFFF /* SegmentController.swift in Sources */,
 				0C87E0791FA78B7000EBEFFF /* SplashContentViewController.swift in Sources */,
+				0C866AE42041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift in Sources */,
 				0C803C2A1FA6250D00CA4058 /* AppDelegate.swift in Sources */,
 				0C48C9A31FA7DA0100B39473 /* StoryViewController.swift in Sources */,
 				0C6358CA1FAA7D6500C87BD8 /* StoryProgressViewController.swift in Sources */,

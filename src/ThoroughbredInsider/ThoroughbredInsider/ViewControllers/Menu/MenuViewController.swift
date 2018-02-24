@@ -117,7 +117,7 @@ class MenuViewController: UIViewController {
             .subscribe(onNext: { [weak self] (value: User) in
                 self?.usernameLabel.text = value.name
                 self?.emailLabel.text = value.email
-                self?.userImage.load(url: value.image)
+                self?.userImage.load(url: value.profilePhotoURL)
         }).disposed(by: rx.bag)
     }
 

@@ -381,7 +381,8 @@ extension UIImageView {
     /// load image from url
     ///
     /// - Parameter url: url
-    func load(url: String) {
+    func load(url: String?) {
+        guard let url = url else { return }
         if let imageUrl = URL(string: url), !(imageUrl.scheme ?? "").isEmpty {
             af_setImage(withURL: imageUrl)
         }

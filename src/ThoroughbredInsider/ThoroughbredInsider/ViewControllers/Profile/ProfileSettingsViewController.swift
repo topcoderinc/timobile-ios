@@ -37,9 +37,8 @@ class ProfileSettingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addBackButton()
         user.asObservable().subscribe(onNext: { [weak self] value in
-            self?.userImage.load(url: value.image)
+            self?.userImage.load(url: value.profilePhotoURL)
         }).disposed(by: rx.bag)
     }
 
@@ -65,6 +64,7 @@ class ProfileSettingsViewController: UIViewController {
             controller.user = user
         }
     }
+    
 }
 
 // MARK: - image select extension
@@ -129,7 +129,6 @@ class ProfileSettingsTableViewController: UITableViewController {
         didSet {
             nameField.isUserInteractionEnabled = isEditMode
             emailField.isUserInteractionEnabled = isEditMode
-            passwordField.isUserInteractionEnabled = isEditMode
             nameField.underlineColor = isEditMode ? .textDark : .clear
             emailField.underlineColor = isEditMode ? .textDark : .clear
             passwordField.underlineColor = isEditMode ? .textDark : .clear
@@ -149,7 +148,6 @@ class ProfileSettingsTableViewController: UITableViewController {
                     else {
                         user.email = self.emailField.textValue
                     }
-                    self.passwordField.text = user.name // just mock for now
                 }
             }
         }
