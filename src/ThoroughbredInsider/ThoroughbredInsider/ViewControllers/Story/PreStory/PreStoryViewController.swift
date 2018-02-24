@@ -42,7 +42,7 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
     @IBOutlet weak var pageControl: PagerControl!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
-    var statesIds = Variable("")
+    var statesIds = Variable<[Int]>([])
     
     override func viewDidLoad() {
         super.viewDidLoad()

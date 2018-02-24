@@ -18,11 +18,10 @@ import RealmSwift
  * - author: TCCODER
  * - version: 1.0
  */
-class PreStoryStateViewController: UIViewController {
+class PreStoryStateViewController: InfiniteTableViewController {
 
     /// outlets
-    @IBOutlet weak var filterField: UITextField!    
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var filterField: UITextField!
     
     /// viewmodel
     var vm: RealmTableViewModel<State, SelectCell>!
@@ -41,6 +40,9 @@ class PreStoryStateViewController: UIViewController {
             }).disposed(by: rx.bag)
         
         loadData(from: RestDataSource.getStates())
+        setupPager(requestPager: RequestPager<State>(request: { (offset, limit) in
+            RestDataSource.getStates(offset: offset, limit: limit)
+        }))
     }
     
     /// configure vm
@@ -62,6 +64,11 @@ class PreStoryStateViewController: UIViewController {
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
         vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "value")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "value CONTAINS[cd] %@", filter))
+    }
+    
+    /// items count
+    override var itemsCount: Int {
+        return vm.entries.value.count
     }
 
 }
@@ -93,7 +100,7 @@ extension PreStoryStateViewController: PreStoryScreen {
                 self.showErrorAlert(message: "Please select at least one".localized)
                 return
             }
-            vc.statesIds.value = self.selected.map { "\($0.id)" }.joined(separator: ",")
+            vc.statesIds.value = self.selected.map { $0.id } 
             vc.next()
         }
     }

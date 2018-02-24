@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RealmSwift
 
 /**
  * Base class for infinite table view controllers
@@ -18,7 +21,6 @@ class InfiniteTableViewController: UIViewController {
 
     /// outlets
     @IBOutlet weak var tableView: UITableView!
-
     
     /// loader
     private var loaderView: UIView!
@@ -40,38 +42,50 @@ class InfiniteTableViewController: UIViewController {
         }
     }
     
+    /// request pager
+    var requestPager: RequestPagerProtocol!
+    
+    /// override this
+    var itemsCount: Int {
+        return 0
+    }
+    
     /// view did load
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         loaderView = Bundle.main.loadNibNamed("FooterLoader", owner: self, options: nil)?[0] as? UIView
-        
-//        requestPager = RequestPager<[MotorcycleInfo]>.init(request: api.getMyMotorcycles)
-//        requestPager.page
-//            .showLoading(on: view, stopOnNext: true)
-//            .subscribe(onNext: { [weak self] value in
-//                self?.items.append(contentsOf: value.map { $0.0 })
-//                self?.tableView.reloadData()
-//                self?.noDataLabel.isHidden = self?.items.isEmpty == false
-//                self?.loadingMore = false
-//                }, onCompleted: { [weak self] in
-//                    self?.loadingMore = false
-//            }).disposed(by: rx.bag)
-//        requestPager.next()
+
+        tableView.rx.willDisplayCell
+            .subscribe(onNext: { [weak self] value in
+            guard let strongSelf = self else { return }
+            if value.cell.frame.maxY+44 > strongSelf.tableView.contentSize.height && !strongSelf.loadingMore && strongSelf.requestPager != nil && !strongSelf.requestPager.isCompleted {
+                self?.loadingMore = true
+                strongSelf.requestPager.next()
+            }
+        }).disposed(by: rx.bag)
     }
-    
-    /// will display cell
+ 
+    /// convenience to setup the pager
     ///
     /// - Parameters:
-    ///   - tableView: the tableView
-    ///   - cell: the cell
-    ///   - indexPath: the indexPath
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if indexPath.row == items.count-1 && !loadingMore && !requestPager.isCompleted {
-//            loadingMore = true
-//            requestPager.next()
-//        }
-//    }
+    ///   - requestPager: request pager
+    ///   - realmVM: realm table viewmodel
+    func setupPager<T: Object>(requestPager: RequestPager<T>) {
+        self.requestPager = requestPager
+        requestPager.page
+            .showLoading(on: view, stopOnNext: true)
+            .do(onNext: { [weak self] value in
+                self?.loadingMore = false
+                }, onCompleted: { [weak self] in
+                    self?.loadingMore = false
+            })
+            .map { $0.items }
+            .store()
+            .disposed(by: rx.bag)
+        loadingMore = true
+        requestPager.next()
+    }
     
 }

@@ -193,48 +193,6 @@ extension Observable {
     
 }
 
-/**
- * Adopted pager for requests
- *
- * - author: TCCODER
- * - version: 1.0
- */
-class RequestPager<T: RandomAccessCollection> {
-    
-    /// page stream
-    var page: Observable<T>!
-    
-    /// completed flag
-    var isCompleted: Bool = false
-    
-    // trigger used to call next page
-    private let trigger = PublishSubject<Void>()
-    
-    /// completed page count
-    private var count: Int = 0
-    
-    /// converts a request with page/size parameters to a pager
-    ///
-    /// - Parameter request: request
-    init(request: @escaping (Int, Int) -> Observable<T>) {
-        page = Observable.page(make: { [weak self] (collection) -> Observable<T> in
-            let completed = self?.count ?? 0
-            self?.count = completed + 1
-            return request(completed, kDefaultLimit)
-            }, while: { [weak self] (collection) -> Bool in
-                let size = collection.count
-                let hasNext = Int(size) == kDefaultLimit // full page
-                self?.isCompleted = !hasNext
-                return hasNext
-            }, when: trigger.asObservable())
-    }
-    
-    /// trigger the next page
-    func next() {
-        trigger.onNext(())
-    }
-}
-
 // MARK: - UIViewController extension
 extension UIViewController {
     

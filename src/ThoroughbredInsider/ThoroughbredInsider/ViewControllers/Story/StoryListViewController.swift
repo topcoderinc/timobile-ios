@@ -18,11 +18,8 @@ import RxRealm
  * - author: TCCODER
  * - version: 1.0
  */
-class StoryListViewController: UIViewController {
+class StoryListViewController: InfiniteTableViewController {
 
-    /// outlets
-    @IBOutlet weak var tableView: UITableView!
-    
     /// search query
     var query = Variable<String>("")
     
@@ -39,7 +36,9 @@ class StoryListViewController: UIViewController {
             .subscribe(onNext: { [weak self] value in
                 guard let strongSelf = self else { return }
                 strongSelf.setupVM(filter: value)
-                strongSelf.loadData(from: RestDataSource.getStories(title: value.isEmpty ? nil : value))
+                strongSelf.setupPager(requestPager: RequestPager<Story>(request: { (offset, limit) in
+                    RestDataSource.getStories(offset: offset, limit: limit, title: value.isEmpty ? nil : value)
+                }))
             }).disposed(by: rx.bag)
         
         LocationManager.shared.startUpdatingLocation()
@@ -74,6 +73,10 @@ class StoryListViewController: UIViewController {
                         ]))
     }
 
+    /// items count
+    override var itemsCount: Int {
+        return vm?.entries.value.count ?? 0
+    }
 }
 
 /**

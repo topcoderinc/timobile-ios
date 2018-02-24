@@ -17,16 +17,15 @@ import RealmSwift
  * - author: TCCODER
  * - version: 1.0
  */
-class PreStoryRacetrackViewController: UIViewController {
+class PreStoryRacetrackViewController: InfiniteTableViewController {
 
     /// outlets
     @IBOutlet weak var filterField: UITextField!
-    @IBOutlet weak var tableView: UITableView!
     
     /// viewmodel
     var vm: RealmTableViewModel<Racetrack, SelectCell>!
     var selected = Set<Racetrack>()
-    var statesIds: Variable<String>!
+    var statesIds: Variable<[Int]>!
     var needReload = false
     
     override func viewDidLoad() {
@@ -53,7 +52,11 @@ class PreStoryRacetrackViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if needReload {
-            loadData(from: RestDataSource.getRacetracks(stateIds: statesIds.value))
+            let stateIds = self.statesIds.value.map { "\($0)" }.joined(separator: ",")
+            setupPager(requestPager: RequestPager<Racetrack>(request: { (offset, limit) in
+                RestDataSource.getRacetracks(offset: offset, limit: limit, stateIds: stateIds)
+            }))            
+            setupVM()
         }
     }
     
@@ -75,9 +78,14 @@ class PreStoryRacetrackViewController: UIViewController {
             }
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? NSPredicate(format: "stateId IN %@", statesIds.value) : NSPredicate(format: "name CONTAINS[cd] %@ AND stateId IN %@", filter, statesIds.value))
     }
 
+    /// items count
+    override var itemsCount: Int {
+        return vm?.entries.value.count ?? 0
+    }
+    
 }
 
 // MARK: - PreStoryScreen

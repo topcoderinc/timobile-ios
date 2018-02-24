@@ -10,6 +10,7 @@
 		0C198E091FA7CF4C0040A190 /* SplashScreenData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C87E07B1FA78B7B00EBEFFF /* SplashScreenData.json */; };
 		0C198E0B1FA7D1780040A190 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C198E0A1FA7D1780040A190 /* CircleView.swift */; };
 		0C26C1C81FAAB55B00E24FFD /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C26C1C71FAAB55B00E24FFD /* ChapterViewController.swift */; };
+		0C2889CA20421FE9004EFC81 /* RequestPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2889C920421FE9004EFC81 /* RequestPager.swift */; };
 		0C30984F203ED163007E8009 /* TokenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C30984E203ED163007E8009 /* TokenUtil.swift */; };
 		0C309851203EDBAB007E8009 /* PageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C309850203EDBAB007E8009 /* PageResult.swift */; };
 		0C309853203EF8E4007E8009 /* StoryProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C309852203EF8E4007E8009 /* StoryProgress.swift */; };
@@ -182,6 +183,7 @@
 /* Begin PBXFileReference section */
 		0C198E0A1FA7D1780040A190 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		0C26C1C71FAAB55B00E24FFD /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
+		0C2889C920421FE9004EFC81 /* RequestPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPager.swift; sourceTree = "<group>"; };
 		0C30984E203ED163007E8009 /* TokenUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUtil.swift; sourceTree = "<group>"; };
 		0C309850203EDBAB007E8009 /* PageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageResult.swift; sourceTree = "<group>"; };
 		0C309852203EF8E4007E8009 /* StoryProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryProgress.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				0CB5A8331FA7651B000563E4 /* NSExtensions.swift */,
 				0CB5A8341FA7651B000563E4 /* RealmExtensions.swift */,
 				0CB5A8351FA7651B000563E4 /* RxExtensions.swift */,
+				0C2889C920421FE9004EFC81 /* RequestPager.swift */,
 				0C87E0801FA790C000EBEFFF /* Colors.swift */,
 				0C3C14971FA8B9ED000443E6 /* LocationManager.swift */,
 				0C56F8101FA917BD0004AE3F /* FileUtil.swift */,
@@ -1019,6 +1022,7 @@
 				0C87E0811FA790C000EBEFFF /* Colors.swift in Sources */,
 				0C6358C61FAA7BD500C87BD8 /* StoryDetailsViewController.swift in Sources */,
 				0CB5A8361FA7651B000563E4 /* NSExtensions.swift in Sources */,
+				0C2889CA20421FE9004EFC81 /* RequestPager.swift in Sources */,
 				0CFA72021FAA921200CD6410 /* StoryDetails.swift in Sources */,
 				0C87E07A1FA78B7000EBEFFF /* SplashContainerViewController.swift in Sources */,
 				0CB5A82A1FA764D2000563E4 /* Configuration.swift in Sources */,
