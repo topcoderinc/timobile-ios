@@ -8,6 +8,8 @@
 
 import UIKit
 import UIComponents
+import RxCocoa
+import RxSwift
 
 /**
  * pre-stroy screen protocol
@@ -40,6 +42,7 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
     @IBOutlet weak var pageControl: PagerControl!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
+    var statesIds = Variable("")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +67,11 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
         return [
             { return self.create(viewController: PreStoryLocationViewController.self)! },
             { return self.create(viewController: PreStoryStateViewController.self)! },
-            { return self.create(viewController: PreStoryRacetrackViewController.self)! }
+            {
+                let vc = self.create(viewController: PreStoryRacetrackViewController.self)!
+                vc.statesIds = self.statesIds
+                return vc
+            }
         ]
     }
     

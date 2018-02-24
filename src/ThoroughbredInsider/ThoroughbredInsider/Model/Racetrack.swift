@@ -21,7 +21,7 @@ class Racetrack: Object {
     /// fields
     @objc dynamic var id = 0
     @objc dynamic var name = ""
-    @objc dynamic var state: State!
+    @objc dynamic var stateId = 0
     @objc dynamic var locality = ""
     @objc dynamic var street = ""
     @objc dynamic var locationLat = 0.0
@@ -37,8 +37,12 @@ class Racetrack: Object {
     ///
     /// - Returns: ignored properties
     override static func ignoredProperties() -> [String] {
-        return ["distance", "distanceText"]
+        return ["distance", "distanceText", "state", "pState"]
     }
+    
+    /// stored state
+    private var pState: State?
+    
 }
 
 // MARK: - ignored fields
@@ -56,6 +60,14 @@ extension Racetrack {
         guard let distance = self.distance else { return "N/A miles".localized }
         
         return "\(distance.shortcut) miles"
+    }
+    
+    /// state
+    var state: State! {
+        if pState == nil {
+            pState = realm?.object(ofType: State.self, forPrimaryKey: stateId)
+        }
+        return pState
     }
     
 }

@@ -40,9 +40,8 @@ class State: Object {
 extension State {
     
     /// shortcut name
-    var shortcut: String {
-        let parts = name.components(separatedBy: CharacterSet.letters.inverted)
-        return (parts.count > 1 ? "\(parts[0].first!)\(parts[1].first!)" : "\(name.first!)").uppercased()
+    var shortcut: String { // ideally this should come from server
+        return (value.count > 1 ? "\(value.first!)\(value.last!)" : value).uppercased()
     }
     
 }

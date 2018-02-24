@@ -26,6 +26,8 @@ class PreStoryRacetrackViewController: UIViewController {
     /// viewmodel
     var vm: RealmTableViewModel<Racetrack, SelectCell>!
     var selected = Set<Racetrack>()
+    var statesIds: Variable<String>!
+    var needReload = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,20 @@ class PreStoryRacetrackViewController: UIViewController {
                 strongSelf.setupVM(filter: value)
             }).disposed(by: rx.bag)
         
-        loadData(from: RestDataSource.getRacetracks())
+        statesIds.asObservable().subscribe(onNext: { [weak self] value in
+            self?.needReload = true
+        }).disposed(by: rx.bag)
+    }
+    
+    /// View will appear
+    ///
+    /// - Parameter animated: the animation flag
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if needReload {
+            loadData(from: RestDataSource.getRacetracks(stateIds: statesIds.value))
+        }
     }
     
     /// configure vm
@@ -60,7 +75,7 @@ class PreStoryRacetrackViewController: UIViewController {
             }
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "state.name"), SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
     }
 
 }

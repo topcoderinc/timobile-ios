@@ -93,6 +93,7 @@ extension PreStoryStateViewController: PreStoryScreen {
                 self.showErrorAlert(message: "Please select at least one".localized)
                 return
             }
+            vc.statesIds.value = self.selected.map { "\($0.id)" }.joined(separator: ",")
             vc.next()
         }
     }

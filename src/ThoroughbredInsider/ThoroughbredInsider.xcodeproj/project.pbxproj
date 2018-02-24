@@ -84,6 +84,8 @@
 		0C866AE02041AECB0008FF59 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */; };
 		0C866AE22041BD740008FF59 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866AE12041BD740008FF59 /* ForgotPasswordViewController.swift */; };
 		0C866AE42041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866AE32041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift */; };
+		0C866AE62041FC1D0008FF59 /* InfiniteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866AE52041FC1C0008FF59 /* InfiniteTableViewController.swift */; };
+		0C866AE82041FC3A0008FF59 /* FooterLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C866AE72041FC3A0008FF59 /* FooterLoader.xib */; };
 		0C87E0681FA78ADB00EBEFFF /* PagingController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */; };
 		0C87E06A1FA78AE900EBEFFF /* PagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E0691FA78AE900EBEFFF /* PagingController.swift */; };
 		0C87E06C1FA78B0E00EBEFFF /* BasePagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */; };
@@ -255,6 +257,8 @@
 		0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0C866AE12041BD740008FF59 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		0C866AE32041CD7B0008FF59 /* ProfileUpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdatePasswordViewController.swift; sourceTree = "<group>"; };
+		0C866AE52041FC1C0008FF59 /* InfiniteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteTableViewController.swift; sourceTree = "<group>"; };
+		0C866AE72041FC3A0008FF59 /* FooterLoader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterLoader.xib; sourceTree = "<group>"; };
 		0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagingController.storyboard; sourceTree = "<group>"; };
 		0C87E0691FA78AE900EBEFFF /* PagingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingController.swift; sourceTree = "<group>"; };
 		0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePagedViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +363,7 @@
 				0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */,
 				0C87E0711FA78B3400EBEFFF /* SegmentController.swift */,
 				0C48C99C1FA7D99500B39473 /* ContainerViewController.swift */,
+				0C866AE52041FC1C0008FF59 /* InfiniteTableViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 				0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */,
 				0C87E0741FA78B4500EBEFFF /* SegmentController.storyboard */,
 				0C87E06D1FA78B1800EBEFFF /* SegmentTextItemCell.xib */,
+				0C866AE72041FC3A0008FF59 /* FooterLoader.xib */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -832,6 +838,7 @@
 				0C87E0681FA78ADB00EBEFFF /* PagingController.storyboard in Resources */,
 				0C78442C1FA796D1002FC79F /* states.json in Resources */,
 				0C198E091FA7CF4C0040A190 /* SplashScreenData.json in Resources */,
+				0C866AE82041FC3A0008FF59 /* FooterLoader.xib in Resources */,
 				0C87E07D1FA78E9600EBEFFF /* Splash.storyboard in Resources */,
 				0C7844271FA796D1002FC79F /* points daily tasks.json in Resources */,
 				0C7844371FA7C663002FC79F /* Login.storyboard in Resources */,
@@ -1079,6 +1086,7 @@
 				0C79BFDF1FABAD5A00E8C63F /* HelpSection.swift in Sources */,
 				0C56F8131FA918AF0004AE3F /* State.swift in Sources */,
 				0C78440C1FA795B8002FC79F /* User.swift in Sources */,
+				0C866AE62041FC1D0008FF59 /* InfiniteTableViewController.swift in Sources */,
 				0C3497851FAB76E60004C880 /* HelpViewController.swift in Sources */,
 				0C48C9A11FA7D9FA00B39473 /* PreStoryViewController.swift in Sources */,
 				0C56F8191FA931BD0004AE3F /* StoryListViewController.swift in Sources */,
