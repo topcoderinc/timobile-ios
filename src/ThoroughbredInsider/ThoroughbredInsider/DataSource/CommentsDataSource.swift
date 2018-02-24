@@ -31,7 +31,7 @@ extension RestDataSource {
         return json(.get, "comments", parameters: parameters.flattenValues())
             .map { json in
                 let items = json["items"].arrayValue
-                return PageResult(items: items.map { Comment(value: $0.object) },
+                return PageResult(items: items.map { Comment(value: $0.objectWithConvertedDates()) },
                                   total: json["total"].intValue, offset: json["offset"].intValue, limit: json["limit"].intValue)
             }
             .restSend()
@@ -43,7 +43,7 @@ extension RestDataSource {
     static func post(comment: Comment) -> Observable<Comment> {
         return json(.post, "comments", parameters: comment.toDictionary() as? [String : Any])
             .map { json in
-                return Comment(value: json.object)
+                return Comment(value: json.objectWithConvertedDates())
             }
             .restSend()
     }

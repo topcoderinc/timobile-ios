@@ -21,7 +21,7 @@ class Card: Object {
     @objc dynamic var id = 0
     @objc dynamic var image = ""
     @objc dynamic var name = ""
-    @objc dynamic var content = ""
+    @objc dynamic var descr = ""
     @objc dynamic var isEarned = false
     @objc dynamic var pts = 0
     

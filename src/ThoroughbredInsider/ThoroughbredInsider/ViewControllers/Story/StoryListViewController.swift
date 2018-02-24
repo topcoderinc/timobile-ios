@@ -41,6 +41,8 @@ class StoryListViewController: UIViewController {
                 strongSelf.setupVM(filter: value)
                 strongSelf.loadData(from: RestDataSource.getStories(title: value.isEmpty ? nil : value))
             }).disposed(by: rx.bag)
+        
+        LocationManager.shared.startUpdatingLocation()
     }
     
     /// configure vm

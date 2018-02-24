@@ -54,7 +54,8 @@ extension Racetrack {
     /// distance text
     var distanceText: String {
         guard let distance = self.distance else { return "N/A miles".localized }
-        return "\(String(format: "%.1f", distance)) miles"
+        
+        return "\(distance.shortcut) miles"
     }
     
 }

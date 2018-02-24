@@ -31,7 +31,7 @@ class ShopPopupViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         titleLabel.text = card.name
-        congratsLabel.text = card.content
+        congratsLabel.text = card.descr
         cardImage.contentMode = .scaleAspectFill
         cardImage.load(url: card.image)
         ptsLabel.text = "\(card.pts) pts"

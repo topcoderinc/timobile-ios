@@ -86,7 +86,6 @@ class SignInViewController: UIViewController {
                     //clear fields
                     self?.loginField.text = nil
                     self?.passwordField.text = nil
-                    self?.loginButton.isEnabled = false
                 }
                 }, onError: { [weak self] error in
                     self?.errorLabel.isHidden = false

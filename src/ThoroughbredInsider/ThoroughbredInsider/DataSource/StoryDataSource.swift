@@ -42,7 +42,7 @@ extension RestDataSource {
     ///
     /// - Returns: call observable
     static func getStory(id: Int) -> Observable<StoryDetails> {
-        return json(.get, "trackStories\(id)")
+        return json(.get, "trackStories/\(id)")
             .map { json in
                 return StoryDetails(value: json.objectWithDescriptionMapped(to: "descr"))
         }

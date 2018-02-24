@@ -21,7 +21,7 @@ class Badge: Object {
     @objc dynamic var id = 0
     @objc dynamic var isEarned = false
     @objc dynamic var name = ""
-    @objc dynamic var content = ""
+    @objc dynamic var descr = ""
     
     /// primary key
     override class func primaryKey() -> String? {

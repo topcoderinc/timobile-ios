@@ -32,7 +32,7 @@ class CardPopupViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         titleLabel.text = card.name
-        congratsLabel.text = card.content
+        congratsLabel.text = card.descr
         if card.isEarned {
             cardImage.contentMode = .scaleAspectFill
             cardImage.load(url: card.image)

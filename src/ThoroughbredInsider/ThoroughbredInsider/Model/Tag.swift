@@ -19,7 +19,7 @@ class Tag: Object {
     
     /// fields
     @objc dynamic var id = 0
-    @objc dynamic var name = ""
+    @objc dynamic var value = ""
     
     /// primary key
     override class func primaryKey() -> String? {

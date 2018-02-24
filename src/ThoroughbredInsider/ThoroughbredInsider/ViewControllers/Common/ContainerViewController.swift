@@ -33,7 +33,7 @@ class ContainerViewController: UIViewController {
             leftSideController: menu!,
             defaultContent: defaultVC
         )
-        loadChildController(slideController!, inContentView: self.view)
+        loadChildController(slideController!, inContentView: self.view)        
     }
     
     /**

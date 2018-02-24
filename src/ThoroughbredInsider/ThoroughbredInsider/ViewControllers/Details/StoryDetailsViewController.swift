@@ -34,6 +34,8 @@ class StoryDetailsViewController: UIViewController {
     @IBOutlet weak var rewardsCollection: UICollectionView!
     @IBOutlet weak var additionalRewardView: UIView!
     @IBOutlet weak var additionalRewardLabel: UILabel!
+    @IBOutlet weak var additionalRewardTitleLabel: UILabel!
+    @IBOutlet weak var additionalRewardDescriptionLabel: UILabel!
     @IBOutlet weak var rewardsButton: UIButton!
     
     /// the story
@@ -60,7 +62,7 @@ class StoryDetailsViewController: UIViewController {
         }).disposed(by: rx.bag)
         
         tagsVM.configureCell = { _, value, _, cell in
-            cell.titleLabel.text = value.name
+            cell.titleLabel.text = value.value
         }
         tagsVM.bindData(to: tagsCollection)
         
@@ -90,6 +92,8 @@ class StoryDetailsViewController: UIViewController {
         rewardsVM.entries.value = value.cards.toArray()
         tagsVM.entries.value = value.tags.toArray()
         additionalRewardLabel.text = "\(value.additionalTask?.points ?? 0) pts"
+        additionalRewardTitleLabel.text = value.additionalTask?.name ?? ""
+        additionalRewardDescriptionLabel.text = value.additionalTask?.descr ?? ""
         additionalRewardView.isHidden = value.rewardsReceived
         rewardsButton.isEnabled = value.completed
         bookmarkButton.image = value.bookmarked ? #imageLiteral(resourceName: "navIconStarSelected") : #imageLiteral(resourceName: "navIconStar")

@@ -231,6 +231,10 @@ extension Reactive where Base: DataRequest {
         return Observable.create { observer in
             let request = self.base
             
+            #if DEBUG
+                print("\(request.request?.httpMethod ?? "GET") \(request.request?.url?.absoluteString ?? "")")
+            #endif
+                
             request.responseData { response in
                 if let error = response.result.error {
                     observer.on(.error(error))

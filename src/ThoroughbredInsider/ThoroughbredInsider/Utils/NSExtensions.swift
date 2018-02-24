@@ -162,6 +162,7 @@ extension JSON {
             for (k, v) in dict {
                 resultDict[k.lowercased() == "description" ? descrName : k] = v
             }
+            return resultDict.mapValues { $1.objectWithDescriptionMapped(to: descrName) }
         }
         else if let array = array {
             return array.map { $0.objectWithDescriptionMapped(to: descrName) }
@@ -226,6 +227,23 @@ extension Dictionary where Value: Optionable {
             }
         }
         return result
+    }
+    
+}
+
+// MARK: - shortcut extension
+extension Double {
+    
+    /// shortcut with k, M, G
+    var shortcut: String {
+        var convertedValue: Double = Double(self)
+        var multiplyFactor = 0
+        let tokens = ["", "k", "M", "G", "T"]
+        while convertedValue >= 1000 {
+            convertedValue /= 1000
+            multiplyFactor += 1
+        }
+        return multiplyFactor > 0 ? String(format: "%3.1f%@", convertedValue, tokens[multiplyFactor]) : String(format: "%.1f", self)
     }
     
 }

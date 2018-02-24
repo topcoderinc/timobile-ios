@@ -29,7 +29,7 @@ class BadgePopupViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         titleLabel.text = badge.name
-        congratsLabel.text = badge.content
+        congratsLabel.text = badge.descr
         if !badge.isEarned {
             badgeImage.image = #imageLiteral(resourceName: "iconBadgeEmpty")
         }
