@@ -2,7 +2,7 @@
 //  StoryProgress.swift
 //  ThoroughbredInsider
 //
-//  Created by Nikita Rodin on 2/22/18.
+//  Created by TCCODER on 2/22/18.
 //Copyright © 2018 Topcoder. All rights reserved.
 //
 
