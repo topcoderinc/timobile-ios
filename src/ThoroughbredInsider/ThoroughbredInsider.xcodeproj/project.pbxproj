@@ -82,6 +82,7 @@
 		0C803C341FA6250D00CA4058 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C803C321FA6250D00CA4058 /* LaunchScreen.storyboard */; };
 		0C866ADE2041ADAF0008FF59 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866ADD2041ADAF0008FF59 /* LoginDataSource.swift */; };
 		0C866AE02041AECB0008FF59 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */; };
+		0C866AE22041BD740008FF59 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866AE12041BD740008FF59 /* ForgotPasswordViewController.swift */; };
 		0C87E0681FA78ADB00EBEFFF /* PagingController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */; };
 		0C87E06A1FA78AE900EBEFFF /* PagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E0691FA78AE900EBEFFF /* PagingController.swift */; };
 		0C87E06C1FA78B0E00EBEFFF /* BasePagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */; };
@@ -251,6 +252,7 @@
 		0C803C351FA6250D00CA4058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C866ADD2041ADAF0008FF59 /* LoginDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
 		0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		0C866AE12041BD740008FF59 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagingController.storyboard; sourceTree = "<group>"; };
 		0C87E0691FA78AE900EBEFFF /* PagingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingController.swift; sourceTree = "<group>"; };
 		0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePagedViewController.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 			children = (
 				0C7844391FA7C6C1002FC79F /* SignInViewController.swift */,
 				0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */,
+				0C866AE12041BD740008FF59 /* ForgotPasswordViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1048,6 +1051,7 @@
 				0C6358CA1FAA7D6500C87BD8 /* StoryProgressViewController.swift in Sources */,
 				0C3C14961FA8B184000443E6 /* PreStoryRacetrackViewController.swift in Sources */,
 				0C56F81F1FA931DD0004AE3F /* StoryRacetrackPopupViewController.swift in Sources */,
+				0C866AE22041BD740008FF59 /* ForgotPasswordViewController.swift in Sources */,
 				0C87E06A1FA78AE900EBEFFF /* PagingController.swift in Sources */,
 				0C56F8151FA918BA0004AE3F /* Racetrack.swift in Sources */,
 				0CB5A8221FA76469000563E4 /* LoadingView.swift in Sources */,

@@ -91,7 +91,7 @@ class SignInViewController: UIViewController {
                     self?.passwordField.text = nil
                 }
                 }, onError: { [weak self] error in
-                    self?.errorLabel.text = error as? String ?? error.localizedDescription
+                    self?.errorLabel.text = (error as? String ?? error.localizedDescription).replacingOccurrences(of: "\"", with: "")
                     self?.errorLabel.isHidden = false
             }).disposed(by: rx.bag)
     }
@@ -102,7 +102,30 @@ class SignInViewController: UIViewController {
      - parameter sender: the button
      */
     @IBAction func forgotTapped(_ sender: UIButton) {
-        showStub()
+        guard loginField.textValue.isValidEmail else {
+            errorLabel.text = "Please enter correct email".localized
+            errorLabel.isHidden = false
+            return
+        }
+        view.endEditing(true)
+        
+        RestDataSource.initiateResetPassword(email: loginField.textValue)
+            .showLoading(on: view, showAlertOnError: false)
+            .subscribe(onNext: { [weak self] value in
+                
+                self?.showAlert(title: "Email successfully sent".localized, message: "An email with token has been already sent to your email box, please check it.".localized, handler: { (_) in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self?.passwordField.text = nil
+                        guard let vc = self?.create(viewController: ForgotPasswordViewController.self) else { return }
+                        vc.email = self?.loginField.text ?? ""
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                })
+                
+                }, onError: { [weak self] error in
+                    self?.errorLabel.text = "User with such email not found".localized
+                    self?.errorLabel.isHidden = false
+            }).disposed(by: rx.bag)
     }
  
     /**

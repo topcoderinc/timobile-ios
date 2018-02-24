@@ -50,6 +50,34 @@ extension RestDataSource {
             .restSend()
     }
     
+    /// requests reset token
+    ///
+    /// - Parameters:
+    ///   - email: email
+    /// - Returns: call observable
+    static func initiateResetPassword(email: String) -> Observable<Void> {
+        return json(.post, "initiateForgotPassword?email=\(email)")
+            .toVoid()
+            .restSend()
+    }
+    
+    /// resets forgotten password
+    ///
+    /// - Parameters:
+    ///   - token: forgot password token
+    ///   - email: email
+    ///   - password: password
+    /// - Returns: call observable
+    static func resetPassword(token: String, email: String, password: String) -> Observable<Void> {
+        return json(.post, "changeForgotPassword", parameters: [
+            "forgotPasswordToken": token,
+            "email": email,
+            "newPassword": password,
+            ])
+            .toVoid()
+            .restSend()
+    }
+    
     /// restore session
     ///
     /// - Parameter id: session id
