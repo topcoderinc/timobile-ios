@@ -235,3 +235,34 @@ class RequestPager<T: RandomAccessCollection> {
     }
 }
 
+// MARK: - UIViewController extension
+extension UIViewController {
+    
+    /// chains textfields to proceed between them one by one
+    ///
+    /// - Parameters:
+    ///   - textFields: array of textFields
+    ///   - lastReturnKey: last return key type
+    ///   - lastHandler: handler for last return
+    func chain(textFields: [UITextField], lastReturnKey: UIReturnKeyType = .send, lastHandler: (()->())? = nil) {
+        let n = textFields.count
+        for (i, tf) in textFields.enumerated() {
+            if i < n-1 {
+                tf.returnKeyType = .next
+                tf.rx.controlEvent(.editingDidEndOnExit)
+                    .subscribe(onNext: { value in
+                        textFields[i+1].becomeFirstResponder()
+                    }).disposed(by: rx.bag)
+            }
+            else {
+                tf.returnKeyType = lastReturnKey
+                tf.rx.controlEvent(.editingDidEndOnExit)
+                    .subscribe(onNext: { value in
+                        lastHandler?()
+                    }).disposed(by: rx.bag)
+            }
+            
+        }
+    }
+    
+}

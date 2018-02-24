@@ -131,7 +131,8 @@ class RestDataSource {
 
                     // guard from error messages
                     guard let statusCode = result.response?.statusCode, 200...205 ~= statusCode else {
-                        let message: Error? = JSON(value)["message"].string
+                        let errorText = JSON(value)["message"].string?.components(separatedBy: ":").last
+                        let message: Error? = errorText
                         return Observable.error(message ?? result.error ?? ErrorMessages.resourceNotFound.text)
                     }
                     // successful response

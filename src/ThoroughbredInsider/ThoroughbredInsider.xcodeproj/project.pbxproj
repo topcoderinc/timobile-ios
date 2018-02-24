@@ -81,6 +81,7 @@
 		0C803C311FA6250D00CA4058 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C803C301FA6250D00CA4058 /* Assets.xcassets */; };
 		0C803C341FA6250D00CA4058 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C803C321FA6250D00CA4058 /* LaunchScreen.storyboard */; };
 		0C866ADE2041ADAF0008FF59 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866ADD2041ADAF0008FF59 /* LoginDataSource.swift */; };
+		0C866AE02041AECB0008FF59 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */; };
 		0C87E0681FA78ADB00EBEFFF /* PagingController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */; };
 		0C87E06A1FA78AE900EBEFFF /* PagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E0691FA78AE900EBEFFF /* PagingController.swift */; };
 		0C87E06C1FA78B0E00EBEFFF /* BasePagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */; };
@@ -249,6 +250,7 @@
 		0C803C331FA6250D00CA4058 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C803C351FA6250D00CA4058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C866ADD2041ADAF0008FF59 /* LoginDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
+		0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0C87E0671FA78ADA00EBEFFF /* PagingController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagingController.storyboard; sourceTree = "<group>"; };
 		0C87E0691FA78AE900EBEFFF /* PagingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingController.swift; sourceTree = "<group>"; };
 		0C87E06B1FA78B0E00EBEFFF /* BasePagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePagedViewController.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				0C7844391FA7C6C1002FC79F /* SignInViewController.swift */,
+				0C866ADF2041AECB0008FF59 /* SignUpViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				0C309851203EDBAB007E8009 /* PageResult.swift in Sources */,
 				0CB5A8271FA764C9000563E4 /* UIImagePicker+Rx.swift in Sources */,
 				0CFA720C1FAA9BF600CD6410 /* StoryCompleteViewController.swift in Sources */,
+				0C866AE02041AECB0008FF59 /* SignUpViewController.swift in Sources */,
 				0C30985B203EFADA007E8009 /* ChapterDataSource.swift in Sources */,
 				0C34978D1FAB940C0004C880 /* PointsListViewController.swift in Sources */,
 				0CAB07B41FAB6B6A00390A57 /* CardPopupViewController.swift in Sources */,

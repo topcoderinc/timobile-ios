@@ -97,8 +97,8 @@ extension UIViewController {
      
      - parameter message: the message of the error alert
      */
-    func showErrorAlert(message: String) {
-        showAlert(title: "Error".localized, message: message)
+    func showErrorAlert(message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+        showAlert(title: "Error".localized, message: message, handler: handler)
     }
     
     /**
@@ -208,6 +208,22 @@ extension UIViewController {
                 self.navigationController?.setViewControllers(updatedStack, animated: false)
             }
         }
+    }
+ 
+    /// validates a single text field
+    ///
+    /// - Parameters:
+    ///   - field: text field
+    ///   - name: text field name
+    /// - Returns: validation status
+    func validateFieldNotEmpty(field: UITextField) -> Bool {
+        guard !field.textValue.isEmpty else {
+            showErrorAlert(message: "\(field.placeholder ?? "Field") cannot be empty".localized) { _ in
+                field.becomeFirstResponder()
+            }
+            return false
+        }
+        return true
     }
     
 }

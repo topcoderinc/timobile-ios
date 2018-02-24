@@ -26,7 +26,9 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        passwordField.returnKeyType = .go
+        chain(textFields: [loginField, passwordField]) { [unowned self] in
+            self.loginTapped(self)
+        }
         
         if isIphone5OrLess {
             logoOffset.constant = -43
@@ -72,6 +74,7 @@ class SignInViewController: UIViewController {
     /// - Parameter sender: the button
     @IBAction func loginTapped(_ sender: Any) {
         guard loginField.textValue.isValidEmail && !passwordField.textValue.isEmpty else {
+            errorLabel.text = "Please enter correct email or password".localized
             errorLabel.isHidden = false
             return
         }
@@ -88,6 +91,7 @@ class SignInViewController: UIViewController {
                     self?.passwordField.text = nil
                 }
                 }, onError: { [weak self] error in
+                    self?.errorLabel.text = error as? String ?? error.localizedDescription
                     self?.errorLabel.isHidden = false
             }).disposed(by: rx.bag)
     }
@@ -116,7 +120,8 @@ class SignInViewController: UIViewController {
      - parameter sender: the button
      */
     @IBAction func signupTapped(_ sender: UIButton) {
-        showStub()
+        guard let vc = create(viewController: SignUpViewController.self) else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

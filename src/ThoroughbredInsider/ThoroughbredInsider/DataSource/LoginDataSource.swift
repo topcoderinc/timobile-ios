@@ -31,6 +31,25 @@ extension RestDataSource {
             .restSend()
     }
     
+    /// registers a new user
+    ///
+    /// - Parameters:
+    ///   - firstName: first Name
+    ///   - lastName: last Name
+    ///   - email: email
+    ///   - password: password
+    /// - Returns: call observable
+    static func register(firstName: String, lastName: String, email: String, password: String) -> Observable<Void> {
+        return json(.post, "signup", parameters: [
+            "firstName": firstName,
+            "lastName": lastName,
+            "email": email,
+            "password": password,
+            ])
+            .toVoid()
+            .restSend()
+    }
+    
     /// restore session
     ///
     /// - Parameter id: session id
