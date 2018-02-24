@@ -46,7 +46,7 @@ class StoryRacetrackPopupViewController: UIViewController {
     /// - Parameter filter: current filter
     private func setupVM() {
         guard let realm = try? Realm() else { return }
-        let objects = Observable.array(from: realm.objects(Racetrack.self).sorted(by: [SortDescriptor(keyPath: "locality"), SortDescriptor(keyPath: "name")])).share(replay: 1)
+        let objects = Observable.array(from: realm.objects(Racetrack.self).sorted(by: [SortDescriptor(keyPath: "name")])).share(replay: 1)
         objects.map { array in
                 var full = array as [Racetrack?]
                 full.insert(nil, at: 0)
@@ -56,7 +56,7 @@ class StoryRacetrackPopupViewController: UIViewController {
             .disposed(by: rx.bag)
         vm.configureCell = { [weak self] _, value, _, cell in
             if let value = value {
-                cell.titleLabel.text = "\(value.locality) - \(value.name)"
+                cell.titleLabel.text = "\(value.state.shortcut) - \(value.name)"
             }
             else {
                 cell.titleLabel.text = "All Racetracks".localized

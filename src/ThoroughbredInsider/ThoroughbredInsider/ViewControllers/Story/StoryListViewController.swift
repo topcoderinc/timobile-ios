@@ -26,18 +26,21 @@ class StoryListViewController: InfiniteTableViewController {
     /// viewmodel
     var vm: RealmTableViewModel<Story, StoryCell>!
     
+    /// racetrack
+    var racetrack: Variable<Racetrack?>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupVM()
         
-        query.asObservable()
-            .subscribe(onNext: { [weak self] value in
+        Observable.combineLatest(query.asObservable(), racetrack.asObservable())
+            .subscribe(onNext: { [weak self] query, racetrack in
                 guard let strongSelf = self else { return }
-                strongSelf.setupVM(filter: value)
+                strongSelf.setupVM(filter: query)
                 strongSelf.setupPager(requestPager: RequestPager<Story>(request: { (offset, limit) in
-                    RestDataSource.getStories(offset: offset, limit: limit, title: value.isEmpty ? nil : value)
+                    RestDataSource.getStories(offset: offset, limit: limit, title: query.isEmpty ? nil : query, racetrackId: racetrack?.id)
                 }))
             }).disposed(by: rx.bag)
         
@@ -65,12 +68,17 @@ class StoryListViewController: InfiniteTableViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
             self?.tableView.deselectRow(at: IndexPath.init(row: idx, section: 0), animated: true)
         }
+        
+        var preds: [NSPredicate] = []
+        if !filter.trim().isEmpty {
+            preds.append(NSPredicate(format: "title CONTAINS[cd] %@", filter))
+        }
+        if let race = racetrack.value {
+            preds.append(NSPredicate(format: "racetrack.id IN %@", [race.id]))
+        }
+        
         vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "title")],
-                    predicate: filter.trim().isEmpty ? nil : NSCompoundPredicate.init(orPredicateWithSubpredicates: [
-                        NSPredicate(format: "name CONTAINS[cd] %@", filter),
-                        NSPredicate(format: "content CONTAINS[cd] %@", filter),
-                        NSPredicate(format: "race.name CONTAINS[cd] %@", filter),
-                        ]))
+                    predicate: preds.isEmpty ? nil : NSCompoundPredicate(orPredicateWithSubpredicates: preds))
     }
 
     /// items count

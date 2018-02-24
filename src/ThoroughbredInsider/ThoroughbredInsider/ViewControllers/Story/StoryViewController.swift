@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 /**
  * Story container screen
@@ -26,11 +28,7 @@ class StoryViewController: RootViewController {
     @IBOutlet weak var rightFilterIcon: UIImageView!
     
     /// racetrack
-    private var racetrack: Racetrack? {
-        didSet {
-            leftFilterLabel?.text = racetrack?.name ?? "All Racetracks".localized
-        }
-    }
+    private var racetrack = Variable<Racetrack?>(nil)
     
     /// sort
     private var sortNearest = true
@@ -45,7 +43,13 @@ class StoryViewController: RootViewController {
 
         // Do any additional setup after loading the view.
         listVC = create(viewController: StoryListViewController.self)
+        listVC.racetrack = racetrack
         loadChildController(listVC, inContentView: listContainerView)
+        
+        racetrack.asObservable()
+            .subscribe(onNext: { [weak self] value in
+                self?.leftFilterLabel?.text = value?.name ?? "All Racetracks".localized
+            }).disposed(by: rx.bag)
     }
 
     // MARK: - actions
@@ -114,9 +118,9 @@ class StoryViewController: RootViewController {
     /// - Parameter sender: the button
     @IBAction func leftFilterTapped(_ sender: Any) {
         guard let vc = create(viewController: StoryRacetrackPopupViewController.self) else { return }
-        vc.selected = racetrack
+        vc.selected = racetrack.value
         vc.onSelect = { [unowned self] track in
-            self.racetrack = track
+            self.racetrack.value = track
         }
         present(vc, animated: true, completion: nil)
     }

@@ -51,7 +51,9 @@ class StoryMapViewController: UIViewController {
         vm.asObservable()
             .subscribe(onNext: { [weak self] value in
                 self?.mapView.removeAnnotations(self?.mapView.annotations ?? [])
-                self?.mapView.addAnnotations(value.map { StoryAnnotation(story: $0) })
+                let newAnnotations = value.map { StoryAnnotation(story: $0) }
+                self?.mapView.addAnnotations(newAnnotations)
+                self?.mapView.showAnnotations(newAnnotations, animated: true)
                 self?.countLabel.text = "Displaying \(value.count) of \(value.count) stories in these area"
             }).disposed(by: rx.bag)
     }
