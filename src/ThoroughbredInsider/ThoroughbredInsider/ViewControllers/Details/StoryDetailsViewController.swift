@@ -120,6 +120,23 @@ class StoryDetailsViewController: UIViewController {
         rewardsButton.isEnabled = progress.completed
         rewardsButton.isHidden = progress.cardsAndRewardsReceived
         bookmarkButton.image = details.bookmarked ? #imageLiteral(resourceName: "navIconStarSelected") : #imageLiteral(resourceName: "navIconStar")
+        
+        // check if we need to mark the progress as completed
+        markCompletedIfNeeded(progress: progress)
+    }
+    
+    /// marks story as completed if all chapters are read
+    private func markCompletedIfNeeded(progress: StoryProgress) {
+        guard !progress.completed else { return }
+        if progress.chaptersUserProgress.toArray().filter({ !$0.completed }).isEmpty {
+            RestDataSource.completeStory(id: progress.id)
+                .showLoading(on: self.view)
+                .subscribe(onNext: { [weak self] value in
+                    try? self?.progress.value.realm?.write {
+                        self?.progress.value.completed = true
+                    }
+                }).disposed(by: self.rx.bag)
+        }
     }
 
     /// View will appear

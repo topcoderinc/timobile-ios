@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Alamofire
 
 // MARK: - chapter & story detail methods
 extension RestDataSource {
@@ -38,9 +39,8 @@ extension RestDataSource {
                     "wordsRead": $0.wordsRead,
                     "completed": $0.completed
                 ]
-            },
-            "completed": progress.completed
-            ])
+            }
+            ], encoding: JSONEncoding.default)
             .map { json in
                 return StoryProgress(value: json.object)
         }

@@ -186,6 +186,10 @@ extension Reactive where Base: DataRequest {
             
             #if DEBUG
                 print("\(request.request?.httpMethod ?? "GET") \(request.request?.url?.absoluteString ?? "")")
+                if let data = request.request?.httpBody {
+                    let json = JSON(data)
+                    print("\(json)")
+                }
             #endif
                 
             request.responseData { response in

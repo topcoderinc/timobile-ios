@@ -39,8 +39,7 @@ class StoryCompleteViewController: UIViewController {
             cell.titleLabel.text = value.name
             cell.rewardImage.load(url: value.image)
         }
-        // if rewards info is empty - grab from story
-        let rewards = rewardsVM.entries.value.isEmpty ? story.cards.toArray() : rewardsVM.entries.value
+        let rewards = story.cards.toArray()
         
         titleLabel.text = "Congratulations!\nYou got \(rewards.count) trading cards!".localized
         let font = cardsDescription.font!

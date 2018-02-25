@@ -56,23 +56,51 @@ class ChapterViewController: UIViewController {
                 self?.raceLabel.text = value.racetrack?.name ?? ""
             }).disposed(by: rx.bag)
         
-        scrollView.rx.didScroll.subscribe(onNext: { [weak self] value in
+        chapter.asObservable().subscribe(onNext: { [weak self] value in
+            self?.setupUI(value)
+        }).disposed(by: rx.bag)
+        
+        setupUpdates()
+
+    }
+    
+    /// setup progress updates
+    private func setupUpdates() {
+        if let chapterProgress = progress.value.chaptersUserProgress.toArray().filter({ $0.chapterId == self.chapter.value.id }).first {
+            sliderView.value = Float(chapterProgress.wordsRead) / Float(chapter.value.wordsCount)
+            guard !chapterProgress.completed else { return }
+        }
+        
+        Observable.concat(Observable.just(()), scrollView.rx.didScroll.asObservable())
+        .map({ [weak self] value -> Float? in
             let offset = (self?.scrollView.contentOffset.y ?? 0) + (self?.scrollView.bounds.height ?? 0)
             let size = self?.scrollView.contentSize.height ?? 0
             let old = self?.sliderView.value ?? 0
             let new = Float(max(0, min(1, offset / size)))
-            let percent = max(old, new)
-            self?.sliderView.value = percent
-            
-            //TODO: throttle & update progress
-//            try? self?.chapter?.realm?.write {
-//                self?.chapter.current = Int(round(max(old, new) * Float(self?.chapter.total ?? 0)))
-//            }
-        }).disposed(by: rx.bag)
-        
-        chapter.asObservable().subscribe(onNext: { [weak self] value in
-            self?.setupUI(value)
-        }).disposed(by: rx.bag)
+            return new > old && new-old > 1e-3 ? new : nil
+        })
+            .flatten()
+            .do(onNext: { [weak self] value in
+                self?.sliderView.value = value
+            })
+            .throttle(2.0, scheduler: MainScheduler.instance)
+            .flatMap { [weak self] value -> Observable<StoryProgress> in
+                guard let progress = self?.progress.value,
+                    let chapter = self?.chapter.value else { return Observable<StoryProgress>.empty() }
+                let newProgress = StoryProgress(value: progress)
+                var chapterProgress = newProgress.chaptersUserProgress.toArray().filter { $0.chapterId == chapter.id }.first
+                if chapterProgress == nil {
+                    chapterProgress = ChapterProgress()
+                    chapterProgress?.chapterId = chapter.id
+                    newProgress.chaptersUserProgress.append(chapterProgress!)
+                }
+                let read = min(chapter.wordsCount, Int(roundf(Float(chapter.wordsCount) * value)))
+                chapterProgress?.wordsRead = read
+                chapterProgress?.completed = read == chapter.wordsCount
+                return RestDataSource.updateStoryProgress(id: newProgress.id, progress: newProgress)
+            }
+            .store()
+            .disposed(by: rx.bag)
     }
     
     /// setup UI

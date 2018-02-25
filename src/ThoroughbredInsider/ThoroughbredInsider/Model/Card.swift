@@ -19,7 +19,7 @@ class Card: Object {
     
     /// fields
     @objc dynamic var id = 0
-    @objc dynamic var image = ""
+    @objc dynamic var imageURL = ""
     @objc dynamic var name = ""
     @objc dynamic var descr = ""
     @objc dynamic var isEarned = false
