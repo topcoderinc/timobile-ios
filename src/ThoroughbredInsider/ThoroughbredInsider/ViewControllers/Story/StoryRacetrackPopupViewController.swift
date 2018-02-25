@@ -12,6 +12,7 @@ import RxCocoa
 import RxSwift
 import RealmSwift
 import RxRealm
+import CoreLocation
 
 /**
  * racetrack dropdown
@@ -21,10 +22,7 @@ import RxRealm
  * 1.1:
  * - updates for integration
  */
-class StoryRacetrackPopupViewController: UIViewController {
-    
-    /// outlets
-    @IBOutlet weak var tableView: UITableView!
+class StoryRacetrackPopupViewController: InfiniteTableViewController {
     
     /// viewmodel
     var vm = TableViewModel<Racetrack?, SelectCell>()
@@ -42,6 +40,14 @@ class StoryRacetrackPopupViewController: UIViewController {
         tableView.layer.shadowColor = UIColor.black.cgColor
         tableView.layer.shadowRadius = 5
         tableView.layer.shadowOpacity = 0.36
+        
+        let maxDistance: Float = 1000*1000
+        setupPager(requestPager: RequestPager<Racetrack>(request: { (offset, limit) in
+            let location = LocationManager.shared.currentLocation?.coordinate
+            return RestDataSource.getRacetracks(offset: offset, limit: limit,
+                                                distanceToLocationMiles: maxDistance, locationLat: location?.latitude ?? 0, locationLng: location?.longitude ?? 0,
+                                                sortColumn: "name", sortOrder: "asc")
+        }))
     }
     
     /// configure vm
