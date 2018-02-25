@@ -48,8 +48,9 @@ class ProfileUpdatePasswordViewController: UITableViewController {
             && validateFieldNotEmpty(field: passwordConfirmField) else { return }
         
         guard passwordField.textValue == passwordConfirmField.textValue else {
-            showErrorAlert(message: "Passwords don't match".localized)
-            passwordField.becomeFirstResponder()
+            showErrorAlert(message: "Passwords don't match".localized) { _ in
+                self.passwordField.becomeFirstResponder()
+            }            
             return
         }
         view.endEditing(true)
