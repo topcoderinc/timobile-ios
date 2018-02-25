@@ -35,12 +35,14 @@ class StoryCompleteViewController: UIViewController {
         // Do any additional setup after loading the view.
         let layout = collection.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.itemSize.width = (SCREEN_SIZE.width - 100) / 3
-        titleLabel.text = "Congratulations!\nYou got \(story.cards) trading cards!".localized
         rewardsVM.configureCell = { _, value, _, cell in
             cell.titleLabel.text = value.name
             cell.rewardImage.load(url: value.image)
         }
-        let rewards = story.cards.toArray()
+        // if rewards info is empty - grab from story
+        let rewards = rewardsVM.entries.value.isEmpty ? story.cards.toArray() : rewardsVM.entries.value
+        
+        titleLabel.text = "Congratulations!\nYou got \(rewards.count) trading cards!".localized
         let font = cardsDescription.font!
         let bold = UIFont(name: "OpenSans-Bold", size: 14.0)!
         let attributedString = NSMutableAttributedString(string: "Wow! You have unlocked ", attributes: [.font: font])
@@ -56,12 +58,6 @@ class StoryCompleteViewController: UIViewController {
         
         rewardsVM.bindData(to: collection)
         rewardsVM.entries.value = rewards
-        
-        Observable.just([]).delaySubscription(1.25, scheduler: MainScheduler.instance)
-            .showLoading(on: view)
-            .subscribe(onNext: { value in
-                
-            }).disposed(by: rx.bag)
     }
     
     /// back button tap handler

@@ -25,6 +25,9 @@ class SelfieSuccessViewController: UIViewController {
     /// image
     var image: UIImage!
     
+    /// details
+    var details: StoryDetails!
+    
     /// continue handler
     var onContinue: (()->())?
     
@@ -33,6 +36,7 @@ class SelfieSuccessViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         imageView.image = image
+        countLabel.text = "\(details.additionalTask?.points ?? 0) pts"
     }
 
     /// collect button tap handler

@@ -27,6 +27,9 @@ class StoryChapterViewController: UIViewController {
     /// story
     var story: StoryDetails!
     
+    /// the progress
+    var progress: Variable<StoryProgress>!
+    
     /// initial chapter to open
     var initial = 0
     
@@ -116,6 +119,7 @@ extension StoryChapterViewController: PagingContentProvider {
         guard pageControl.count > index && index > -1 else { return nil }
         guard let vc = create(viewController: ChapterViewController.self) else { return nil }
         vc.story = story
+        vc.progress = progress
         vc.chapter.value = index < vm.value.count ? vm.value[index] : nil
         return vc
     }

@@ -24,8 +24,6 @@ class Story: Object {
     @objc dynamic var largeImageURL = ""
     @objc dynamic var smallImageURL = ""
     @objc dynamic var bookmarked = false
-    @objc dynamic var rewardsReceived = false
-    @objc dynamic var completed = false
     @objc dynamic var racetrack: Racetrack!
     @objc dynamic var badge: Badge?
     @objc dynamic var additionalTask: AdditionalTask?

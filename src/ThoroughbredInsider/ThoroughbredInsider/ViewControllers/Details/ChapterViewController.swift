@@ -34,6 +34,9 @@ class ChapterViewController: UIViewController {
     /// the chapter
     var chapter = Variable<Chapter!>(nil)
     
+    /// the progress
+    var progress: Variable<StoryProgress>!
+    
     /// the story
     var story: StoryDetails!
     
@@ -58,7 +61,9 @@ class ChapterViewController: UIViewController {
             let size = self?.scrollView.contentSize.height ?? 0
             let old = self?.sliderView.value ?? 0
             let new = Float(max(0, min(1, offset / size)))
-            self?.sliderView.value = max(old, new)
+            let percent = max(old, new)
+            self?.sliderView.value = percent
+            
             //TODO: throttle & update progress
 //            try? self?.chapter?.realm?.write {
 //                self?.chapter.current = Int(round(max(old, new) * Float(self?.chapter.total ?? 0)))

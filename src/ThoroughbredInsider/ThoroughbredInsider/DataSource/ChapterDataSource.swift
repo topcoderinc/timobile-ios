@@ -10,11 +10,12 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-// MARK: - chapter, story detail methods
+// MARK: - chapter & story detail methods
 extension RestDataSource {
 
     /// gets story progress
     ///
+    /// - Parameter id: story id
     /// - Returns: call observable
     static func getStoryProgress(id: Int) -> Observable<StoryProgress> {
         return json(.get, "trackStories/\(id)/userProgress")
@@ -26,9 +27,20 @@ extension RestDataSource {
     
     /// update story progress
     ///
+    /// - Parameter id: story progress id
     /// - Returns: call observable
     static func updateStoryProgress(id: Int, progress: StoryProgress) -> Observable<StoryProgress> {
-        return json(.put, "currentUser/trackStoryUserProgress/\(id)", parameters: progress.toDictionary() as? [String: Any])
+        return json(.put, "currentUser/trackStoryUserProgress/\(id)", parameters: [
+            "trackStoryId": progress.trackStoryId,
+            "chaptersUserProgress": progress.chaptersUserProgress.toArray().map {
+                [
+                    "chapterId": $0.chapterId,
+                    "wordsRead": $0.wordsRead,
+                    "completed": $0.completed
+                ]
+            },
+            "completed": progress.completed
+            ])
             .map { json in
                 return StoryProgress(value: json.object)
         }
@@ -37,6 +49,7 @@ extension RestDataSource {
     
     /// complete story
     ///
+    /// - Parameter id: story progress id
     /// - Returns: call observable
     static func completeStory(id: Int) -> Observable<StoryProgress> {
         return json(.put, "currentUser/trackStoryUserProgress/\(id)/complete")
@@ -48,6 +61,7 @@ extension RestDataSource {
     
     /// receive rewards for story
     ///
+    /// - Parameter id: story progress id
     /// - Returns: call observable
     static func receiveRewards(id: Int) -> Observable<StoryReward> {
         return json(.put, "currentUser/trackStoryUserProgress/\(id)/receiveRewards")
@@ -59,6 +73,7 @@ extension RestDataSource {
     
     /// complete additional task for story
     ///
+    /// - Parameter id: story progress id
     /// - Returns: call observable
     static func completeAdditionalTask(id: Int) -> Observable<Void> {
         return json(.put, "currentUser/trackStoryUserProgress/\(id)/completeAdditionalTask")

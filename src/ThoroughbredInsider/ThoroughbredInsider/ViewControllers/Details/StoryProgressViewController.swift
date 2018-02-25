@@ -32,7 +32,7 @@ class StoryProgressViewController: UIViewController {
     
     /// viewmodel
     var vm = TableViewModel<Chapter, ChapterCell>()
-    var progress = Variable<StoryProgress?>(nil)
+    var progress: Variable<StoryProgress>!
     
     /// rewards tap handler
     var onRewardsTap: (()->())?
@@ -45,22 +45,21 @@ class StoryProgressViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupVM()
-        RestDataSource.getStoryProgress(id: story.id)
-            .showLoading(on: view)
-            .subscribe(onNext: { value in
-                
-            }).disposed(by: rx.bag)
         
         Observable.combineLatest(vm.entries.asObservable(), progress.asObservable())
+            .do(onNext: { [weak self] _, progress in
+                let incomplete = progress.chaptersUserProgress.toArray().filter { !$0.completed }.count
+                self?.valueDescription.text = incomplete > 0 ? "You need to finish \(incomplete) \(incomplete == 1 ? "chapter" : "chapters") more to unlock the rewards".localized : ""
+                self?.rewardsButton.isHidden = progress.cardsAndRewardsReceived
+                self?.rewardsButton.isEnabled = progress.completed
+            })
             .map { chapters, progress -> CGFloat in
-                guard let progress = progress else { return 0 }
                 let current = progress.chaptersUserProgress.map { CGFloat($0.wordsRead) }.reduce(0, +)
                 let total = chapters.map { CGFloat($0.wordsCount) }.reduce(0, +)
                 return total > 0 ? current / total : 0
             }
             .subscribe(onNext: { [weak self] value in
                 self?.valueWidth.constant = value * (self?.trackView.bounds.width ?? 0)
-                self?.rewardsButton.isEnabled = abs(1-value) < 1e-5
             }).disposed(by: rx.bag)
     }
     
@@ -70,14 +69,10 @@ class StoryProgressViewController: UIViewController {
     private func setupVM() {
         guard let realm = try? Realm() else { return }
         let objects = Observable.array(from: realm.objects(Chapter.self).filter("trackStoryId = %d", story.id).sorted(by: [SortDescriptor(keyPath: "id")])).share(replay: 1)
-        realm.fetch(type: StoryProgress.self, predicate: NSPredicate(format: "trackStoryId = %d", story.id))
-            .map { $0.last }        
-            .bind(to: progress)
-            .disposed(by: rx.bag)
         objects.bind(to: vm.entries)
             .disposed(by: rx.bag)
         vm.configureCell = { [weak self] _, value, _, cell in
-            let current = self?.progress.value?.chaptersUserProgress.filter { $0.chapterId == value.id }.first
+            let current = self?.progress.value.chaptersUserProgress.filter { $0.chapterId == value.id }.first
             let read = current?.wordsRead ?? 0
             cell.titleLabel.text = value.title
             cell.currentLabel.text = "\(read)"

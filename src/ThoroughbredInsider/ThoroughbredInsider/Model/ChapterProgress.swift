@@ -23,5 +23,10 @@ class ChapterProgress: Object {
     @objc dynamic var chapterId = 0
     @objc dynamic var wordsRead = 0
     @objc dynamic var completed = false
+
+    /// primary key
+    override class func primaryKey() -> String? {
+        return "id"
+    }
     
 }

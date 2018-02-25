@@ -25,5 +25,10 @@ class StoryProgress: Object {
     @objc dynamic var cardsAndRewardsReceived = false
     @objc dynamic var additionalTaskCompleted = false
     var chaptersUserProgress = List<ChapterProgress>()
+    
+    /// primary key
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
