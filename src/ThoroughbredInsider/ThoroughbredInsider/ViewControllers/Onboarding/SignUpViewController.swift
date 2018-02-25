@@ -58,13 +58,15 @@ class SignUpViewController: UIViewController {
             && validateFieldNotEmpty(field: passwordConfirmField) else { return }
 
         guard passwordField.textValue == passwordConfirmField.textValue else {
-            showErrorAlert(message: "Passwords don't match".localized)
-            passwordField.becomeFirstResponder()
+            showErrorAlert(message: "Passwords don't match".localized) { _ in
+                self.passwordField.becomeFirstResponder()
+            }
             return
         }
         guard emailField.textValue.isValidEmail else {
-            showErrorAlert(message: "Invalid email format".localized)
-            emailField.becomeFirstResponder()
+            showErrorAlert(message: "Invalid email format".localized) { _ in
+                self.emailField.becomeFirstResponder()
+            }
             return
         }
         view.endEditing(true)
