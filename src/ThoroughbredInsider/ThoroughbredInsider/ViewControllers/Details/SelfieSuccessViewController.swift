@@ -3,6 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -12,7 +13,9 @@ import UIKit
  * Selfie success view
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class SelfieSuccessViewController: UIViewController {
 
@@ -36,7 +39,9 @@ class SelfieSuccessViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         imageView.image = image
-        countLabel.text = "\(details.additionalTask?.points ?? 0) pts"
+        let pts = details.additionalTask?.points ?? 0
+        countLabel.text = "\(pts) pts"
+        congratsLabel.text = "Wow! You have earned \(pts) pts by take a selfie\nin the location. Additional points have been\nadded automatically in your account.".localized
     }
 
     /// collect button tap handler

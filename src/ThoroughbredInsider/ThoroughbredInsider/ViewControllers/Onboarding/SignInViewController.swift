@@ -3,6 +3,7 @@
 //  SocialBike
 //
 //  Created by TCCODER on 9/3/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -10,6 +11,14 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+/**
+ * Sign in screen
+ *
+ * - author: TCCODER
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
+ */
 class SignInViewController: UIViewController {
 
     /// outlets

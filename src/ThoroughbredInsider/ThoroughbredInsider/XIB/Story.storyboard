@@ -823,11 +823,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="184" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UpO-Wd-tRF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="184" estimatedRowHeight="184" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UpO-Wd-tRF">
                                 <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                                 <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoryCell" id="jUo-wl-gZe" customClass="StoryCell" customModule="ThoroughbredInsider" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoryCell" rowHeight="184" id="jUo-wl-gZe" customClass="StoryCell" customModule="ThoroughbredInsider" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="184"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jUo-wl-gZe" id="nIp-Ik-ibM">
@@ -850,7 +850,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPM-Ic-ygg">
-                                                            <rect key="frame" x="123" y="82" width="208.5" height="45.5"/>
+                                                            <rect key="frame" x="123" y="82" width="208.5" height="49.5"/>
                                                             <string key="text">Ut wisi enim ad minim veniam quis 
 nostrud exerci tation ullamcorper 
 suscipit lobortis nisl ut aliquip ex ea...</string>
@@ -859,7 +859,7 @@ suscipit lobortis nisl ut aliquip ex ea...</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="999" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cih-kP-FuL">
-                                                            <rect key="frame" x="123" y="13" width="212.5" height="38.5"/>
+                                                            <rect key="frame" x="123" y="13" width="220" height="38.5"/>
                                                             <string key="text">Story Title Lorem Ipsum Dolor 
 Sit Amet</string>
                                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
@@ -945,13 +945,15 @@ Sit Amet</string>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="iPM-Ic-ygg" secondAttribute="trailing" constant="19.5" id="004-F7-nqn"/>
                                                         <constraint firstItem="cih-kP-FuL" firstAttribute="top" secondItem="fyx-os-dDQ" secondAttribute="top" constant="13" id="6Jr-68-jmm"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="167.5" id="7LM-Q0-xEM"/>
                                                         <constraint firstItem="IwX-Hp-NeX" firstAttribute="leading" secondItem="iPM-Ic-ygg" secondAttribute="leading" id="Ae7-3q-skN"/>
                                                         <constraint firstAttribute="trailing" secondItem="7Sy-RX-O4k" secondAttribute="trailing" constant="8" id="FQU-6M-Myu"/>
                                                         <constraint firstItem="cih-kP-FuL" firstAttribute="leading" secondItem="fyx-os-dDQ" secondAttribute="leading" constant="123" id="Jxk-SM-I4O"/>
                                                         <constraint firstAttribute="bottom" secondItem="7Sy-RX-O4k" secondAttribute="bottom" constant="8.5" id="UW5-76-XNf"/>
                                                         <constraint firstItem="UkQ-nN-aji" firstAttribute="top" secondItem="fyx-os-dDQ" secondAttribute="top" id="YGq-TF-bt2"/>
                                                         <constraint firstItem="7Sy-RX-O4k" firstAttribute="leading" secondItem="iPM-Ic-ygg" secondAttribute="leading" id="glc-2Q-N8r"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iPM-Ic-ygg" secondAttribute="bottom" constant="40" id="hPZ-cL-ggH"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iPM-Ic-ygg" secondAttribute="bottom" constant="30" id="hPZ-cL-ggH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cih-kP-FuL" secondAttribute="trailing" constant="8" id="i9x-Ee-eOn"/>
                                                         <constraint firstItem="IwX-Hp-NeX" firstAttribute="leading" secondItem="cih-kP-FuL" secondAttribute="leading" id="kD3-hc-QYw"/>
                                                         <constraint firstItem="UkQ-nN-aji" firstAttribute="leading" secondItem="fyx-os-dDQ" secondAttribute="leading" id="pBc-Ef-NDJ"/>
                                                         <constraint firstItem="iPM-Ic-ygg" firstAttribute="top" secondItem="IwX-Hp-NeX" secondAttribute="bottom" constant="10" id="tcB-cI-Msg"/>

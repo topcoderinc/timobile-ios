@@ -142,7 +142,7 @@ class RestDataSource {
                 return Observable.error(result.error ?? ErrorMessages.resourceNotFound.text)
             }
             .map { data in
-                let json = JSON(data)
+                let json = try! JSON(data: data)
                 #if DEBUG
                     print(json)
                 #endif
@@ -186,8 +186,9 @@ extension Reactive where Base: DataRequest {
             
             #if DEBUG
                 print("\(request.request?.httpMethod ?? "GET") \(request.request?.url?.absoluteString ?? "")")
-                if let data = request.request?.httpBody {
-                    let json = JSON(data)
+                if let data = request.request?.httpBody,
+                    let json = try? JSON(data: data) {
+                    
                     print("\(json)")
                 }
             #endif

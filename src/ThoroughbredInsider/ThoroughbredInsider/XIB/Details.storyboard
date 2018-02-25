@@ -196,14 +196,14 @@ suscipit lobortis nisl ut aliquip ex ea...suscipit lobortis nisl ut aliquip ex e
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-IR-t2N">
-                                                        <rect key="frame" x="294" y="95.5" width="61" height="18"/>
+                                                        <rect key="frame" x="294" y="95" width="61" height="18"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="HZU-RU-sIx"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBg-ID-hsM">
-                                                        <rect key="frame" x="294" y="82.5" width="61" height="44"/>
+                                                        <rect key="frame" x="294" y="82" width="61" height="44"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="tuH-tW-NA7"/>

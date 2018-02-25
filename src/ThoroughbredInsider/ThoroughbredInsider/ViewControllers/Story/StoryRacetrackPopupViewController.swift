@@ -3,6 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/1/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -16,7 +17,9 @@ import RxRealm
  * racetrack dropdown
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class StoryRacetrackPopupViewController: UIViewController {
     
@@ -46,7 +49,7 @@ class StoryRacetrackPopupViewController: UIViewController {
     /// - Parameter filter: current filter
     private func setupVM() {
         guard let realm = try? Realm() else { return }
-        let objects = Observable.array(from: realm.objects(Racetrack.self).sorted(by: [SortDescriptor(keyPath: "name")])).share(replay: 1)
+        let objects = Observable.array(from: realm.objects(Racetrack.self).sorted(by: [SortDescriptor(keyPath: "stateId"), SortDescriptor(keyPath: "name")])).share(replay: 1)
         objects.map { array in
                 var full = array as [Racetrack?]
                 full.insert(nil, at: 0)

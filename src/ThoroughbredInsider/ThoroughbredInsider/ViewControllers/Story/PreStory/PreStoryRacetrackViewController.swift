@@ -3,6 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -15,7 +16,9 @@ import RealmSwift
  * racetracks selection
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class PreStoryRacetrackViewController: InfiniteTableViewController {
 
@@ -78,7 +81,7 @@ class PreStoryRacetrackViewController: InfiniteTableViewController {
             }
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? NSPredicate(format: "stateId IN %@", statesIds.value) : NSPredicate(format: "name CONTAINS[cd] %@ AND stateId IN %@", filter, statesIds.value))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "stateId"), SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? NSPredicate(format: "stateId IN %@", statesIds.value) : NSPredicate(format: "name CONTAINS[cd] %@ AND stateId IN %@", filter, statesIds.value))
     }
     
 }

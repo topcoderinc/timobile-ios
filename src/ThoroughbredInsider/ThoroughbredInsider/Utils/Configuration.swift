@@ -3,6 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -12,7 +13,9 @@ import UIKit
  * A helper class to get the configuration data in the plist file.
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 final class Configuration: NSObject {
    

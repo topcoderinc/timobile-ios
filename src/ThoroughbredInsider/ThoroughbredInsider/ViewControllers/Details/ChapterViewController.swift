@@ -3,6 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -16,7 +17,9 @@ import RxSwift
  * chapter screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class ChapterViewController: UIViewController {
 
@@ -45,6 +48,8 @@ class ChapterViewController: UIViewController {
     /// and its layer
     private var playerLayer: AVPlayerLayer?
     
+    /// updates have been set up
+    private var updatesSetup = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +65,6 @@ class ChapterViewController: UIViewController {
             self?.setupUI(value)
         }).disposed(by: rx.bag)
         
-        setupUpdates()
-
     }
     
     /// setup progress updates
@@ -71,7 +74,7 @@ class ChapterViewController: UIViewController {
             guard !chapterProgress.completed else { return }
         }
         
-        Observable.concat(Observable.just(()), scrollView.rx.didScroll.asObservable())
+        Observable.concat(Observable.just(()).delaySubscription(0.3, scheduler: MainScheduler.instance), scrollView.rx.didScroll.asObservable())
         .map({ [weak self] value -> Float? in
             let offset = (self?.scrollView.contentOffset.y ?? 0) + (self?.scrollView.bounds.height ?? 0)
             let size = self?.scrollView.contentSize.height ?? 0
@@ -90,6 +93,13 @@ class ChapterViewController: UIViewController {
                 let newProgress = StoryProgress(value: progress)
                 var chapterProgress = newProgress.chaptersUserProgress.toArray().filter { $0.chapterId == chapter.id }.first
                 if chapterProgress == nil {
+                    chapterProgress = ChapterProgress()
+                    chapterProgress?.chapterId = chapter.id
+                    newProgress.chaptersUserProgress.append(chapterProgress!)
+                }
+                else {
+                    let idx = newProgress.chaptersUserProgress.index(of: chapterProgress!)
+                    newProgress.chaptersUserProgress.remove(at: idx!)
                     chapterProgress = ChapterProgress()
                     chapterProgress?.chapterId = chapter.id
                     newProgress.chaptersUserProgress.append(chapterProgress!)
@@ -118,6 +128,11 @@ class ChapterViewController: UIViewController {
         }
         titleLabel.text = chapter.title
         conentLabel.text = chapter.content
+        
+        if !updatesSetup {
+            updatesSetup = true
+            setupUpdates()
+        }
     }
 
     /// view will disappear

@@ -3,6 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -141,7 +142,7 @@ extension JSON {
             return nil
         }
         // parse json
-        return JSON(data: data)
+        return try? JSON(data: data)
     }
     
     /// same as .object but with all date strings converted to dates

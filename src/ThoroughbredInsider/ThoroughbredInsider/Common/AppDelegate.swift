@@ -3,6 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/29/17.
+//  Modified by TCCODER on 23/2/18.
 //  Copyright © 2018  topcoder. All rights reserved.
 //
 
@@ -13,7 +14,9 @@ import IQKeyboardManagerSwift
  * App delegate responder
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
