@@ -32,11 +32,7 @@ class ChapterViewController: UIViewController {
     @IBOutlet weak var conentLabel: UILabel!
     
     /// the chapter
-    var chapter: Chapter! {
-        didSet {
-            setupUI()
-        }
-    }
+    var chapter = Variable<Chapter!>(nil)
     
     /// the story
     var story: StoryDetails!
@@ -52,7 +48,6 @@ class ChapterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         sliderView.setThumbImage(#imageLiteral(resourceName: "iconChapterSliderPin"), for: .normal)
-        setupUI()
         Story.get(with: story.id)
             .subscribe(onNext: { [weak self] (value: Story) in
                 self?.raceLabel.text = value.racetrack?.name ?? ""
@@ -69,11 +64,15 @@ class ChapterViewController: UIViewController {
 //                self?.chapter.current = Int(round(max(old, new) * Float(self?.chapter.total ?? 0)))
 //            }
         }).disposed(by: rx.bag)
+        
+        chapter.asObservable().subscribe(onNext: { [weak self] value in
+            self?.setupUI(value)
+        }).disposed(by: rx.bag)
     }
     
     /// setup UI
-    private func setupUI() {
-        guard viewIfLoaded?.window != nil && chapter != nil else {
+    private func setupUI(_ chapter: Chapter?) {
+        guard let chapter = chapter else {
             return
         }
         if chapter.video.isEmpty {
@@ -98,7 +97,7 @@ class ChapterViewController: UIViewController {
     ///
     /// - Parameter sender: the button
     @IBAction func playTapped(_ sender: Any) {
-        guard let url = URL(string: chapter.video) else { return }
+        guard let url = URL(string: chapter.value.video) else { return }
         createPlayer(mediaURL: url, in: videoImageView)
         playButton.isHidden = true
     }

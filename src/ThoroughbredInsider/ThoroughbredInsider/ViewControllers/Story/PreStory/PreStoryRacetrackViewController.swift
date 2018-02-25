@@ -80,11 +80,6 @@ class PreStoryRacetrackViewController: InfiniteTableViewController {
         }
         vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? NSPredicate(format: "stateId IN %@", statesIds.value) : NSPredicate(format: "name CONTAINS[cd] %@ AND stateId IN %@", filter, statesIds.value))
     }
-
-    /// items count
-    override var itemsCount: Int {
-        return vm?.entries.value.count ?? 0
-    }
     
 }
 

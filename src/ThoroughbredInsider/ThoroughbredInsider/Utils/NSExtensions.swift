@@ -145,9 +145,9 @@ extension JSON {
     }
     
     /// same as .object but with all date strings converted to dates
-    func objectWithConvertedDates(using formatter: DateFormatter = Date.DefaultFormatter) -> Any {
+    func objectWithConvertedDates(using formatter: DateFormatter = Date.FullFormatter) -> Any {
         if let dict = dictionary {
-            return dict.mapValues { $0.lowercased().contains("date") ? formatter.date(from: $1.stringValue) as Any : $1.objectWithConvertedDates(using: formatter) }
+            return dict.mapValues { $0.lowercased().contains("date") || $0.lowercased().contains("updatedat") || $0.lowercased().contains("createdat") ? formatter.date(from: $1.stringValue) as Any : $1.objectWithConvertedDates(using: formatter) }
         }
         else if let array = array {
             return array.map { $0.objectWithConvertedDates(using: formatter) }

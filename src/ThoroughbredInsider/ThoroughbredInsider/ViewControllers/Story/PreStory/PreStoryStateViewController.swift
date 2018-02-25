@@ -65,11 +65,6 @@ class PreStoryStateViewController: InfiniteTableViewController {
         }
         vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "value")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "value CONTAINS[cd] %@", filter))
     }
-    
-    /// items count
-    override var itemsCount: Int {
-        return vm.entries.value.count
-    }
 
 }
 

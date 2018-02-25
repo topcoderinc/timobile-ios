@@ -57,7 +57,7 @@ class StoryChapterViewController: UIViewController {
             let idx = self?.pageViewController?.currentIndex ?? 0
             let vc = self?.pageViewController?.currentViewController as? ChapterViewController
             if value.count > idx {
-                vc?.chapter = value[idx]
+                vc?.chapter.value = value[idx]
             }
         }).disposed(by: rx.bag)
     }
@@ -94,8 +94,10 @@ class StoryChapterViewController: UIViewController {
     
     /// prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? StoryCommentsViewController {
+        if let vc = segue.destination as? StoryCommentsViewController,
+            let idx = pageViewController?.currentIndex {
             vc.story = story
+            vc.chapterId = vm.value[idx].id
         }
     }
     
@@ -114,7 +116,7 @@ extension StoryChapterViewController: PagingContentProvider {
         guard pageControl.count > index && index > -1 else { return nil }
         guard let vc = create(viewController: ChapterViewController.self) else { return nil }
         vc.story = story
-        vc.chapter = index < vm.value.count ? vm.value[index] : nil
+        vc.chapter.value = index < vm.value.count ? vm.value[index] : nil
         return vc
     }
     
@@ -130,7 +132,7 @@ extension StoryChapterViewController: PagingControllerDelegate {
         if index < vm.value.count {
             navigationItem.title = vm.value[index].title
             let vc = viewController as? ChapterViewController
-            vc?.chapter = vm.value[index]
+            vc?.chapter.value = vm.value[index]
         }
     }
 }

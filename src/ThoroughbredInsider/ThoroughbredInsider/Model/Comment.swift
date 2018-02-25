@@ -17,6 +17,12 @@ import RealmSwift
  */
 class Comment: Object {
     
+    /// types
+    enum CommentType: String {
+        case story = "TrackStory"
+        case chapter = "Chapter"
+    }
+    
     /// fields
     @objc dynamic var id = 0
     @objc dynamic var trackStoryId = 0

@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 import RxRealm
+import RxCocoa
+import RxSwift
 import UIComponents
 import IQKeyboardManagerSwift
 
@@ -18,13 +20,15 @@ import IQKeyboardManagerSwift
  * - author: TCCODER
  * - version: 1.0
  */
-class StoryCommentsViewController: UIViewController {
+class StoryCommentsViewController: InfiniteTableViewController {
     
     /// story
     var story: StoryDetails!
     
+    /// chapter id
+    var chapterId = 0
+    
     /// outlets
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var fakeInputView: FakeInputView!
     @IBOutlet var textfieldView: UIView!
@@ -33,7 +37,7 @@ class StoryCommentsViewController: UIViewController {
     @IBOutlet weak var textfieldBgView: UIView!
     
     /// viewmodel
-    var vm = TableViewModel<Comment, CommentCell>()
+    var vm = RealmTableViewModel<Comment, CommentCell>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +49,33 @@ class StoryCommentsViewController: UIViewController {
         vm.configureCell = { [weak self] index, item, _, cell in
             cell.configure(item)
             cell.onDelete = {
-                self?.vm.entries.value.remove(at: index)
+                guard let strongSelf = self else { return }
+                strongSelf.confirm(action: "Delete comment".localized,
+                                   message: "Do you want to delete this comment?".localized,
+                                   confirmTitle: "Delete".localized, confirmHandler: {
+                                    RestDataSource.delete(comment: item)
+                                        .subscribe(onNext: { [weak self] value in
+                                            guard let realm = item.realm else {
+                                                self?.vm.entries.value.remove(at: index)
+                                                return
+                                            }
+                                            try? realm.write {
+                                                realm.delete(item)
+                                            }
+                                        }).disposed(by: strongSelf.rx.bag)
+                }, cancelHandler: nil)
             }
         }
-        vm.bindData(to: tableView)
+        vm.bindData(to: tableView,
+                    sortDescriptors: [SortDescriptor(keyPath: "updatedAt", ascending: false)],
+                    predicate: NSPredicate(format: "trackStoryId = %d AND chapterId = %d", story.id, chapterId))
         loadData()
+        
+        vm.entries.asObservable()
+            .map { $0.isEmpty }
+            .subscribe(onNext: { [weak self] value in
+            self?.noDataLabel.isHidden = !value
+        }).disposed(by: rx.bag)
         
         setupEditComment()
         startObservingKeyboardEvents()
@@ -93,12 +119,11 @@ class StoryCommentsViewController: UIViewController {
     /// Load data
     private func loadData() {
         noDataLabel.isHidden = true
-        RestDataSource.getStoryComments(trackStoryId: story.id)
-            .showLoading(on: view)
-            .subscribe(onNext: { [weak self] value in
-                self?.vm.entries.value.append(contentsOf: value.items)
-                self?.noDataLabel.isHidden = self?.vm.entries.value.isEmpty == false
-            }).disposed(by: rx.bag)
+        let storyId = story.id
+        let chapterId = self.chapterId
+        setupPager(requestPager: RequestPager<Comment>(request: { (offset, limit) -> Observable<PageResult<Comment>> in
+            RestDataSource.getStoryComments(offset: offset, limit: limit, trackStoryId: storyId, chapterId: chapterId)
+        }))
     }
     
     /// cancel editing tap handler
@@ -116,7 +141,11 @@ class StoryCommentsViewController: UIViewController {
         fakeInputView.resignFirstResponder()
         let comment = Comment.create()
         comment.text = keyboardTF.textValue
-        vm.entries.value.insert(comment, at: 0)
+        comment.userId = UserDefaults.loggedUserId
+        comment.chapterId = chapterId
+        comment.type = Comment.CommentType.chapter.rawValue
+        comment.trackStoryId = story.id
+        loadData(from: RestDataSource.post(comment: comment))
         noDataLabel.isHidden = true
         keyboardTF.text = ""
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.025) {

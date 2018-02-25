@@ -81,10 +81,6 @@ class StoryListViewController: InfiniteTableViewController {
                     predicate: preds.isEmpty ? nil : NSCompoundPredicate(orPredicateWithSubpredicates: preds))
     }
 
-    /// items count
-    override var itemsCount: Int {
-        return vm?.entries.value.count ?? 0
-    }
 }
 
 /**

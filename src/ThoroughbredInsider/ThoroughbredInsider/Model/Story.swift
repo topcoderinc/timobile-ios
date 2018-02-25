@@ -30,7 +30,7 @@ class Story: Object {
     @objc dynamic var badge: Badge?
     @objc dynamic var additionalTask: AdditionalTask?
     var cards = List<Card>()
-    var chapters = List<Chapter>()
+    var chapters = List<ChapterSmall>()
     var tags = List<Tag>()    
     
     /// primary key

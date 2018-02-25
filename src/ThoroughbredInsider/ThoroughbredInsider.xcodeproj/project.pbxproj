@@ -11,6 +11,7 @@
 		0C198E0B1FA7D1780040A190 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C198E0A1FA7D1780040A190 /* CircleView.swift */; };
 		0C26C1C81FAAB55B00E24FFD /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C26C1C71FAAB55B00E24FFD /* ChapterViewController.swift */; };
 		0C2889CA20421FE9004EFC81 /* RequestPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2889C920421FE9004EFC81 /* RequestPager.swift */; };
+		0C2889CC20423143004EFC81 /* ChapterSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2889CB20423143004EFC81 /* ChapterSmall.swift */; };
 		0C30984F203ED163007E8009 /* TokenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C30984E203ED163007E8009 /* TokenUtil.swift */; };
 		0C309851203EDBAB007E8009 /* PageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C309850203EDBAB007E8009 /* PageResult.swift */; };
 		0C309853203EF8E4007E8009 /* StoryProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C309852203EF8E4007E8009 /* StoryProgress.swift */; };
@@ -176,6 +177,7 @@
 		0C198E0A1FA7D1780040A190 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		0C26C1C71FAAB55B00E24FFD /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
 		0C2889C920421FE9004EFC81 /* RequestPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPager.swift; sourceTree = "<group>"; };
+		0C2889CB20423143004EFC81 /* ChapterSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterSmall.swift; sourceTree = "<group>"; };
 		0C30984E203ED163007E8009 /* TokenUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUtil.swift; sourceTree = "<group>"; };
 		0C309850203EDBAB007E8009 /* PageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageResult.swift; sourceTree = "<group>"; };
 		0C309852203EF8E4007E8009 /* StoryProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryProgress.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				0CFA72091FAA99B900CD6410 /* Card.swift */,
 				0CFA72011FAA921200CD6410 /* StoryDetails.swift */,
 				0CFA72051FAA961000CD6410 /* Chapter.swift */,
+				0C2889CB20423143004EFC81 /* ChapterSmall.swift */,
 				0C309852203EF8E4007E8009 /* StoryProgress.swift */,
 				0C309854203EFA15007E8009 /* ChapterProgress.swift */,
 				0C30985C203F0C69007E8009 /* StoryReward.swift */,
@@ -993,6 +996,7 @@
 				0C2889CA20421FE9004EFC81 /* RequestPager.swift in Sources */,
 				0CFA72021FAA921200CD6410 /* StoryDetails.swift in Sources */,
 				0C87E07A1FA78B7000EBEFFF /* SplashContainerViewController.swift in Sources */,
+				0C2889CC20423143004EFC81 /* ChapterSmall.swift in Sources */,
 				0CB5A82A1FA764D2000563E4 /* Configuration.swift in Sources */,
 				0CB5A8261FA764C9000563E4 /* UIExtensions.swift in Sources */,
 				0CB5A8371FA7651B000563E4 /* RealmExtensions.swift in Sources */,

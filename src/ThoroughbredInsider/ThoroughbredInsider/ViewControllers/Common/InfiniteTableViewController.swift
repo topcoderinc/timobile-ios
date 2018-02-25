@@ -45,11 +45,6 @@ class InfiniteTableViewController: UIViewController {
     /// request pager
     var requestPager: RequestPagerProtocol!
     
-    /// override this
-    var itemsCount: Int {
-        return 0
-    }
-    
     /// view did load
     override func viewDidLoad() {
         super.viewDidLoad()

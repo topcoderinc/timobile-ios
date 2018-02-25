@@ -37,14 +37,29 @@ extension RestDataSource {
             .restSend()
     }
     
-    /// gets story details
+    /// post a comment
     ///
     /// - Returns: call observable
     static func post(comment: Comment) -> Observable<Comment> {
-        return json(.post, "comments", parameters: comment.toDictionary() as? [String : Any])
+        return json(.post, "comments", parameters: [
+            "text": comment.text,
+            "userId": comment.userId,
+            "chapterId": comment.chapterId,
+            "trackStoryId": comment.trackStoryId,
+            "type": comment.type,
+            ])
             .map { json in
                 return Comment(value: json.objectWithConvertedDates())
             }
+            .restSend()
+    }
+    
+    /// deletes a comment
+    ///
+    /// - Returns: call observable
+    static func delete(comment: Comment) -> Observable<Void> {
+        return json(.delete, "comments/\(comment.id)")
+            .toVoid()
             .restSend()
     }
     
