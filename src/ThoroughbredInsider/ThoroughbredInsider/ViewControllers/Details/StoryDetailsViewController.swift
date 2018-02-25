@@ -122,13 +122,13 @@ class StoryDetailsViewController: UIViewController {
         bookmarkButton.image = details.bookmarked ? #imageLiteral(resourceName: "navIconStarSelected") : #imageLiteral(resourceName: "navIconStar")
         
         // check if we need to mark the progress as completed
-        markCompletedIfNeeded(progress: progress)
+        markCompletedIfNeeded(details: details, progress: progress)
     }
     
     /// marks story as completed if all chapters are read
-    private func markCompletedIfNeeded(progress: StoryProgress) {
-        guard !progress.completed else { return }
-        if progress.chaptersUserProgress.toArray().filter({ !$0.completed }).isEmpty {
+    private func markCompletedIfNeeded(details: StoryDetails, progress: StoryProgress) {
+        guard progress.id > 0 && !progress.completed else { return }
+        if progress.chaptersUserProgress.toArray().filter({ $0.completed }).count == details.chapters.count {
             RestDataSource.completeStory(id: progress.id)
                 .showLoading(on: self.view)
                 .subscribe(onNext: { [weak self] value in
