@@ -77,7 +77,7 @@ class StoryDetailsViewController: UIViewController {
         rewardsVM.configureCell = { [weak self] _, value, _, cell in
             cell.titleLabel.text = value.name
             if self?.progress.value.cardsAndRewardsReceived == true {
-                cell.rewardImage.load(url: value.image)
+                cell.rewardImage.load(url: value.imageURL)
                 cell.rewardImage.contentMode = .scaleAspectFill
             }
             else {

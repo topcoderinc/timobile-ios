@@ -37,7 +37,7 @@ class ProfileCardsViewController: UIViewController {
             cell.titleLabel.text = value.name
             if value.isEarned {
                 cell.rewardImage.contentMode = .scaleAspectFill
-                cell.rewardImage.load(url: value.image)
+                cell.rewardImage.load(url: value.imageURL)
             }
             else {
                 cell.rewardImage.contentMode = .scaleAspectFit

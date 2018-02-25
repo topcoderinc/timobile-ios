@@ -60,7 +60,7 @@ class ShopViewController: RootViewController {
         rewardsVM.configureCell = { _, value, _, cell in
             cell.titleLabel.text = value.name
             cell.rewardImage.contentMode = .scaleAspectFill
-            cell.rewardImage.load(url: value.image)
+            cell.rewardImage.load(url: value.imageURL)
             cell.ptsLabel.text = "\(value.pts) pts"
         }
         rewardsVM.onSelect = { [weak self] _, card in

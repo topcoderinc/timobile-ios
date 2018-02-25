@@ -37,7 +37,7 @@ class StoryCompleteViewController: UIViewController {
         layout?.itemSize.width = (SCREEN_SIZE.width - 100) / 3
         rewardsVM.configureCell = { _, value, _, cell in
             cell.titleLabel.text = value.name
-            cell.rewardImage.load(url: value.image)
+            cell.rewardImage.load(url: value.imageURL)
         }
         let rewards = story.cards.toArray()
         

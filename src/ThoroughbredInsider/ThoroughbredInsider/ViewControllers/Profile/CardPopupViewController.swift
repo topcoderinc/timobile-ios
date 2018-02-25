@@ -35,7 +35,7 @@ class CardPopupViewController: UIViewController {
         congratsLabel.text = card.descr
         if card.isEarned {
             cardImage.contentMode = .scaleAspectFill
-            cardImage.load(url: card.image)
+            cardImage.load(url: card.imageURL)
             shareButton.setTitle("SHARE".localized, for: .normal)
         }
         editButton.isEnabled = card.isEarned
