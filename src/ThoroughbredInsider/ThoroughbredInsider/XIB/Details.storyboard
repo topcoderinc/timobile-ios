@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -419,7 +420,7 @@ Lorem Ipsum</string>
                                                         <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPC-5i-Nh5">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPC-5i-Nh5">
                                                         <rect key="frame" x="285" y="82" width="74" height="27.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27.5" id="ahw-Ys-bwN"/>
@@ -427,7 +428,9 @@ Lorem Ipsum</string>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="12"/>
                                                         <color key="tintColor" red="0.25098039215686274" green="0.55686274509803924" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" title="Take Selfie"/>
+                                                        <state key="normal" title="Take Selfie">
+                                                            <color key="titleColor" red="0.25098039220000001" green="0.5568627451" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                                 <color key="value" red="0.25098039220000001" green="0.5568627451" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -480,17 +483,18 @@ location for additional rewards.</string>
                                                     <constraint firstItem="yMO-qp-Rp5" firstAttribute="trailing" secondItem="JPC-5i-Nh5" secondAttribute="trailing" id="GKp-Rx-quh"/>
                                                     <constraint firstItem="YHY-qJ-tmZ" firstAttribute="leading" secondItem="PyC-xZ-02n" secondAttribute="leading" constant="17" id="OIM-yv-scW"/>
                                                     <constraint firstItem="bBo-An-0em" firstAttribute="leading" secondItem="EpV-PK-EBw" secondAttribute="trailing" constant="20" id="PI8-Wy-PGF"/>
+                                                    <constraint firstItem="xOo-qT-Mkr" firstAttribute="top" secondItem="MZk-se-ewF" secondAttribute="bottom" priority="200" constant="10" id="RBs-Rv-5Gh"/>
                                                     <constraint firstAttribute="trailing" secondItem="xOo-qT-Mkr" secondAttribute="trailing" id="Sis-fE-au0"/>
                                                     <constraint firstAttribute="trailing" secondItem="JPC-5i-Nh5" secondAttribute="trailing" constant="16" id="YmG-Bu-XBd"/>
                                                     <constraint firstItem="JPC-5i-Nh5" firstAttribute="top" secondItem="yMO-qp-Rp5" secondAttribute="bottom" constant="11" id="ZU6-Ec-jtY"/>
                                                     <constraint firstItem="yMO-qp-Rp5" firstAttribute="leading" secondItem="yin-KR-ojk" secondAttribute="trailing" constant="5" id="eRh-IX-bYs"/>
                                                     <constraint firstItem="MZk-se-ewF" firstAttribute="top" secondItem="bBo-An-0em" secondAttribute="bottom" constant="1" id="ekM-BH-mPQ"/>
-                                                    <constraint firstAttribute="height" constant="140" id="j2b-vy-nY2"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="140" id="j2b-vy-nY2"/>
+                                                    <constraint firstItem="yMO-qp-Rp5" firstAttribute="top" secondItem="PyC-xZ-02n" secondAttribute="top" constant="53" id="jIG-kF-O4y"/>
                                                     <constraint firstAttribute="bottom" secondItem="xOo-qT-Mkr" secondAttribute="bottom" id="nor-Lq-R2I"/>
                                                     <constraint firstItem="EpV-PK-EBw" firstAttribute="leading" secondItem="YHY-qJ-tmZ" secondAttribute="leading" id="pxA-Su-j0E"/>
                                                     <constraint firstItem="yin-KR-ojk" firstAttribute="centerY" secondItem="yMO-qp-Rp5" secondAttribute="centerY" id="sOd-Jw-OUw"/>
                                                     <constraint firstItem="bBo-An-0em" firstAttribute="top" secondItem="EpV-PK-EBw" secondAttribute="top" id="tqx-Mf-JDg"/>
-                                                    <constraint firstAttribute="bottom" secondItem="JPC-5i-Nh5" secondAttribute="bottom" constant="30.5" id="yuN-ca-1vF"/>
                                                     <constraint firstItem="MZk-se-ewF" firstAttribute="leading" secondItem="bBo-An-0em" secondAttribute="leading" id="zid-VW-WgM"/>
                                                 </constraints>
                                             </view>
@@ -560,7 +564,10 @@ location for additional rewards.</string>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <size key="freeformSize" width="375" height="967"/>
                     <connections>
+                        <outlet property="additionalRewardDescriptionLabel" destination="MZk-se-ewF" id="Xsi-cc-IsM"/>
+                        <outlet property="additionalRewardHeight" destination="j2b-vy-nY2" id="9cy-7o-6Tp"/>
                         <outlet property="additionalRewardLabel" destination="yMO-qp-Rp5" id="Jgn-sx-CNB"/>
+                        <outlet property="additionalRewardTitleLabel" destination="bBo-An-0em" id="kMY-70-2JO"/>
                         <outlet property="additionalRewardView" destination="PyC-xZ-02n" id="y7p-wv-Zqs"/>
                         <outlet property="bookmarkButton" destination="5lU-Qd-bAu" id="oNr-qd-Q2q"/>
                         <outlet property="cardsLabel" destination="3g7-0n-tR9" id="wZb-vE-GQs"/>
@@ -571,6 +578,8 @@ location for additional rewards.</string>
                         <outlet property="storyImage" destination="lKo-nC-eR2" id="ZtI-R8-J9V"/>
                         <outlet property="summaryLabel" destination="fOb-gN-UJu" id="mzW-dR-vjR"/>
                         <outlet property="tagsCollection" destination="Afi-Ng-arY" id="dEu-Up-b2b"/>
+                        <outlet property="takeSelfie2Button" destination="EpV-PK-EBw" id="Oge-xT-Wd4"/>
+                        <outlet property="takeSelfieButton" destination="JPC-5i-Nh5" id="mCz-2y-oiz"/>
                         <outlet property="titleLabel" destination="CvF-0x-6Sa" id="wjN-f2-h9J"/>
                     </connections>
                 </viewController>
@@ -593,6 +602,7 @@ location for additional rewards.</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h0t-np-TWv">
                                 <rect key="frame" x="0.0" y="150" width="375" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="3lf-Wc-vX7">
                                     <rect key="frame" x="0.0" y="128" width="375" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -707,7 +717,7 @@ location for additional rewards.</string>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be the first to comment" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3SK-ky-o4C">
                                 <rect key="frame" x="22" y="325" width="331" height="17.5"/>
                                 <fontDescription key="fontDescription" name="Titillium-Regular" family="Titillium" pointSize="15"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0i-cf-BSX">
@@ -847,7 +857,7 @@ location for additional rewards.</string>
                         <constraint firstItem="uQN-N5-7Ts" firstAttribute="leading" secondItem="V1X-5G-Pv2" secondAttribute="leading" id="IfV-Yf-jCR"/>
                         <constraint firstAttribute="trailing" secondItem="uQN-N5-7Ts" secondAttribute="trailing" id="Iy5-54-aQj"/>
                         <constraint firstItem="C3T-CU-l3h" firstAttribute="top" secondItem="V1X-5G-Pv2" secondAttribute="top" constant="30" id="TYy-d4-sHg"/>
-                        <constraint firstAttribute="bottom" secondItem="jtO-8w-Lkg" secondAttribute="bottom" constant="15" id="Y7N-xV-dky"/>
+                        <constraint firstAttribute="bottom" secondItem="jtO-8w-Lkg" secondAttribute="bottom" priority="999" constant="15" id="Y7N-xV-dky"/>
                         <constraint firstAttribute="trailing" secondItem="7X3-sh-9bO" secondAttribute="trailing" constant="12" id="aZ7-UP-f1S"/>
                         <constraint firstItem="uQN-N5-7Ts" firstAttribute="top" secondItem="jtO-8w-Lkg" secondAttribute="top" constant="-12" id="qms-2l-Y3Z"/>
                         <constraint firstAttribute="trailing" secondItem="jtO-8w-Lkg" secondAttribute="trailing" constant="47" id="zmE-X8-Vwe"/>
@@ -1039,7 +1049,7 @@ location for additional rewards.</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="588-Tb-K0d" userLabel="Pin bg">
-                                                <rect key="frame" x="0.0" y="-7" width="6" height="20"/>
+                                                <rect key="frame" x="-3" y="-7" width="6" height="20"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDragPin" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-8E-Wqv">
                                                         <rect key="frame" x="-8.5" y="-1" width="22" height="22"/>
@@ -1064,7 +1074,7 @@ location for additional rewards.</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="0ZW-eJ-n4T"/>
-                                            <constraint firstItem="588-Tb-K0d" firstAttribute="leading" secondItem="rCD-kF-Ac8" secondAttribute="trailing" id="BvE-Zk-U4i"/>
+                                            <constraint firstItem="588-Tb-K0d" firstAttribute="centerX" secondItem="rCD-kF-Ac8" secondAttribute="trailing" id="BvE-Zk-U4i"/>
                                             <constraint firstItem="Hva-bZ-gMw" firstAttribute="top" secondItem="RSB-nI-JpL" secondAttribute="bottom" constant="19" id="N1h-k3-xsl"/>
                                             <constraint firstItem="Hva-bZ-gMw" firstAttribute="leading" secondItem="RSB-nI-JpL" secondAttribute="leading" id="b6f-KJ-mYh"/>
                                             <constraint firstItem="RSB-nI-JpL" firstAttribute="top" secondItem="vqI-Y1-yKk" secondAttribute="top" id="e2o-rG-gGd"/>
@@ -1188,21 +1198,31 @@ location for additional rewards.</string>
                                                         <constraint firstAttribute="height" constant="31.5" id="yHp-v0-nWk"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="progressCheckmark" translatesAutoresizingMaskIntoConstraints="NO" id="mgw-hr-MkU">
+                                                    <rect key="frame" x="287.5" y="13.5" width="31.5" height="31.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="cWm-rJ-EME" firstAttribute="leading" secondItem="3VX-X7-zFR" secondAttribute="trailing" id="1La-kd-Us8"/>
                                                 <constraint firstItem="SeO-CY-yWR" firstAttribute="centerY" secondItem="uqb-ht-tta" secondAttribute="centerY" id="4hD-DP-vvS"/>
                                                 <constraint firstItem="cWm-rJ-EME" firstAttribute="centerY" secondItem="uqb-ht-tta" secondAttribute="centerY" id="6uw-Bp-A7a"/>
                                                 <constraint firstItem="VS0-YE-VkW" firstAttribute="leading" secondItem="uqb-ht-tta" secondAttribute="leading" constant="14" id="EsI-dQ-Kbm"/>
-                                                <constraint firstAttribute="trailing" secondItem="cWm-rJ-EME" secondAttribute="trailing" constant="20" id="Zop-gG-xJy"/>
+                                                <constraint firstItem="3VX-X7-zFR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kza-bE-F8E" secondAttribute="trailing" constant="3" id="O0C-qT-CiQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="cWm-rJ-EME" secondAttribute="trailing" priority="200" constant="20" id="Zop-gG-xJy"/>
+                                                <constraint firstItem="mgw-hr-MkU" firstAttribute="bottom" secondItem="kza-bE-F8E" secondAttribute="bottom" id="cFE-1E-aEh"/>
                                                 <constraint firstItem="3VX-X7-zFR" firstAttribute="baseline" secondItem="cWm-rJ-EME" secondAttribute="baseline" id="eDF-C1-LEP"/>
                                                 <constraint firstItem="SeO-CY-yWR" firstAttribute="leading" secondItem="uqb-ht-tta" secondAttribute="leading" constant="50" id="eSS-dZ-U3W"/>
+                                                <constraint firstItem="mgw-hr-MkU" firstAttribute="top" secondItem="kza-bE-F8E" secondAttribute="top" id="jOP-Of-bdh"/>
                                                 <constraint firstAttribute="trailing" secondItem="kza-bE-F8E" secondAttribute="trailing" constant="56" id="lM2-h0-lpC"/>
+                                                <constraint firstItem="mgw-hr-MkU" firstAttribute="leading" secondItem="kza-bE-F8E" secondAttribute="leading" id="sZI-p8-6US"/>
                                                 <constraint firstItem="kza-bE-F8E" firstAttribute="centerY" secondItem="uqb-ht-tta" secondAttribute="centerY" id="wAE-Ar-cUB"/>
                                                 <constraint firstItem="VS0-YE-VkW" firstAttribute="centerY" secondItem="uqb-ht-tta" secondAttribute="centerY" id="xC1-Yg-i7X"/>
+                                                <constraint firstItem="mgw-hr-MkU" firstAttribute="trailing" secondItem="kza-bE-F8E" secondAttribute="trailing" id="zsD-Z9-KSN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkmark" destination="mgw-hr-MkU" id="Km5-NP-Ti2"/>
                                             <outlet property="currentLabel" destination="3VX-X7-zFR" id="zvh-qc-LZl"/>
                                             <outlet property="numberLabel" destination="VS0-YE-VkW" id="cfL-0g-ZXP"/>
                                             <outlet property="progress" destination="kza-bE-F8E" id="cRb-7i-Rev"/>
@@ -1238,7 +1258,7 @@ location for additional rewards.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84c-ry-oro" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="-446"/>
+            <point key="canvasLocation" x="341.60000000000002" y="-446.62668665667172"/>
         </scene>
         <!--Selfie Success View Controller-->
         <scene sceneID="vyh-g0-WMP">
@@ -1695,6 +1715,7 @@ Check your trading card gallery for details!</string>
         <image name="iconStarLarge" width="60" height="60"/>
         <image name="logoWhite" width="57" height="19"/>
         <image name="navIconStar" width="19" height="18"/>
+        <image name="progressCheckmark" width="10" height="7"/>
         <image name="redCloseButtonOn" width="16" height="16"/>
         <image name="storybg1" width="750" height="501"/>
     </resources>

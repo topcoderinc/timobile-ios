@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -11,11 +12,19 @@ import RxCocoa
 import RxSwift
 import RealmSwift
 
+/// option: true - allows to select only one racetrack in PreStory, false - multiple selection
+let OPTION_PRESTORY_SINGLE_RACETRACK_SELECTION = false
+
 /**
  * racetracks selection
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration
+ * - selection bug fixed
  */
 class PreStoryRacetrackViewController: UIViewController {
 
@@ -24,9 +33,13 @@ class PreStoryRacetrackViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     /// viewmodel
-    var vm: RealmTableViewModel<Racetrack, SelectCell>!
+    var vm: InfiniteTableViewModel<Racetrack, SelectCell>!
     var selected = Set<Racetrack>()
-    
+    var states: [State]?
+
+    // true - initial loading, false - else
+    private var initialLoad = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,30 +51,69 @@ class PreStoryRacetrackViewController: UIViewController {
                 guard let strongSelf = self else { return }
                 strongSelf.setupVM(filter: value)
             }).disposed(by: rx.bag)
-        
-        loadData(from: MockDataSource.getRacetracks())
+    }
+
+    /// Clean up table
+    ///
+    /// - Parameter animated: the animation flag
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !initialLoad {
+            vm.items.removeAll()
+            tableView.reloadData()
+        }
+    }
+
+    /// Reload data
+    ///
+    /// - Parameter animated: the animation flag
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !initialLoad {
+            vm.bindData(to: tableView)
+        }
+        initialLoad = false
     }
     
     /// configure vm
     ///
     /// - Parameter filter: current filter
     func setupVM(filter: String = "") {
-        selected.removeAll()
-        vm = RealmTableViewModel<Racetrack, SelectCell>()
+        vm = InfiniteTableViewModel<Racetrack, SelectCell>()
         vm.configureCell = { [weak self] _, value, _, cell in
-            cell.titleLabel.text = "\(value.code) - \(value.name)"
-            cell.itemSelected = self?.selected.contains(value) == true
-        }
-        vm.onSelect = { [weak self] idx, value in
-            if self?.selected.contains(value) == true {
-                _ = self?.selected.remove(value)
+            if value.code.isEmpty {
+                cell.titleLabel.text = value.name
             }
             else {
-                self?.selected.insert(value)
+                cell.titleLabel.text = "\(value.code) - \(value.name)"
             }
-            self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
+            cell.itemSelected = self?.selected.map({$0.id}).contains(value.id) == true
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "code"), SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.onSelect = { [weak self] idx, value in
+            if OPTION_PRESTORY_SINGLE_RACETRACK_SELECTION {
+                self?.selected = Set<Racetrack>([value])
+                self?.tableView.reloadData()
+            }
+            else {
+                if let object = self?.selected.filter({$0.id == value.id}).first {
+                    _ = self?.selected.remove(object)
+                }
+                else {
+                    self?.selected.insert(value)
+                }
+                self?.tableView.reloadRows(at: [idx], with: .fade)
+            }
+        }
+        vm.fetchItems = { (_ offset, _ limit, _ callback, _ failure) in
+            let stateIds = self.states?.map{"\($0.id)"} ?? []
+            if filter.isEmpty {
+                RestServiceApi.shared.searchRacetracks(stateIds: stateIds, offset: offset, limit: limit, callback: callback, failure: failure)
+            }
+            else {
+                RestServiceApi.shared.searchRacetracks(name: filter, stateIds: stateIds, offset: offset, limit: limit, callback: callback, failure: failure)
+            }
+        }
+        vm.bindData(to: tableView)
     }
 
 }
@@ -89,11 +141,13 @@ extension PreStoryRacetrackViewController: PreStoryScreen {
     /// right button
     var rightButtonAction: ((PreStoryViewController) -> ())? {
         return { vc in
-            if self.selected.isEmpty {
+            let visibleItems = self.vm.items.map({$0.id})
+            let choice: [Racetrack] = Array(self.selected.filter({visibleItems.contains($0.id)}))
+            if choice.isEmpty {
                 self.showErrorAlert(message: "Please select at least one".localized)
                 return
             }
-            vc.finish()
+            vc.finish(selectedObjects: choice)
         }
     }
     

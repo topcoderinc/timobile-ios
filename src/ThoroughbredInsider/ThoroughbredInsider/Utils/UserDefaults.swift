@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -30,21 +31,10 @@ extension UserDefaults {
     /// first story launch flag
     static var firstStoryLaunch: Bool {
         get {
-        return standard.bool(forKey: "firstStoryLaunch")
+            return standard.bool(forKey: "firstStoryLaunch")
         }
         set {
             standard.set(newValue, forKey: "firstStoryLaunch")
-            standard.synchronize()
-        }
-    }
-    
-    /// logged in user
-    static var loggedUserId: Int {
-        get {
-            return standard.integer(forKey: "loggedUserId")
-        }
-        set {
-            standard.set(newValue, forKey: "loggedUserId")
             standard.synchronize()
         }
     }
@@ -56,6 +46,17 @@ extension UserDefaults {
         }
         set {
             standard.set(newValue, forKey: "switchEmails")
+            standard.synchronize()
+        }
+    }
+
+    /// is user allowed location services
+    static var locationServicesAllowed: Bool {
+        get {
+            return standard.bool(forKey: "locationServicesAllowed")
+        }
+        set {
+            standard.set(newValue, forKey: "locationServicesAllowed")
             standard.synchronize()
         }
     }

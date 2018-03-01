@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -16,12 +17,16 @@ import IQKeyboardManagerSwift
  * Details comments screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration
  */
 class StoryCommentsViewController: UIViewController {
     
-    /// story
-    var story: StoryDetails!
+    /// the related chapter
+    var chapter: Chapter!
     
     /// outlets
     @IBOutlet weak var tableView: UITableView!
@@ -33,23 +38,42 @@ class StoryCommentsViewController: UIViewController {
     @IBOutlet weak var textfieldBgView: UIView!
     
     /// viewmodel
-    var vm = TableViewModel<Comment, CommentCell>()
-    
+    var vm = InfiniteTableViewModel<Comment, CommentCell>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
-        
+
+        vm.noDataLabel = self.noDataLabel
         vm.configureCell = { [weak self] index, item, _, cell in
             cell.configure(item)
             cell.onDelete = {
-                self?.vm.entries.value.remove(at: index)
+                guard let sf = self, let index = sf.vm.items.index(of: item) else { return }
+                let item = sf.vm.items[index]
+                guard item.userId == AuthenticationUtil.sharedInstance.userInfo?.toUser().id else {
+                    sf.showAlert("", "You cannot delete other user's comment")
+                    return
+                }
+                RestServiceApi.shared.deleteComment(item, callback: {
+                    if let index = sf.vm.items.index(of: item) {
+                        sf.vm.items.remove(at: index)
+                        if sf.vm.items.count > 0 {
+                            sf.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                        }
+                        else {
+                            sf.tableView.reloadData()
+                        }
+                    }
+                }, failure: sf.createGeneralFailureCallback())
             }
         }
+        vm.fetchItems = { offset, limit, callback, failure in
+            RestServiceApi.shared.searchComments(chapterId: self.chapter.id, trackStoryId: self.chapter.trackStoryId, offset: offset, limit: limit, callback: callback, failure: failure)
+        }
         vm.bindData(to: tableView)
-        loadData()
         
         setupEditComment()
         startObservingKeyboardEvents()
@@ -90,17 +114,6 @@ class StoryCommentsViewController: UIViewController {
             .disposed(by: rx.bag)
     }
     
-    /// Load data
-    private func loadData() {
-        noDataLabel.isHidden = true
-        MockDataSource.getStoryComments(id: story.id)
-            .showLoading(on: view)
-            .subscribe(onNext: { [weak self] value in
-                self?.vm.entries.value.append(contentsOf: value)
-                self?.noDataLabel.isHidden = self?.vm.entries.value.isEmpty == false
-            }).disposed(by: rx.bag)
-    }
-    
     /// cancel editing tap handler
     ///
     /// - Parameter sender: the button
@@ -114,10 +127,26 @@ class StoryCommentsViewController: UIViewController {
     @IBAction func sendTapped(_ sender: Any) {
         keyboardTF.resignFirstResponder()
         fakeInputView.resignFirstResponder()
-        let comment = Comment.create()
-        comment.timestamp = Date().timeIntervalSince1970
+        let comment = Comment()
+        comment.id = UUID().uuidString.hashValue
+        comment.chapterId = self.chapter.id
+        comment.trackStoryId = self.chapter.trackStoryId
+        comment.type = "TrackStory"
         comment.text = keyboardTF.textValue
-        vm.entries.value.insert(comment, at: 0)
+        comment.user = AuthenticationUtil.sharedInstance.userInfo?.toUser()
+        vm.items.insert(comment, at: 0)
+        if vm.items.count > 0 {
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        }
+        else {
+            self.tableView.reloadData()
+        }
+        RestServiceApi.shared.createComment(comment, callback: { (updatedComment) in
+            if let index = self.vm.items.index(of: comment) {
+                self.vm.items.remove(at: index)
+                self.vm.items.insert(updatedComment, at: index)
+            }
+        }, failure: createGeneralFailureCallback())
         noDataLabel.isHidden = true
         keyboardTF.text = ""
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.025) {
@@ -168,6 +197,9 @@ class StoryCommentsViewController: UIViewController {
     /// - Parameter notification: the notification
     @objc func keyboardDidHide(_ notification: NSNotification) {
         tableView.contentInset.bottom = 44
+        DispatchQueue.main.async {
+            self.fakeInputView.becomeFirstResponder()
+        }
     }
     
 }
@@ -176,7 +208,11 @@ class StoryCommentsViewController: UIViewController {
  * Comment cell
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - model object fields changed
  */
 class CommentCell: UITableViewCell {
     
@@ -198,10 +234,11 @@ class CommentCell: UITableViewCell {
     ///   - comment: the comment
     func configure(_ comment: Comment) {
         item = comment
-        nameLabel.text = comment.name
+        nameLabel.text = comment.user.name
         messageLabel.text = comment.text
-        userImage.load(url: comment.image)
-        timeLabel.text = Date(timeIntervalSince1970: comment.timestamp).timeAgo()
+        userImage.image = #imageLiteral(resourceName: "noProfileIcon")
+        userImage.load(url: comment.user.profilePhotoURL, resetImage: false)
+        timeLabel.text = comment.createdAt.timeAgo()
     }
     
     /// delete button tap handler

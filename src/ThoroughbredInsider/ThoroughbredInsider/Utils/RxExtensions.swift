@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -168,7 +169,7 @@ extension Observable {
             }
         }, onError: { (error) in
             if showAlertOnError {
-                showAlert(title: "Error".localized, message: error as? String ?? error.localizedDescription)
+                showAlert("Error".localized, message: error as? String ?? error.localizedDescription)
             }
             loader.terminate()
         }, onCompleted: {

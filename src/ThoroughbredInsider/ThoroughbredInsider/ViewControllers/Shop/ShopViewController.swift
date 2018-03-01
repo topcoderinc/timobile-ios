@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +15,11 @@ import RxSwift
  * shop screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - model object changes support
  */
 class ShopViewController: RootViewController {
 
@@ -60,8 +65,8 @@ class ShopViewController: RootViewController {
         rewardsVM.configureCell = { _, value, _, cell in
             cell.titleLabel.text = value.name
             cell.rewardImage.contentMode = .scaleAspectFill
-            cell.rewardImage.load(url: value.image)
-            cell.ptsLabel.text = "\(value.pts) pts"
+            cell.rewardImage.load(url: value.imageURL)
+            cell.ptsLabel.text = "\(value.pricePoints) pts"
         }
         rewardsVM.onSelect = { [weak self] _, card in
             guard let vc = self?.create(viewController: ShopPopupViewController.self) else { return }
@@ -69,7 +74,7 @@ class ShopViewController: RootViewController {
             self?.present(vc, animated: true, completion: nil)
         }
         
-        var predicates = [NSPredicate(format: "pts > 0")]
+        var predicates = [NSPredicate(format: "pricePoints > 0")]
         if !filter.isEmpty {
             predicates.append(NSPredicate(format: "name CONTAINS[cd] %@", filter))
         }

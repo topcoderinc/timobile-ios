@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/30/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +13,11 @@ import UIKit
  * Color pallette
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - new color
  */
 extension UIColor {
     
@@ -69,5 +74,10 @@ extension UIColor {
     /// cerulean
     @nonobjc class var cerulean: UIColor {
         return UIColor(red: 0.0, green: 150.0 / 255.0, blue: 215.0 / 255.0, alpha: 1.0)
+    }
+
+    /// pink
+    @nonobjc class var pink: UIColor {
+        return UIColor(red: 1, green: 80.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
     }
 }

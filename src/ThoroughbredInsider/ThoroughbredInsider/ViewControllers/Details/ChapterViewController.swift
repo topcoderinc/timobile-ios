@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -11,12 +12,30 @@ import UIComponents
 import AVFoundation
 import RxCocoa
 import RxSwift
+import RealmSwift
+import RxRealm
+
+/**
+ * StoryChapterViewController and ChapterViewController delegate protocol
+ *
+ * - author: TCCODER
+ * - version: 1.0
+ */
+protocol ChapterViewControllerDelegate {
+
+    /// Notify progres updated
+    func progressUpdated()
+}
 
 /**
  * chapter screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration
  */
 class ChapterViewController: UIViewController {
 
@@ -37,16 +56,19 @@ class ChapterViewController: UIViewController {
             setupUI()
         }
     }
-    
+    /// the total progress
+    var progress: StoryProgress?
     /// the story
-    var story: StoryDetails!
+    var story: Story!
+    /// the delegate
+    var delegate: ChapterViewControllerDelegate?
     
     /// the player
     private var player: AVPlayer?
     /// and its layer
     private var playerLayer: AVPlayerLayer?
     
-    
+    /// Setup UI
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,23 +81,78 @@ class ChapterViewController: UIViewController {
             }).disposed(by: rx.bag)
         
         scrollView.rx.didScroll.subscribe(onNext: { [weak self] value in
-            let offset = (self?.scrollView.contentOffset.y ?? 0) + (self?.scrollView.bounds.height ?? 0)
-            let size = self?.scrollView.contentSize.height ?? 0
-            let old = self?.sliderView.value ?? 0
-            let new = Float(max(0, min(1, offset / size)))
-            self?.sliderView.value = max(old, new)
-            try? self?.chapter?.realm?.write {
-                self?.chapter.current = Int(round(max(old, new) * Float(self?.chapter.total ?? 0)))
-            }
+            guard let sf = self else { return }
+            sf.updateProgress()
         }).disposed(by: rx.bag)
+    }
+
+    /// Update progress
+    ///
+    /// - Parameter animated: the animation flag
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.view.layoutIfNeeded()
+        updateProgress()
+    }
+
+    /// Update progress
+    private func updateProgress() {
+        let offset = self.scrollView.contentOffset.y + self.scrollView.bounds.height
+        let size = self.scrollView.contentSize.height
+        let old = self.sliderView.value
+        let new = Float(max(0, min(1, offset / max(1, size))))
+        self.sliderView.value = max(old, new)
+        let progressValue = max(old, new)
+        var progress: ChapterProgress! = self.chapter.progress
+
+        // No progress object
+        if progress == nil {
+            progress = ChapterProgress()
+            progress.chapter = self.chapter
+            self.chapter?.progress = progress
+        }
+        if !progress.completed {
+            let wordsRead = Int(round(progressValue * Float(self.chapter.wordsCount)))
+            // if completed
+            if progressValue >= 1 {
+                progress.completed = true
+                progress.wordsRead = self.chapter?.wordsCount ?? 0
+                self.updateProgress(progress)
+            }
+            // if not completed
+            else {
+                if wordsRead > progress.wordsRead {
+                    progress.wordsRead = wordsRead
+                    progress.completed = false
+                    self.updateProgress(progress)
+                }
+                else { return }
+            }
+            let isCompleted = progress.completed
+            try? progress.realm?.write {
+                progress.wordsRead = wordsRead
+                progress.completed = isCompleted
+            }
+        }
+    }
+
+    /// Save progress
+    ///
+    /// - Parameter progress: the progress
+    private func updateProgress(_ progress: ChapterProgress) {
+        RestServiceApi.shared.updateProgress(progress, storyProgress: self.progress, story: self.story, callback: {
+            self.delegate?.progressUpdated()
+        }, failure: { error in
+            print("ERROR: \(error)")
+        })
     }
     
     /// setup UI
     private func setupUI() {
-        guard viewIfLoaded?.window != nil && chapter != nil else {
+        guard titleLabel != nil && chapter != nil else {
             return
         }
-        if chapter.video.isEmpty {
+        if chapter.media.isEmpty {
             videoView.isHidden = true
             videoViewHeight.constant = 0
         }
@@ -97,7 +174,7 @@ class ChapterViewController: UIViewController {
     ///
     /// - Parameter sender: the button
     @IBAction func playTapped(_ sender: Any) {
-        guard let url = URL(string: chapter.video) else { return }
+        guard let url = URL(string: chapter.media) else { return }
         createPlayer(mediaURL: url, in: videoImageView)
         playButton.isHidden = true
     }

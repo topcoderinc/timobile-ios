@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -25,8 +26,34 @@ extension NSObject {
 }
 
 // MARK: - string extensions
+/**
+ * Extension adds methods String
+ *
+ * - author: TCCODER
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - new methods
+ */
 extension String {
-    
+
+    /// the length of the string
+    var length: Int {
+        return self.count
+    }
+
+    /// Shortcut method for replacingOccurrences
+    ///
+    /// - Parameters:
+    ///   - target: the string to replace
+    ///   - withString: the string to add instead of target
+    /// - Returns: a result of the replacement
+    public func replace(_ target: String, withString: String) -> String {
+        return self.replacingOccurrences(of: target, with: withString,
+                                         options: NSString.CompareOptions.literal, range: nil)
+    }
+
     /**
      Get string without spaces at the end and at the start.
      
@@ -35,10 +62,77 @@ extension String {
     func trim() -> String {
         return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
-    
+
+    /**
+     Checks if string contains given substring
+
+     - parameter substring:     the search string
+     - parameter caseSensitive: flag: true - search is case sensitive, false - else
+
+     - returns: true - if the string contains given substring, false - else
+     */
+    func contains(_ substring: String, caseSensitive: Bool = true) -> Bool {
+        if let _ = self.range(of: substring,
+                              options: caseSensitive ? NSString.CompareOptions(rawValue: 0) : .caseInsensitive) {
+            return true
+        }
+        return false
+    }
+
     /// localized string
     var localized: String {
         return NSLocalizedString(self, comment: "")
+    }
+
+    /// Checks if the string is number
+    ///
+    /// - Returns: true if the string presents number
+    func isNumber() -> Bool {
+        let formatter = NumberFormatter()
+        if let _ = formatter.number(from: self) {
+            return true
+        }
+        return false
+    }
+
+    /// Checks if the string is positive number
+    ///
+    /// - Returns: true if the string presents positive number
+    func isPositiveNumber() -> Bool {
+        let formatter = NumberFormatter()
+        if let number = formatter.number(from: self) {
+            if number.doubleValue > 0 {
+                return true
+            }
+        }
+        return false
+    }
+
+    /// Get substring, e.g. "ABCDE".substring(index: 2, length: 3) -> "CDE"
+    ///
+    /// - parameter index:  the start index
+    /// - parameter length: the length of the substring
+    ///
+    /// - returns: the substring
+    public func substring(index: Int, length: Int) -> String {
+        if self.length <= index {
+            return ""
+        }
+        let leftIndex = self.index(self.startIndex, offsetBy: index)
+        if self.length <= index + length {
+            return String(self[leftIndex...])
+        }
+        let rightIndex = self.index(self.endIndex, offsetBy: -(self.length - index - length))
+        return String(self[leftIndex..<rightIndex])
+    }
+
+    /// Capitalize first word
+    ///
+    /// - Returns: the result
+    func capitalizeFirstWord() -> String {
+        var a = self.split(separator: " ").map{String($0)}
+        if a.count > 1 { a[0] = a[0].capitalized }
+        return a.joined(separator: " ")
     }
     
 }
@@ -108,6 +202,17 @@ extension Date {
 
 
 // MARK: - json extensions
+
+/**
+ * Extension adds methods for reading and writing JSON objects
+ *
+ * - author: TCCODER
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - new methods
+ */
 extension JSON {
     
     /// Get JSON from resource file
@@ -141,9 +246,41 @@ extension JSON {
         }
         return object
     }
-    
-}
 
+    /**
+     Save JSON object into given file
+
+     - parameter fileName: the file name
+
+     - returns: the URL of the saved file
+     */
+    func saveFile(_ fileName: String) -> Foundation.URL? {
+        do {
+            let data = try self.rawData()
+            return FileUtil.saveContentFile(fileName, data: data)
+        } catch {
+            return nil
+        }
+    }
+
+    /**
+     Get JSON object from given file
+
+     - parameter fileName: the file name
+
+     - returns: JSONObject
+     */
+    static func contentOfFile(_ fileName: String) -> JSON? {
+        let url = FileUtil.getLocalFileURL(fileName)
+        if FileManager.default.fileExists(atPath: url.path) {
+            if let data = try? Data(contentsOf: Foundation.URL(fileURLWithPath: url.path)) {
+                let json = JSON(data: data)
+                return json
+            }
+        }
+        return nil
+    }
+}
 
 // MARK: - dictionary extension
 extension Dictionary {
@@ -178,7 +315,38 @@ extension Date {
         if hours > 0 { return "\(hours)h ago"}
         if minutes > 0 { return "\(minutes)m ago" }
         if seconds > 0 { return "\(seconds)s ago" }
-        return "Now"
+        return "Just now"
     }
     
+}
+
+/**
+ *  Helper class for regular expressions
+ *
+ * - author: TCCODER
+ * - version: 1.0
+ */
+class Regex {
+    let internalExpression: NSRegularExpression
+    let pattern: String
+
+    init(_ pattern: String) {
+        self.pattern = pattern
+        self.internalExpression = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+    }
+
+    func test(_ input: String) -> Bool {
+        let matches = self.internalExpression.matches(in: input, options: [],
+                                                      range:NSMakeRange(0, input.count))
+        return matches.count > 0
+    }
+}
+precedencegroup RegexPrecedence {
+    lowerThan: AdditionPrecedence
+}
+
+// Define operator for simplisity of Regex class
+infix operator ≈: RegexPrecedence
+public func ≈(input: String, pattern: String) -> Bool {
+    return Regex(pattern).test(input)
 }

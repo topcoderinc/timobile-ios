@@ -3,16 +3,26 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
+
+/// Possible sorting types
+enum StorySortingType: String {
+    case nearest = "distance", alphabetical = "title"
+}
 
 /**
  * Story container screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration
  */
 class StoryViewController: RootViewController {
 
@@ -24,16 +34,19 @@ class StoryViewController: RootViewController {
     @IBOutlet weak var leftFilterIcon: UIImageView!
     @IBOutlet weak var rightFilterLabel: UILabel!
     @IBOutlet weak var rightFilterIcon: UIImageView!
-    
-    /// racetrack
-    private var racetrack: Racetrack? {
+
+    /// racetracks
+    var racetracks: [Racetrack]? {
         didSet {
-            leftFilterLabel?.text = racetrack?.name ?? "All Racetracks".localized
+            leftFilterLabel?.text = racetracks?.first?.name ?? "All Racetracks".localized
         }
     }
     
     /// sort
-    private var sortNearest = true
+    private var sort: StorySortingType = .nearest
+
+    /// the last search string
+    private var query: String = ""
     
     /// children
     private var listVC: StoryListViewController!
@@ -45,7 +58,11 @@ class StoryViewController: RootViewController {
 
         // Do any additional setup after loading the view.
         listVC = create(viewController: StoryListViewController.self)
+        self.listVC.setRacetrackFilter(racetracks, reload: false)
         loadChildController(listVC, inContentView: listContainerView)
+        if let racetracks = racetracks { // needed to update the label
+            self.racetracks = racetracks
+        }
     }
 
     // MARK: - actions
@@ -56,6 +73,10 @@ class StoryViewController: RootViewController {
         if mapContainerView.isHidden {
             if mapVC == nil {
                 mapVC = create(viewController: StoryMapViewController.self)
+                let ids = self.racetracks == nil ? [] : self.racetracks!.map({"\($0.id)"})
+                mapVC.filter = StoryFilter(title: "", racetrackIds: ids, tagIds: [], location: nil)
+                mapVC.sorting = self.sort
+                mapVC.query.value = self.query
                 loadChildController(mapVC, inContentView: mapContainerView)
             }
             
@@ -93,11 +114,13 @@ class StoryViewController: RootViewController {
         showSearchBar(placeholder: "Search Stories".localized, onDismiss: dismissSearch, onComplete: { [weak self] value in
             self?.listVC?.query.value = value
             self?.mapVC?.query.value = value
+            self?.query = value
             RecentSearch.upsert(query: value)
         })
         searchVC.onSelect = { [weak self] value in
             self?.listVC?.query.value = value.query
             self?.mapVC?.query.value = value.query
+            self?.query = value.query
             RecentSearch.upsert(query: value.query)
             self?.dismissSearch()
             self?.dismissSearchBar(initialLeftBarButtons: initialLeftBarButtons, initialRightBarButtons: initialRightBarButtons)
@@ -114,9 +137,12 @@ class StoryViewController: RootViewController {
     /// - Parameter sender: the button
     @IBAction func leftFilterTapped(_ sender: Any) {
         guard let vc = create(viewController: StoryRacetrackPopupViewController.self) else { return }
-        vc.selected = racetrack
+        vc.selected = racetracks ?? []
         vc.onSelect = { [unowned self] track in
-            self.racetrack = track
+            let tracks = track != nil ? [track!] : nil
+            self.racetracks = tracks
+            self.listVC.setRacetrackFilter(tracks)
+            self.mapVC?.setRacetrackFilter(tracks)
         }
         present(vc, animated: true, completion: nil)
     }
@@ -125,8 +151,18 @@ class StoryViewController: RootViewController {
     ///
     /// - Parameter sender: the button
     @IBAction func rightFilterTapped(_ sender: Any) {
-        sortNearest = !sortNearest
-        rightFilterLabel.text = sortNearest ? "Nearest".localized : "Alphabetical".localized
+        guard LoadingView.lastLoadingView == nil else {
+            return
+        }
+        switch sort {
+        case .nearest:
+            sort = .alphabetical
+        default:
+            sort = .nearest
+        }
+        rightFilterLabel.text = sort == .nearest ? "Nearest".localized : "Alphabetical".localized
+        self.listVC.setSorting(sort)
+        self.mapVC?.setSorting(sort)
     }
     
 }
@@ -147,6 +183,7 @@ extension UIViewController {
         let initialLeftBarButtons = navigationItem.leftBarButtonItems ?? []
         let initialRightBarButtons = navigationItem.rightBarButtonItems ?? []
         let searchbar = CustomSearchBar(frame: CGRect(x: 6, y: 6, width: view.frame.width-12, height: 30))
+        searchbar.autocapitalizationType = .none
         searchbar.showsCancelButton = true
         // present
         navigationItem.titleView = searchbar
