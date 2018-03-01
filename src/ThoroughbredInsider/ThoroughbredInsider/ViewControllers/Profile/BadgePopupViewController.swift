@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +13,11 @@ import UIKit
  * Badge popup
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - model object changes support
  */
 class BadgePopupViewController: UIViewController {
 
@@ -29,7 +34,7 @@ class BadgePopupViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         titleLabel.text = badge.name
-        congratsLabel.text = badge.content
+        congratsLabel.text = badge.desc
         if !badge.isEarned {
             badgeImage.image = #imageLiteral(resourceName: "iconBadgeEmpty")
         }

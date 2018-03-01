@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/30/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -30,6 +31,9 @@ class LoadingView: UIView {
     
     /// Oy shift added to the loading indicator
     private let yShift: CGFloat
+
+    /// the reference to last loading view
+    static var lastLoadingView: LoadingView?
     
     /// Initializer
     ///
@@ -78,6 +82,9 @@ class LoadingView: UIView {
      Removes the view from the screen
      */
     func terminate() {
+        if LoadingView.lastLoadingView == self {
+            LoadingView.lastLoadingView = nil
+        }
         terminated = true
         if !didShow { return }
         UIView.animate(withDuration: 0.25, animations: {
@@ -95,6 +102,7 @@ class LoadingView: UIView {
      */
     func show() -> LoadingView {
         didShow = true
+        LoadingView.lastLoadingView = self
         if !terminated {
             if let view = parentView {
                 view.addSubview(self)

@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +13,11 @@ import UIKit
  * Represents the slide menu view controller class
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration related changes
  */
 class SlideMenuViewController: UIViewController, UIGestureRecognizerDelegate {
 
@@ -209,12 +214,7 @@ class SlideMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     /// confirms logout and logouts if confirmed
     func confirmLogout() {
-        confirm(action: "Logout".localized, message: "Are you sure you want to logout?".localized, confirmHandler: {
-            MockDataSource.logout()
-                .subscribe(onNext: { [weak self] value in
-                    self?.dismiss(animated: true, completion: nil)
-                }).disposed(by: self.rx.bag)
-        }, cancelHandler: nil)
+        logout()
     }
 }
 

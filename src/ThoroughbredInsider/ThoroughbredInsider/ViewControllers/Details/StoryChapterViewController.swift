@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -17,15 +18,22 @@ import RealmSwift
  * story chapters screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration
  */
 class StoryChapterViewController: UIViewController {
 
     /// page controller
     private var pageViewController: PagingController?
     
-    /// story
-    var story: StoryDetails!
+    /// story and progress
+    var story: Story!
+    var progress: StoryProgress?
+    /// the delegate
+    var delegate: ChapterViewControllerDelegate?
     
     /// initial chapter to open
     var initial = 0
@@ -45,30 +53,27 @@ class StoryChapterViewController: UIViewController {
         // Do any additional setup after loading the view.
         navigationItem.title = "Chapters".localized
         addBackButton()
-        guard let realm = try? Realm() else { return }
-        let objects = Observable.array(from: realm.objects(Chapter.self).filter("storyId = %d", story.id).sorted(by: [SortDescriptor(keyPath: "id")])).share(replay: 1)
-        objects.bind(to: vm)
-            .disposed(by: rx.bag)
+        vm.value = story.chapters.toArray()
+        
         createPageViewController()
         pageViewController?.setSelectedPageIndex(initial)
         pageControl.selected = initial
-        MockDataSource.getStoryChapters(id: story.id)
-            .showLoading(on: view)
-            .subscribe(onNext: { value in
-                
-            }).disposed(by: rx.bag)
+
         vm.asObservable().subscribe(onNext: { [weak self] value in
             let idx = self?.pageViewController?.currentIndex ?? 0
             let vc = self?.pageViewController?.currentViewController as? ChapterViewController
             if value.count > idx {
                 vc?.chapter = value[idx]
+                vc?.progress = self?.progress
+                vc?.story = self?.story
+                vc?.delegate = self?.delegate
             }
         }).disposed(by: rx.bag)
     }
     
     /// inits the page controller
     private func createPageViewController() {
-        pageControl.count = story.chapters
+        pageControl.count = story.chapters.count
         
         guard let pageController = create(viewController: PagingController.self) else { return }
         pageViewController = pageController
@@ -99,7 +104,10 @@ class StoryChapterViewController: UIViewController {
     /// prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? StoryCommentsViewController {
-            vc.story = story
+            let chapters = story.chapters.toArray()
+            if pageControl.selected < chapters.count {
+                vc.chapter = chapters[pageControl.selected]
+            }
         }
     }
     
@@ -118,7 +126,9 @@ extension StoryChapterViewController: PagingContentProvider {
         guard pageControl.count > index && index > -1 else { return nil }
         guard let vc = create(viewController: ChapterViewController.self) else { return nil }
         vc.story = story
+        vc.progress = self.progress
         vc.chapter = index < vm.value.count ? vm.value[index] : nil
+        vc.delegate = self.delegate
         return vc
     }
     
@@ -130,11 +140,14 @@ extension StoryChapterViewController: PagingControllerDelegate {
     func pagingController(_ pagingController: PagingController, didTransitionTo viewController: UIViewController, atIndex index: Int) {
         pageControl?.selected = index
         leftButton.isEnabled = index > 0
-        rightButton.isEnabled = index < story.chapters
+        rightButton.isEnabled = index < story.chapters.count
         if index < vm.value.count {
             navigationItem.title = vm.value[index].title
             let vc = viewController as? ChapterViewController
             vc?.chapter = vm.value[index]
+            vc?.story = self.story
+            vc?.progress = self.progress
+            vc?.delegate = self.delegate
         }
     }
 }

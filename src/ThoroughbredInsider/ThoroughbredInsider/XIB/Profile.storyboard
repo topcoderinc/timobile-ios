@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="evb-Jq-oOQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="evb-Jq-oOQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -164,14 +164,14 @@ added automatically in your account.</string>
                                                                 <rect key="frame" x="17.5" y="3.5" width="19" height="18"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="8" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TG-18-gVY">
-                                                                <rect key="frame" x="50" y="3.5" width="8.5" height="17.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="0" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TG-18-gVY">
+                                                                <rect key="frame" x="50" y="2" width="9" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="15"/>
                                                                 <color key="textColor" red="0.46274509803921571" green="0.46274509803921571" blue="0.46274509803921571" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Reviews " lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaW-TS-541">
-                                                                <rect key="frame" x="58.5" y="5" width="129" height="14.5"/>
+                                                                <rect key="frame" x="59" y="4" width="128.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="12.100000381469727"/>
                                                                 <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -195,14 +195,14 @@ added automatically in your account.</string>
                                                                 <rect key="frame" x="20.5" y="5" width="13" height="14"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="8" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3Y-DY-gUO">
-                                                                <rect key="frame" x="50" y="3" width="8.5" height="17.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="0" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3Y-DY-gUO">
+                                                                <rect key="frame" x="50" y="1.5" width="9" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="15"/>
                                                                 <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Stories" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebv-Ab-Axd">
-                                                                <rect key="frame" x="58.5" y="4.5" width="129" height="14.5"/>
+                                                                <rect key="frame" x="59" y="3.5" width="128.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="12.100000381469727"/>
                                                                 <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -231,14 +231,14 @@ added automatically in your account.</string>
                                                                 <rect key="frame" x="20.5" y="3" width="13" height="19"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="8" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ix-LL-qxw">
-                                                                <rect key="frame" x="50" y="3.5" width="8.5" height="17.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="0" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ix-LL-qxw">
+                                                                <rect key="frame" x="50" y="2" width="9" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="15"/>
                                                                 <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Bagdes" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAn-5F-D6B">
-                                                                <rect key="frame" x="58.5" y="5" width="116.5" height="14.5"/>
+                                                                <rect key="frame" x="59" y="4" width="116" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="12.100000381469727"/>
                                                                 <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -262,14 +262,14 @@ added automatically in your account.</string>
                                                                 <rect key="frame" x="20" y="7" width="14" height="10"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="8" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLS-tH-t7T">
-                                                                <rect key="frame" x="50" y="3" width="8.5" height="17.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="0" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLS-tH-t7T">
+                                                                <rect key="frame" x="50" y="1.5" width="9" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="15"/>
                                                                 <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.81999999284744263" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Trading Cards" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEf-EA-8LT">
-                                                                <rect key="frame" x="58.5" y="4.5" width="128.5" height="14.5"/>
+                                                                <rect key="frame" x="59" y="3.5" width="128" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="12.100000381469727"/>
                                                                 <color key="textColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -322,7 +322,7 @@ added automatically in your account.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View My Achievement" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozb-D8-6o5">
-                                        <rect key="frame" x="16" y="16.5" width="138" height="16.5"/>
+                                        <rect key="frame" x="16" y="15" width="148" height="19.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -374,13 +374,13 @@ added automatically in your account.</string>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="David Williams" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpq-1g-XX1">
-                                <rect key="frame" x="132" y="169.5" width="111.5" height="20"/>
+                                <rect key="frame" x="126.5" y="169.5" width="121" height="23.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="david.williams@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVN-ds-VB0">
-                                <rect key="frame" x="105" y="197.5" width="164" height="16.5"/>
+                                <rect key="frame" x="101" y="201" width="172" height="19.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -429,6 +429,7 @@ added automatically in your account.</string>
                         <outlet property="badgesCount" destination="6Ix-LL-qxw" id="xFw-dN-kph"/>
                         <outlet property="cardsCount" destination="aLS-tH-t7T" id="UIR-8f-I0E"/>
                         <outlet property="emailLabel" destination="aVN-ds-VB0" id="Ubk-Yg-Xkx"/>
+                        <outlet property="profileImageBottonMargin" destination="VAv-98-jwQ" id="ZJP-4j-Mcv"/>
                         <outlet property="reviewsCount" destination="9TG-18-gVY" id="93b-We-XCW"/>
                         <outlet property="storiesCount" destination="B3Y-DY-gUO" id="oYE-QQ-0Hd"/>
                         <outlet property="userImage" destination="chD-HA-kZ0" id="9h8-tL-tN8"/>
@@ -533,13 +534,13 @@ added automatically in your account.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xj-AF-gkc">
-                                                    <rect key="frame" x="20" y="23" width="35.5" height="16.5"/>
+                                                    <rect key="frame" x="20" y="19" width="35.5" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="David Williams" placeholder="Enter name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W2X-62-ZMa" customClass="UnderlineTextField" customModule="UIComponents">
-                                                    <rect key="frame" x="20" y="35.5" width="275" height="30"/>
+                                                    <rect key="frame" x="20" y="31.5" width="275" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="DL4-Pi-rEX"/>
                                                     </constraints>
@@ -561,10 +562,10 @@ added automatically in your account.</string>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="W2X-62-ZMa" secondAttribute="bottom" constant="10" id="Hab-CD-UWl"/>
-                                                <constraint firstItem="1xj-AF-gkc" firstAttribute="top" secondItem="MdZ-Bt-hRW" secondAttribute="top" constant="23" id="VQb-Hg-yVI"/>
+                                                <constraint firstAttribute="bottom" secondItem="W2X-62-ZMa" secondAttribute="bottom" priority="999" constant="14" id="Hab-CD-UWl"/>
+                                                <constraint firstItem="1xj-AF-gkc" firstAttribute="top" secondItem="MdZ-Bt-hRW" secondAttribute="top" constant="19" id="VQb-Hg-yVI"/>
                                                 <constraint firstAttribute="trailing" secondItem="W2X-62-ZMa" secondAttribute="trailing" constant="80" id="gZe-xa-OIU"/>
-                                                <constraint firstItem="W2X-62-ZMa" firstAttribute="top" secondItem="MdZ-Bt-hRW" secondAttribute="top" constant="35.5" id="iR4-N7-pvy"/>
+                                                <constraint firstItem="W2X-62-ZMa" firstAttribute="top" secondItem="MdZ-Bt-hRW" secondAttribute="top" constant="31.5" id="iR4-N7-pvy"/>
                                                 <constraint firstItem="W2X-62-ZMa" firstAttribute="leading" secondItem="1xj-AF-gkc" secondAttribute="leading" id="nNu-ta-gdW"/>
                                                 <constraint firstItem="1xj-AF-gkc" firstAttribute="leading" secondItem="MdZ-Bt-hRW" secondAttribute="leading" constant="20" id="on0-NX-ESS"/>
                                             </constraints>
@@ -579,13 +580,13 @@ added automatically in your account.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgd-UV-8Tz">
-                                                    <rect key="frame" x="20" y="23" width="36" height="17"/>
+                                                    <rect key="frame" x="20" y="19" width="36" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="David Williams" placeholder="Enter name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TZw-oL-IMU" customClass="UnderlineTextField" customModule="UIComponents">
-                                                    <rect key="frame" x="20" y="35.5" width="275" height="30"/>
+                                                    <rect key="frame" x="20" y="31.5" width="275" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Wch-ug-umk"/>
                                                     </constraints>
@@ -610,9 +611,9 @@ added automatically in your account.</string>
                                                 <constraint firstItem="Fgd-UV-8Tz" firstAttribute="leading" secondItem="Xca-QD-TFI" secondAttribute="leading" constant="20" id="1XY-Oh-1OA"/>
                                                 <constraint firstItem="TZw-oL-IMU" firstAttribute="leading" secondItem="Fgd-UV-8Tz" secondAttribute="leading" id="Fwp-aY-8xh"/>
                                                 <constraint firstAttribute="trailing" secondItem="TZw-oL-IMU" secondAttribute="trailing" constant="80" id="JIA-oE-Gte"/>
-                                                <constraint firstItem="Fgd-UV-8Tz" firstAttribute="top" secondItem="Xca-QD-TFI" secondAttribute="top" constant="23" id="fQh-8m-t6R"/>
-                                                <constraint firstAttribute="bottom" secondItem="TZw-oL-IMU" secondAttribute="bottom" constant="10" id="p0f-am-2hl"/>
-                                                <constraint firstItem="TZw-oL-IMU" firstAttribute="top" secondItem="Xca-QD-TFI" secondAttribute="top" constant="35.5" id="sQT-bG-LUL"/>
+                                                <constraint firstItem="Fgd-UV-8Tz" firstAttribute="top" secondItem="Xca-QD-TFI" secondAttribute="top" constant="19" id="fQh-8m-t6R"/>
+                                                <constraint firstAttribute="bottom" secondItem="TZw-oL-IMU" secondAttribute="bottom" priority="999" constant="14" id="p0f-am-2hl"/>
+                                                <constraint firstItem="TZw-oL-IMU" firstAttribute="top" secondItem="Xca-QD-TFI" secondAttribute="top" constant="31.5" id="sQT-bG-LUL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -620,18 +621,18 @@ added automatically in your account.</string>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="76" id="beP-Dv-a71">
                                         <rect key="frame" x="0.0" y="187" width="375" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="beP-Dv-a71" id="TUG-KA-nvR">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="beP-Dv-a71" id="TUG-KA-nvR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RzI-5P-5TL">
-                                                    <rect key="frame" x="20" y="23" width="66" height="17"/>
+                                                    <rect key="frame" x="20" y="19" width="66" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="David Williams" placeholder="Enter name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="53I-jp-JKV" customClass="UnderlineTextField" customModule="UIComponents">
-                                                    <rect key="frame" x="20" y="35.5" width="275" height="30"/>
+                                                    <rect key="frame" x="20" y="31.5" width="275" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="foS-Fy-GyI"/>
                                                     </constraints>
@@ -650,15 +651,24 @@ added automatically in your account.</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="atY-rp-mvh">
+                                                    <rect key="frame" x="343" y="0.0" width="20" height="75.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="kmO-tA-Yn7"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="53I-jp-JKV" firstAttribute="top" secondItem="TUG-KA-nvR" secondAttribute="top" constant="35.5" id="BTD-Ih-RN3"/>
+                                                <constraint firstItem="atY-rp-mvh" firstAttribute="top" secondItem="TUG-KA-nvR" secondAttribute="top" id="13b-S5-DRc"/>
+                                                <constraint firstItem="53I-jp-JKV" firstAttribute="top" secondItem="TUG-KA-nvR" secondAttribute="top" constant="31.5" id="BTD-Ih-RN3"/>
                                                 <constraint firstItem="53I-jp-JKV" firstAttribute="leading" secondItem="RzI-5P-5TL" secondAttribute="leading" id="DzC-Yx-dH9"/>
-                                                <constraint firstItem="RzI-5P-5TL" firstAttribute="top" secondItem="TUG-KA-nvR" secondAttribute="top" constant="23" id="d55-dy-RCR"/>
+                                                <constraint firstAttribute="bottom" secondItem="atY-rp-mvh" secondAttribute="bottom" id="JYu-9p-Xsn"/>
+                                                <constraint firstAttribute="trailing" secondItem="atY-rp-mvh" secondAttribute="centerX" constant="22" id="VHq-kt-rji"/>
+                                                <constraint firstItem="RzI-5P-5TL" firstAttribute="top" secondItem="TUG-KA-nvR" secondAttribute="top" constant="19" id="d55-dy-RCR"/>
                                                 <constraint firstAttribute="trailing" secondItem="53I-jp-JKV" secondAttribute="trailing" constant="80" id="edT-0a-zHb"/>
                                                 <constraint firstItem="RzI-5P-5TL" firstAttribute="leading" secondItem="TUG-KA-nvR" secondAttribute="leading" constant="20" id="veF-cD-tsJ"/>
-                                                <constraint firstAttribute="bottom" secondItem="53I-jp-JKV" secondAttribute="bottom" constant="10" id="wen-jp-bkE"/>
+                                                <constraint firstAttribute="bottom" secondItem="53I-jp-JKV" secondAttribute="bottom" priority="999" constant="14" id="wen-jp-bkE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -765,7 +775,7 @@ added automatically in your account.</string>
         <scene sceneID="zwf-dj-SS3">
             <objects>
                 <collectionViewController id="trE-8M-Azc" customClass="ProfileSegmentController" customModule="ThoroughbredInsider" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="reI-ay-N1q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="reI-ay-N1q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -777,7 +787,7 @@ added automatically in your account.</string>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="8of-pc-28D">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="UICollectionViewCell" id="8of-pc-28D">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1158,10 +1168,232 @@ added automatically in your account.</string>
             </objects>
             <point key="canvasLocation" x="1770" y="-447"/>
         </scene>
+        <!--Change Password-->
+        <scene sceneID="JOn-YD-IyX">
+            <objects>
+                <tableViewController storyboardIdentifier="ProfileChangePasswordTableViewController" id="0Or-A7-Jsw" customClass="ProfileChangePasswordTableViewController" customModule="ThoroughbredInsider" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="35" sectionFooterHeight="28" id="82C-G3-TmL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="XET-SH-qI3">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="11"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="VYv-FZ-Y36">
+                            <rect key="frame" x="0.0" y="274" width="375" height="86"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Tf-U8-HyN">
+                                    <rect key="frame" x="101.5" y="18" width="172" height="50"/>
+                                    <color key="backgroundColor" red="0.23921568627450979" green="0.0" blue="0.41960784313725491" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="172" id="7jn-YK-u3e"/>
+                                        <constraint firstAttribute="height" constant="50" id="MS9-80-o9c"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
+                                    <state key="normal" title="UPDATE PASSWORD">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="updateAction:" destination="0Or-A7-Jsw" eventType="touchUpInside" id="nmZ-Xk-Z9L"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5N-Ux-KBb">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                                    <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="0.5" id="tjX-M4-Zn3"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="S5N-Ux-KBb" secondAttribute="trailing" id="H31-ag-Xbg"/>
+                                <constraint firstItem="S5N-Ux-KBb" firstAttribute="leading" secondItem="VYv-FZ-Y36" secondAttribute="leading" id="Nfb-Rf-gYv"/>
+                                <constraint firstItem="6Tf-U8-HyN" firstAttribute="centerX" secondItem="VYv-FZ-Y36" secondAttribute="centerX" id="VsO-3b-vko"/>
+                                <constraint firstItem="6Tf-U8-HyN" firstAttribute="centerY" secondItem="VYv-FZ-Y36" secondAttribute="centerY" id="e9m-9t-lkW"/>
+                                <constraint firstItem="S5N-Ux-KBb" firstAttribute="top" secondItem="VYv-FZ-Y36" secondAttribute="top" id="wWu-d0-t2Z"/>
+                            </constraints>
+                        </view>
+                        <sections>
+                            <tableViewSection headerTitle="Change password" id="MtC-sK-USN">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="76" id="OXa-Pd-vYR">
+                                        <rect key="frame" x="0.0" y="46" width="375" height="76"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OXa-Pd-vYR" id="XV9-Ck-bF7">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBs-QY-6cK">
+                                                    <rect key="frame" x="20" y="19" width="93" height="17"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your old password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0yS-VO-vqb" customClass="UnderlineTextField" customModule="UIComponents">
+                                                    <rect key="frame" x="20" y="31.5" width="275" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="CLn-ll-zgk"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="customLeftTextOffset">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="underlineColor">
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                            <color key="value" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="0Or-A7-Jsw" id="29x-lA-obY"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="0yS-VO-vqb" secondAttribute="trailing" constant="80" id="49P-8P-pmP"/>
+                                                <constraint firstItem="xBs-QY-6cK" firstAttribute="top" secondItem="XV9-Ck-bF7" secondAttribute="top" constant="19" id="ItZ-iv-F7X"/>
+                                                <constraint firstItem="xBs-QY-6cK" firstAttribute="leading" secondItem="XV9-Ck-bF7" secondAttribute="leading" constant="20" id="d5y-Et-uQp"/>
+                                                <constraint firstItem="0yS-VO-vqb" firstAttribute="leading" secondItem="xBs-QY-6cK" secondAttribute="leading" id="hnn-Lb-g3i"/>
+                                                <constraint firstAttribute="bottom" secondItem="0yS-VO-vqb" secondAttribute="bottom" priority="999" constant="14" id="k2s-pW-lZO"/>
+                                                <constraint firstItem="0yS-VO-vqb" firstAttribute="top" secondItem="XV9-Ck-bF7" secondAttribute="top" constant="31.5" id="kY1-pY-lvM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="76" id="55p-Jc-cSZ">
+                                        <rect key="frame" x="0.0" y="122" width="375" height="76"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="55p-Jc-cSZ" id="vgl-Kd-gns">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7A-ZV-gch">
+                                                    <rect key="frame" x="20" y="19" width="96" height="17"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your new password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bw2-2n-pAw" customClass="UnderlineTextField" customModule="UIComponents">
+                                                    <rect key="frame" x="20" y="31.5" width="275" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="HDJ-un-eIT"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="customLeftTextOffset">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="underlineColor">
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                            <color key="value" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="0Or-A7-Jsw" id="9Ti-2l-ySM"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Bw2-2n-pAw" secondAttribute="bottom" priority="999" constant="14" id="28B-vv-9rm"/>
+                                                <constraint firstItem="E7A-ZV-gch" firstAttribute="leading" secondItem="vgl-Kd-gns" secondAttribute="leading" constant="20" id="CfN-fe-JR3"/>
+                                                <constraint firstItem="Bw2-2n-pAw" firstAttribute="leading" secondItem="E7A-ZV-gch" secondAttribute="leading" id="Db2-gI-qyR"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bw2-2n-pAw" secondAttribute="trailing" constant="80" id="awZ-2I-9bA"/>
+                                                <constraint firstItem="E7A-ZV-gch" firstAttribute="top" secondItem="vgl-Kd-gns" secondAttribute="top" constant="19" id="g5e-7F-6Eh"/>
+                                                <constraint firstItem="Bw2-2n-pAw" firstAttribute="top" secondItem="vgl-Kd-gns" secondAttribute="top" constant="31.5" id="pfJ-Si-pWr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="76" id="MDu-yi-bqA">
+                                        <rect key="frame" x="0.0" y="198" width="375" height="76"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MDu-yi-bqA" id="s9v-ky-AQu">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONFIRM PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahi-X2-BHf">
+                                                    <rect key="frame" x="20" y="19" width="124" height="17"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your confirm password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRd-gO-gHv" customClass="UnderlineTextField" customModule="UIComponents">
+                                                    <rect key="frame" x="20" y="31.5" width="275" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="fgH-23-ZT1"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="customLeftTextOffset">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="underlineColor">
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                            <color key="value" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="0Or-A7-Jsw" id="pbN-IJ-z7n"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="BRd-gO-gHv" firstAttribute="leading" secondItem="Ahi-X2-BHf" secondAttribute="leading" id="Hqx-3P-l3y"/>
+                                                <constraint firstAttribute="bottom" secondItem="BRd-gO-gHv" secondAttribute="bottom" priority="999" constant="14" id="Vx2-jv-uGU"/>
+                                                <constraint firstItem="Ahi-X2-BHf" firstAttribute="top" secondItem="s9v-ky-AQu" secondAttribute="top" constant="19" id="gkz-3p-H1C"/>
+                                                <constraint firstAttribute="trailing" secondItem="BRd-gO-gHv" secondAttribute="trailing" constant="80" id="hIo-wh-gWy"/>
+                                                <constraint firstItem="Ahi-X2-BHf" firstAttribute="leading" secondItem="s9v-ky-AQu" secondAttribute="leading" constant="20" id="rPS-VD-2Gu"/>
+                                                <constraint firstItem="BRd-gO-gHv" firstAttribute="top" secondItem="s9v-ky-AQu" secondAttribute="top" constant="31.5" id="wZl-Jh-Hxy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="0Or-A7-Jsw" id="vC8-eG-1b5"/>
+                            <outlet property="delegate" destination="0Or-A7-Jsw" id="3dg-EE-DFK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Change Password" id="8wX-SF-bFt"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="confirmPasswordField" destination="BRd-gO-gHv" id="o9v-lR-f1C"/>
+                        <outlet property="newPasswordField" destination="Bw2-2n-pAw" id="RRK-Zj-kPn"/>
+                        <outlet property="oldPasswordField" destination="0yS-VO-vqb" id="Gce-wl-1t0"/>
+                        <outlet property="updateButton" destination="6Tf-U8-HyN" id="10e-46-x2R"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kq2-gH-2rn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3962.4000000000001" y="356.67166416791605"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrowDownLarge" width="17" height="10"/>
         <image name="bgReward" width="85" height="117"/>
+        <image name="disclosure" width="7" height="12"/>
         <image name="iconBadgeCount" width="13" height="19"/>
         <image name="iconBadgeEmpty" width="64" height="69"/>
         <image name="iconBadgeLarge" width="114" height="123"/>

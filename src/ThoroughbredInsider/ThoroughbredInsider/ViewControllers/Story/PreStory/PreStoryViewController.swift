@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -28,7 +29,11 @@ protocol PreStoryScreen {
  * pre-story container
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - bug fixed - selected state and racetracks are saved now
  */
 class PreStoryViewController: RootViewController, StaticPagingContentProvider {
 
@@ -40,7 +45,13 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
     @IBOutlet weak var pageControl: PagerControl!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
-    
+
+    /// the selected states
+    private var selectedStates: [State]?
+
+    /// the reference to last page
+    private var lastPage: UIViewController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,6 +65,15 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
         
         guard let pageController = create(viewController: PagingController.self) else { return }
         pageViewController = pageController
+        pageViewController?.configure = { vc in
+            (vc as? PreStoryStateViewController)?.selected = self.selectedStates != nil ? Set<State>(self.selectedStates!) : Set<State>()
+            (vc as? PreStoryRacetrackViewController)?.states = self.selectedStates
+            if let _ = self.lastPage as? PreStoryLocationViewController, let _ = vc as? PreStoryStateViewController {
+                LocationManager.shared.allowedByUser = true
+                LocationManager.shared.startUpdatingLocation()
+            }
+            self.lastPage = vc
+        }
         pageController.contentProvider = self
         pageController.contentDelegate = self
         loadChildController(pageController, inContentView: containerView)
@@ -69,9 +89,14 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
     }
     
     /// finish or skip
-    func finish() {
+    ///
+    /// - Parameter selectedObjects: the selected objects on previous step
+    func finish(selectedObjects: Any? = nil) {
         UserDefaults.firstStoryLaunch = true
         guard let vc = create(viewController: StoryViewController.self) else { return }
+        if let racetrack = (selectedObjects as? [Racetrack])?.first {
+            vc.racetracks = [racetrack]
+        }
         slideMenuController?.setContentViewController(vc)
     }
     
@@ -81,9 +106,12 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
             pageViewController?.setSelectedPageIndex(index-1)
         }
     }
-    
+
     /// go next
-    func next() {
+    ///
+    /// - Parameter selectedObjects: the selected objects on previous step
+    func next(selectedObjects: Any? = nil) {
+        self.selectedStates = selectedObjects as? [State]
         if let index = pageViewController?.currentIndex, index < pageControl.count-1 {
             pageViewController?.setSelectedPageIndex(index+1)
         }

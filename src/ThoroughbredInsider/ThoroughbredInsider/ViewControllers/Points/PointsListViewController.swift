@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -57,7 +58,11 @@ class PointsListViewController: UIViewController {
  * Achievement cell
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - minor change
  */
 class AchievementCell: UITableViewCell {
     
@@ -72,6 +77,6 @@ class AchievementCell: UITableViewCell {
     ///
     /// - Parameter sender: the button
     @IBAction func redeemTapped(_ sender: Any) {
-        showAlert(title: "Stub", message: "Stub")
+        showStub()
     }
 }

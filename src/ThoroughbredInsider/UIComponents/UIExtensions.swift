@@ -3,7 +3,8 @@
 //  Thoroughbred
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -49,7 +50,7 @@ extension UIView {
     
     
     /// border color
-    @IBInspectable var borderColor: UIColor? {
+    @IBInspectable public var borderColor: UIColor? {
         get {
             return layer.borderColor.map(UIColor.init)
         }
@@ -131,7 +132,7 @@ public extension UIColor {
      - returns: the UIColor instance or nil
      */
     public class func from(hexString: String) -> UIColor? {
-        if hexString.characters.count == 6 {
+        if hexString.count == 6 {
             let redStr = hexString.substring(to: 2)
             let greenStr = hexString.substring(with: 2..<4)
             let blueStr = hexString.substring(from: 4)
@@ -142,5 +143,5 @@ public extension UIColor {
         }
         return nil
     }
-    
+
 }

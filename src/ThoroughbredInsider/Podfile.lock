@@ -1,6 +1,7 @@
 PODS:
   - Differentiator (3.0.1)
   - IQKeyboardManagerSwift (5.0.4)
+  - KeychainAccess (3.1.0)
   - NSObject+Rx (4.2.0):
     - RxSwift (~> 4.0)
   - Realm (3.0.1):
@@ -22,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
+  - KeychainAccess
   - NSObject+Rx
   - RealmSwift
   - RxCocoa
@@ -33,6 +35,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
+  KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   Realm: ba6144c74f835f7497791f6599d63a7755377b83
   RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
@@ -42,6 +45,6 @@ SPEC CHECKSUMS:
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 5617dfc1e80f917b359b71b8b3a3deef9f127c67
+PODFILE CHECKSUM: 7902c74da72806d6f460812275ac350a7d55e131
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.1.1

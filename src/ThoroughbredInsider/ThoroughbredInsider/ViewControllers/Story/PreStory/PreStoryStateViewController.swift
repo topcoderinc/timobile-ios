@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -16,7 +17,11 @@ import RealmSwift
  * state selection
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration
  */
 class PreStoryStateViewController: UIViewController {
 
@@ -25,44 +30,56 @@ class PreStoryStateViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     /// viewmodel
-    var vm: RealmTableViewModel<State, SelectCell>!
+    var vm: InfiniteTableViewModel<State, SelectCell>!
     var selected = Set<State>()
-    
+
+    /// the filter to apply
+    private var filter: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setupVM()
         
         filterField.rx.text.orEmpty
             .subscribe(onNext: { [weak self] value in
                 guard let strongSelf = self else { return }
-                strongSelf.setupVM(filter: value)
+                strongSelf.applyFilter(value)
             }).disposed(by: rx.bag)
-        
-        loadData(from: MockDataSource.getStates())
+        setupVM()
     }
-    
-    /// configure vm
+
+    /// Apply filter
     ///
     /// - Parameter filter: current filter
-    func setupVM(filter: String = "") {
+    func applyFilter(_ filter: String = "") {
+        if self.filter != filter {
+            self.filter = filter
+            self.vm?.loadData()
+        }
+    }
+
+    /// configure vm
+    func setupVM() {
         selected.removeAll()
-        vm = RealmTableViewModel<State, SelectCell>()
+        vm = InfiniteTableViewModel<State, SelectCell>()
         vm.configureCell = { [weak self] _, value, _, cell in
             cell.titleLabel.text = value.name
-            cell.itemSelected = self?.selected.contains(value) == true
+            cell.itemSelected = self?.selected.map({$0.id}).contains(value.id) == true
         }
-        vm.onSelect = { [weak self] idx, value in
-            if self?.selected.contains(value) == true {
-                _ = self?.selected.remove(value)
+        vm.onSelect = { [weak self] indexPath, value in
+            if let object = self?.selected.filter({$0.id == value.id}).first {
+                _ = self?.selected.remove(object)
             }
             else {
                 self?.selected.insert(value)
             }
-            self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
+            self?.tableView.reloadRows(at: [indexPath], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.fetchItems = { offset, limit, callback, failure in
+            RestServiceApi.shared.getStates(name: self.filter, offset: offset, limit: limit, callback: callback, failure: failure)
+        }
+        vm.bindData(to: tableView)
     }
 
 }
@@ -90,11 +107,13 @@ extension PreStoryStateViewController: PreStoryScreen {
     /// right button
     var rightButtonAction: ((PreStoryViewController) -> ())? {
         return { vc in
-            if self.selected.isEmpty {
+            let visibleItems = self.vm.items.map({$0.id})
+            let choice = Array(self.selected.filter({visibleItems.contains($0.id)}))
+            if choice.isEmpty {
                 self.showErrorAlert(message: "Please select at least one".localized)
                 return
             }
-            vc.next()
+            vc.next(selectedObjects: choice)
         }
     }
     

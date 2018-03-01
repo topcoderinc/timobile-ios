@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +15,11 @@ import RxSwift
  * cards screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - model object changes support
  */
 class ProfileCardsViewController: UIViewController {
 
@@ -37,7 +42,7 @@ class ProfileCardsViewController: UIViewController {
             cell.titleLabel.text = value.name
             if value.isEarned {
                 cell.rewardImage.contentMode = .scaleAspectFill
-                cell.rewardImage.load(url: value.image)
+                cell.rewardImage.load(url: value.imageURL)
             }
             else {
                 cell.rewardImage.contentMode = .scaleAspectFit

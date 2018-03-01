@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -60,7 +61,11 @@ struct MenuSection  {
  * menu view controller
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration related changes
  */
 class MenuViewController: UIViewController {
 
@@ -69,7 +74,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var logoView: UIImageView!
+
     /// connection status
     var offline = false {
         didSet {
@@ -102,23 +108,22 @@ class MenuViewController: UIViewController {
         
         tableView.backgroundColor = .clear
         view.backgroundColor = .clear
+
+        if isIphone5OrLess {
+            logoView.isHidden = true
+        }
         
         sections = [
             MenuSection(name: "", items: [.dashboard, .bookmark, .points, .shop, .profile, .help, .logout]),
         ]
         selected = IndexPath.init(row: 0, section: 0)
-        
-        MockDataSource.getUser()
-            .showLoading(on: userImage)
-            .store()
-            .disposed(by: rx.bag)
-        
-        User.get(with: UserDefaults.loggedUserId)
-            .subscribe(onNext: { [weak self] (value: User) in
-                self?.usernameLabel.text = value.name
-                self?.emailLabel.text = value.email
-                self?.userImage.load(url: value.image)
-        }).disposed(by: rx.bag)
+
+        if let user = AuthenticationUtil.sharedInstance.userInfo?.toUser() {
+            self.usernameLabel.text = user.name
+            self.emailLabel.text = user.email
+            self.userImage.image = #imageLiteral(resourceName: "noProfileIcon")
+            self.userImage.load(url: user.profilePhotoURL, resetImage: false)
+        }
     }
 
     /**
@@ -214,6 +219,7 @@ extension MenuViewController : UITableViewDataSource, UITableViewDelegate {
     
     /// cell selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let menu = self.menus[self.sections[indexPath.section].items[indexPath.row]]
         
         if menu?.item == .logout {
@@ -221,8 +227,10 @@ extension MenuViewController : UITableViewDataSource, UITableViewDelegate {
                 self.slideMenuController?.confirmLogout()
             }
         } else if !menu!.controllerName.isEmpty {
-            if let controller = createContentControllerAtIndex(indexPath) {
-                self.slideMenuController?.setContentViewController(controller)
+            DispatchQueue.main.async {
+                if let controller = self.createContentControllerAtIndex(indexPath) {
+                    self.slideMenuController?.setContentViewController(controller)
+                }
             }
             selected = indexPath
         }

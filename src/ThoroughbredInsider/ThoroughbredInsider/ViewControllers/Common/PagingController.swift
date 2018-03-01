@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 9/1/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -87,7 +88,11 @@ extension PagingControllerDelegate {
  * Paging controller
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - `configure` callback parameter added
  */
 class PagingController: UIPageViewController {
     
@@ -100,6 +105,9 @@ class PagingController: UIPageViewController {
     /// data source
     weak var contentProvider: PagingContentProvider?
     weak var contentDelegate: PagingControllerDelegate?
+
+    /// the callback to configure view controller
+    var configure: ((UIViewController?)->())? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +129,7 @@ class PagingController: UIPageViewController {
     /// - Parameters:
     ///   - index: index
     ///   - animated: animated or not
+    ///   - configure:
     func setSelectedPageIndex(_ index: Int, animated: Bool = true) {
         guard index != currentIndex, let viewController = viewControllerAtIndex(index) else {
             return
@@ -151,6 +160,7 @@ class PagingController: UIPageViewController {
     /// update current
     fileprivate func updateCurrentViewController() {
         currentViewController = viewControllers?.first
+        configure?(currentViewController)
         if let controller = currentViewController, let index = indexMap.object(forKey: controller)?.intValue {
             currentIndex = index
             contentDelegate?.pagingController(self, didTransitionTo: controller, atIndex: index)

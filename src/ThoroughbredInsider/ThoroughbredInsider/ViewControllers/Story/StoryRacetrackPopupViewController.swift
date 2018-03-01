@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/1/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -16,7 +17,11 @@ import RxRealm
  * racetrack dropdown
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration
  */
 class StoryRacetrackPopupViewController: UIViewController {
     
@@ -24,8 +29,8 @@ class StoryRacetrackPopupViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     /// viewmodel
-    var vm = TableViewModel<Racetrack?, SelectCell>()
-    var selected: Racetrack?
+    var vm = InfiniteTableViewModel<Racetrack?, SelectCell>()
+    var selected = [Racetrack]()
     
     /// selection handler
     var onSelect: ((Racetrack?)->())?
@@ -39,35 +44,43 @@ class StoryRacetrackPopupViewController: UIViewController {
         tableView.layer.shadowColor = UIColor.black.cgColor
         tableView.layer.shadowRadius = 5
         tableView.layer.shadowOpacity = 0.36
+
     }
     
     /// configure vm
     ///
     /// - Parameter filter: current filter
     private func setupVM() {
-        guard let realm = try? Realm() else { return }
-        let objects = Observable.array(from: realm.objects(Racetrack.self).sorted(by: [SortDescriptor(keyPath: "code"), SortDescriptor(keyPath: "name")])).share(replay: 1)
-        objects.map { array in
-                var full = array as [Racetrack?]
-                full.insert(nil, at: 0)
-                return full
-            }
-            .bind(to: vm.entries)
-            .disposed(by: rx.bag)
         vm.configureCell = { [weak self] _, value, _, cell in
+            guard let sf = self else { return }
             if let value = value {
-                cell.titleLabel.text = "\(value.code) - \(value.name)"
+                if value.code.isEmpty {
+                    cell.titleLabel.text = value.name
+                }
+                else {
+                    cell.titleLabel.text = "\(value.code) - \(value.name)"
+                }
             }
             else {
                 cell.titleLabel.text = "All Racetracks".localized
             }
-            cell.itemSelected = self?.selected === value
+            cell.itemSelected = sf.selected.map({$0.id}).contains(value?.id ?? 0)
         }
         vm.onSelect = { [weak self] idx, value in
-            self?.selected = value
+            self?.selected = value != nil ? [value!] : []
             self?.tableView.reloadData()
             self?.onSelect?(value)
             self?.dismiss(animated: true, completion: nil)
+        }
+        vm.fetchItems = { (_ offset: Any?, _ limit: Int, _ callback: @escaping ([Racetrack?], Any)->(), _ failure: @escaping FailureCallback) in
+            RestServiceApi.shared.searchRacetracks(offset: offset, limit: limit, callback: { items, nextOffset in
+                if offset == nil || offset as? Int == 0 {
+                    callback([nil] + items, nextOffset)
+                }
+                else {
+                    callback(items, nextOffset)
+                }
+            }, failure: failure)
         }
         vm.bindData(to: tableView)
     }

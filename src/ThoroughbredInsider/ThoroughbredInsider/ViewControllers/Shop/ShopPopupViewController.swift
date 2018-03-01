@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +13,11 @@ import UIKit
  * Shop popup
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - model object changes support
  */
 class ShopPopupViewController: UIViewController {
 
@@ -33,8 +38,8 @@ class ShopPopupViewController: UIViewController {
         titleLabel.text = card.name
         congratsLabel.text = card.content
         cardImage.contentMode = .scaleAspectFill
-        cardImage.load(url: card.image)
-        ptsLabel.text = "\(card.pts) pts"
+        cardImage.load(url: card.imageURL)
+        ptsLabel.text = "\(card.pricePoints) pts"
     }
     
     /// bg button tap handler

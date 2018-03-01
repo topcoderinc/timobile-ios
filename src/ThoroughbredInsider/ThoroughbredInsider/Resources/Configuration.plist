@@ -6,5 +6,7 @@
 	<string>abc@gmail.com</string>
 	<key>testPassword</key>
 	<string>123456</string>
+	<key>apiBaseUrl</key>
+	<string>https://polar-ti-mobile.herokuapp.com/api/v1/</string>
 </dict>
 </plist>

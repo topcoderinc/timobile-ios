@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +15,12 @@ import RxSwift
  * story completed screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - model object changes support
+ * - API integration related changes
  */
 class StoryCompleteViewController: UIViewController {
 
@@ -24,7 +30,9 @@ class StoryCompleteViewController: UIViewController {
     @IBOutlet weak var cardsDescription: UILabel!
     
     /// story details
-    var story: StoryDetails!
+    var story: Story!
+    /// the cards to show
+    var cards = [Card]()
     
     /// viewmodels
     var rewardsVM = CollectionViewModel<Card, RewardCell>()
@@ -35,12 +43,14 @@ class StoryCompleteViewController: UIViewController {
         // Do any additional setup after loading the view.
         let layout = collection.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.itemSize.width = (SCREEN_SIZE.width - 100) / 3
-        titleLabel.text = "Congratulations!\nYou got \(story.cards) trading cards!".localized
+        let title = String(format: NSLocalizedString("Congratulations!\nYou got %d trading %@!", comment: "Congratulations!\nYou got %d trading %@!"),
+                           story.cards.count, (story.cards.count == 1 ? NSLocalizedString("card", comment: "card") : NSLocalizedString("cards", comment: "cards")))
+        titleLabel.text = title
         rewardsVM.configureCell = { _, value, _, cell in
             cell.titleLabel.text = value.name
-            cell.rewardImage.load(url: value.image)
+            cell.rewardImage.load(url: value.imageURL)
         }
-        let rewards = story.rewards.toArray()
+        let rewards = self.cards
         let font = cardsDescription.font!
         let bold = UIFont(name: "OpenSans-Bold", size: 14.0)!
         let attributedString = NSMutableAttributedString(string: "Wow! You have unlocked ", attributes: [.font: font])

@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +15,11 @@ import RxSwift
  * Profile screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration related changes
  */
 class ProfileViewController: BasePagedViewController {
 
@@ -34,7 +39,8 @@ class ProfileViewController: BasePagedViewController {
     @IBOutlet weak var reviewsCount: UILabel!
     @IBOutlet weak var cardsCount: UILabel!
     @IBOutlet weak var storiesCount: UILabel!
-    
+    @IBOutlet weak var profileImageBottonMargin: NSLayoutConstraint!
+
     /// user
     private var user = Variable<User>(User())
     
@@ -67,24 +73,18 @@ class ProfileViewController: BasePagedViewController {
             }
         }
     }
-    
+
+    /// Setup UI
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        loadData(from: MockDataSource.getUser())
-        User.get(with: UserDefaults.loggedUserId)
-            .subscribe(onNext: { [weak self] (value: User) in
-                self?.usernameLabel.text = value.name
-                self?.emailLabel.text = value.email
-                self?.userImage.load(url: value.image)
-                self?.badgesCount.text = "\(value.badges)"
-                self?.reviewsCount.text = "\(value.reviews)"
-                self?.storiesCount.text = "\(value.stories)"
-                self?.cardsCount.text = "\(value.cards)"
-                self?.user.value = value
-            }).disposed(by: rx.bag)
-        
+        self.userImage.image = #imageLiteral(resourceName: "noProfileIcon")
+        if let user = AuthenticationUtil.sharedInstance.userInfo?.toUser() {
+            self.usernameLabel.text = user.name
+            self.emailLabel.text = user.email
+            self.userImage.load(url: user.profilePhotoURL, resetImage: false)
+        }
+
         makeTransparentNavigationBar()
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "navIconMenu"), style: .plain, target: self, action: #selector(menuTapped))
     }

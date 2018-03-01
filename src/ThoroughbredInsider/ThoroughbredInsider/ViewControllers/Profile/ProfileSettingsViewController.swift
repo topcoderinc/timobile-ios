@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/24/18.
+//  Copyright © 2017-2018 Topcoder. All rights reserved.
 //
 
 import UIKit
@@ -15,12 +16,15 @@ import MobileCoreServices
 import Photos
 import UIComponents
 
-
 /**
  * settings
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - API integration related changes
  */
 class ProfileSettingsViewController: UIViewController {
 
@@ -32,15 +36,22 @@ class ProfileSettingsViewController: UIViewController {
     
     /// embed
     private var embed: ProfileSettingsTableViewController!
-    
+
+    /// Setup UI
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         addBackButton()
-        user.asObservable().subscribe(onNext: { [weak self] value in
-            self?.userImage.load(url: value.image)
-        }).disposed(by: rx.bag)
+        loadData()
+    }
+
+    /// Load data
+    private func loadData() {
+        self.userImage.image = #imageLiteral(resourceName: "noProfileIcon")
+        if let user = AuthenticationUtil.sharedInstance.userInfo?.toUser() {
+            self.user.value = user
+            self.userImage.load(url: user.profilePhotoURL, resetImage: false)
+        }
     }
 
     /// photo button tap handler
@@ -107,10 +118,14 @@ extension ProfileSettingsViewController: UINavigationControllerDelegate, UIImage
 }
 
 /**
- * Embed
+ * Profile settings subscreen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ *
+ * changes:
+ * 1.1:
+ * - new Change Password screen
  */
 class ProfileSettingsTableViewController: UITableViewController {
     
@@ -165,6 +180,14 @@ class ProfileSettingsTableViewController: UITableViewController {
         switchEmails.isOn = UserDefaults.switchEmails
         switchAdmission.isOn = UserDefaults.switchAdmission
     }
+
+    /// View will appear
+    ///
+    /// - Parameter animated: the animation flag
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        makeTransparentNavigationBar()
+    }
     
     /// customize header
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -172,6 +195,24 @@ class ProfileSettingsTableViewController: UITableViewController {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.textDark
         header.textLabel?.font = UIFont(name: "OpenSans-Semibold", size: 12)
+    }
+
+    /// Open "Change Password" screen if "Password" tapped
+    ///
+    /// - Parameters:
+    ///   - tableView: the tableView
+    ///   - indexPath: the indexPath
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if indexPath.row == 2 { // Password field
+            if let vc = create(viewController: ProfileChangePasswordTableViewController.self) {
+                vc.callback = { password in
+                    self.passwordField.text = password
+                    self.showAlert("", NSLocalizedString("Password update succeed", comment: "Password update succeed"))
+                }
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
     
     /// switch handler
