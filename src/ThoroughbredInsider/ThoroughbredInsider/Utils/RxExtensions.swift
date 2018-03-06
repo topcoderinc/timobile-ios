@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -12,6 +13,7 @@ import RxSwift
 import NSObject_Rx
 import RealmSwift
 import RxRealm
+import RxPager
 
 // MARK: - reactive extension for NSObject
 extension Reactive where Base: NSObject {
@@ -75,6 +77,14 @@ extension UIViewController {
     /// loads data from remote
     func loadData<S: Sequence>(from observable: Observable<S>) where S.Iterator.Element: Object {
         observable.showLoading(on: view)
+            .store()
+            .disposed(by: rx.bag)
+    }
+    
+    /// loads data from remote
+    func loadData<O: Object>(from observable: Observable<PageResult<O>>) {
+        observable.showLoading(on: view)
+            .map { $0.items }
             .store()
             .disposed(by: rx.bag)
     }
@@ -164,16 +174,54 @@ extension Observable {
         let loader = LoadingView(parentView: view).show()
         return self.do(onNext: { _ in
             if stopOnNext {
-                loader.terminate()
+                DispatchQueue.main.async {
+                    loader.terminate()
+                }
             }
         }, onError: { (error) in
-            if showAlertOnError {
-                showAlert(title: "Error".localized, message: error as? String ?? error.localizedDescription)
+            DispatchQueue.main.async {
+                if showAlertOnError {
+                    showAlert(title: "Error".localized, message: error as? String ?? error.localizedDescription)
+                }
+                loader.terminate()
             }
-            loader.terminate()
         }, onCompleted: {
-            loader.terminate()
+            DispatchQueue.main.async {
+                loader.terminate()
+            }
         })
+    }
+    
+}
+
+// MARK: - UIViewController extension
+extension UIViewController {
+    
+    /// chains textfields to proceed between them one by one
+    ///
+    /// - Parameters:
+    ///   - textFields: array of textFields
+    ///   - lastReturnKey: last return key type
+    ///   - lastHandler: handler for last return
+    func chain(textFields: [UITextField], lastReturnKey: UIReturnKeyType = .send, lastHandler: (()->())? = nil) {
+        let n = textFields.count
+        for (i, tf) in textFields.enumerated() {
+            if i < n-1 {
+                tf.returnKeyType = .next
+                tf.rx.controlEvent(.editingDidEndOnExit)
+                    .subscribe(onNext: { value in
+                        textFields[i+1].becomeFirstResponder()
+                    }).disposed(by: rx.bag)
+            }
+            else {
+                tf.returnKeyType = lastReturnKey
+                tf.rx.controlEvent(.editingDidEndOnExit)
+                    .subscribe(onNext: { value in
+                        lastHandler?()
+                    }).disposed(by: rx.bag)
+            }
+            
+        }
     }
     
 }

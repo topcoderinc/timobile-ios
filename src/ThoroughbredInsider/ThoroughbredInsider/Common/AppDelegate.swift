@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/29/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +14,9 @@ import IQKeyboardManagerSwift
  * App delegate responder
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         if !UserDefaults.firstLaunch {
             UserDefaults.firstLaunch = true
+            TokenUtil.cleanup()
             let vc = Storyboards.landing.instantiate.instantiateInitialViewController()
             window?.rootViewController = vc
         }
@@ -52,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().barTintColor = UIColor.purple
+        
+        UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "navIconBack")
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "navIconBack")
         return true
     }
 

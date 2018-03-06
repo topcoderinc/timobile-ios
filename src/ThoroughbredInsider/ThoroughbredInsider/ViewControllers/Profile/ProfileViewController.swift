@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +15,9 @@ import RxSwift
  * Profile screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class ProfileViewController: BasePagedViewController {
 
@@ -72,12 +75,12 @@ class ProfileViewController: BasePagedViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        loadData(from: MockDataSource.getUser())
+        loadData(from: RestDataSource.getUser())
         User.get(with: UserDefaults.loggedUserId)
             .subscribe(onNext: { [weak self] (value: User) in
                 self?.usernameLabel.text = value.name
                 self?.emailLabel.text = value.email
-                self?.userImage.load(url: value.image)
+                self?.userImage.load(url: value.profilePhotoURL)
                 self?.badgesCount.text = "\(value.badges)"
                 self?.reviewsCount.text = "\(value.reviews)"
                 self?.storiesCount.text = "\(value.stories)"

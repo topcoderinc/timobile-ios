@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/1/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -16,18 +17,20 @@ import RxRealm
  * Story list screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
-class StoryListViewController: UIViewController {
+class StoryListViewController: InfiniteTableViewController {
 
-    /// outlets
-    @IBOutlet weak var tableView: UITableView!
-    
     /// search query
     var query = Variable<String>("")
     
     /// viewmodel
     var vm: RealmTableViewModel<Story, StoryCell>!
+    
+    /// racetrack
+    var racetrack: Variable<Racetrack?>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +38,16 @@ class StoryListViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupVM()
         
-        query.asObservable()
-            .subscribe(onNext: { [weak self] value in
+        Observable.combineLatest(query.asObservable(), racetrack.asObservable())
+            .subscribe(onNext: { [weak self] query, racetrack in
                 guard let strongSelf = self else { return }
-                strongSelf.setupVM(filter: value)
-                strongSelf.loadData(from: MockDataSource.getStories(query: value))
+                strongSelf.setupVM(filter: query)
+                strongSelf.setupPager(requestPager: RequestPager<Story>(request: { (offset, limit) in
+                    RestDataSource.getStories(offset: offset, limit: limit, title: query.isEmpty ? nil : query, racetrackId: racetrack?.id)
+                }))
             }).disposed(by: rx.bag)
+        
+        LocationManager.shared.startUpdatingLocation()
     }
     
     /// configure vm
@@ -49,14 +56,14 @@ class StoryListViewController: UIViewController {
     func setupVM(filter: String = "") {
         vm = RealmTableViewModel<Story, StoryCell>()
         vm.configureCell = { _, value, _, cell in
-            cell.storyImage.load(url: value.image)
-            cell.titleLabel.text = value.name
-            cell.racetrackLabel.text = value.race?.name
-            cell.shortDescriptionLabel.text = value.content
+            cell.storyImage.load(url: value.smallImageURL)
+            cell.titleLabel.text = value.title
+            cell.racetrackLabel.text = value.racetrack?.name
+            cell.shortDescriptionLabel.text = "\(value.subtitle)\n\n\(value.summary)"
             cell.shortDescriptionLabel.setLineHeight(16)
-            cell.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
-            cell.cardsLabel.text = "\(value.cards) \("cards".localized)"
-            cell.milesLabel.text = "\(value.miles) \("miles".localized)"
+            cell.chaptersLabel.text = "\(value.chapters.count) \("chapters".localized)"
+            cell.cardsLabel.text = "\(value.cards.count) \("cards".localized)"
+            cell.milesLabel.text = value.racetrack.distanceText
         }
         vm.onSelect = { [weak self] idx, value in
             guard let vc = self?.create(viewController: StoryDetailsViewController.self, storyboard: .details) else { return }
@@ -64,12 +71,17 @@ class StoryListViewController: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
             self?.tableView.deselectRow(at: IndexPath.init(row: idx, section: 0), animated: true)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")],
-                    predicate: filter.trim().isEmpty ? nil : NSCompoundPredicate.init(orPredicateWithSubpredicates: [
-                        NSPredicate(format: "name CONTAINS[cd] %@", filter),
-                        NSPredicate(format: "content CONTAINS[cd] %@", filter),
-                        NSPredicate(format: "race.name CONTAINS[cd] %@", filter),
-                        ]))
+        
+        var preds: [NSPredicate] = []
+        if !filter.trim().isEmpty {
+            preds.append(NSPredicate(format: "title CONTAINS[cd] %@", filter))
+        }
+        if let race = racetrack.value {
+            preds.append(NSPredicate(format: "racetrack.id IN %@", [race.id]))
+        }
+        
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "title")],
+                    predicate: preds.isEmpty ? nil : NSCompoundPredicate(orPredicateWithSubpredicates: preds))
     }
 
 }

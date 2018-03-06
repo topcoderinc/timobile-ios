@@ -3,13 +3,22 @@
 //  SocialBike
 //
 //  Created by TCCODER on 9/3/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
 import RxCocoa
 import RxSwift
 
+/**
+ * Sign in screen
+ *
+ * - author: TCCODER
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
+ */
 class SignInViewController: UIViewController {
 
     /// outlets
@@ -26,7 +35,9 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        passwordField.returnKeyType = .go
+        chain(textFields: [loginField, passwordField]) { [unowned self] in
+            self.loginTapped(self)
+        }
         
         if isIphone5OrLess {
             logoOffset.constant = -43
@@ -56,8 +67,8 @@ class SignInViewController: UIViewController {
         super.viewDidAppear(animated)
         
         cleanNavigationStack()
-        if UserDefaults.loggedUserId > 0 {
-            MockDataSource.restoreSession(id: UserDefaults.loggedUserId)
+        if let _ = TokenUtil.accessToken {
+            RestDataSource.restoreSession()
                 .showLoading(on: view)
                 .subscribe(onNext: { value in
                     Storyboards.showHome()
@@ -72,13 +83,14 @@ class SignInViewController: UIViewController {
     /// - Parameter sender: the button
     @IBAction func loginTapped(_ sender: Any) {
         guard loginField.textValue.isValidEmail && !passwordField.textValue.isEmpty else {
+            errorLabel.text = "Please enter correct email or password".localized
             errorLabel.isHidden = false
             return
         }
         loginField.resignFirstResponder()
         passwordField.resignFirstResponder()
         
-        MockDataSource.login(username: loginField.textValue, password: passwordField.textValue)
+        RestDataSource.login(username: loginField.textValue, password: passwordField.textValue)
             .showLoading(on: view, showAlertOnError: false)
             .subscribe(onNext: { [weak self] value in
                 Storyboards.showHome()
@@ -86,9 +98,9 @@ class SignInViewController: UIViewController {
                     //clear fields
                     self?.loginField.text = nil
                     self?.passwordField.text = nil
-                    self?.loginButton.isEnabled = false
                 }
                 }, onError: { [weak self] error in
+                    self?.errorLabel.text = (error as? String ?? error.localizedDescription).replacingOccurrences(of: "\"", with: "")
                     self?.errorLabel.isHidden = false
             }).disposed(by: rx.bag)
     }
@@ -99,7 +111,30 @@ class SignInViewController: UIViewController {
      - parameter sender: the button
      */
     @IBAction func forgotTapped(_ sender: UIButton) {
-        showStub()
+        guard loginField.textValue.isValidEmail else {
+            errorLabel.text = "Please enter correct email".localized
+            errorLabel.isHidden = false
+            return
+        }
+        view.endEditing(true)
+        
+        RestDataSource.initiateResetPassword(email: loginField.textValue)
+            .showLoading(on: view, showAlertOnError: false)
+            .subscribe(onNext: { [weak self] value in
+                
+                self?.showAlert(title: "Email successfully sent".localized, message: "An email with token has been already sent to your email box, please check it.".localized, handler: { (_) in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self?.passwordField.text = nil
+                        guard let vc = self?.create(viewController: ForgotPasswordViewController.self) else { return }
+                        vc.email = self?.loginField.text ?? ""
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                })
+                
+                }, onError: { [weak self] error in
+                    self?.errorLabel.text = "User with such email not found".localized
+                    self?.errorLabel.isHidden = false
+            }).disposed(by: rx.bag)
     }
  
     /**
@@ -117,7 +152,8 @@ class SignInViewController: UIViewController {
      - parameter sender: the button
      */
     @IBAction func signupTapped(_ sender: UIButton) {
-        showStub()
+        guard let vc = create(viewController: SignUpViewController.self) else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

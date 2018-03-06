@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -94,6 +95,14 @@ extension Date {
         return df
     }()
     
+    /// full date formatter
+    static let FullFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        df.timeZone = TimeZone(secondsFromGMT: 0)
+        return df
+    }()
+    
     /// default formatted string
     var defaultFormat: String {
         return Date.DefaultFormatter.string(from: self)
@@ -102,6 +111,11 @@ extension Date {
     /// medium formatted string
     var mediumFormat: String {
         return Date.MediumFormatter.string(from: self)
+    }
+    
+    /// full formatted string
+    var fullFormat: String {
+        return Date.FullFormatter.string(from: self)
     }
     
 }
@@ -128,16 +142,31 @@ extension JSON {
             return nil
         }
         // parse json
-        return JSON(data: data)
+        return try? JSON(data: data)
     }
     
     /// same as .object but with all date strings converted to dates
-    func objectWithConvertedDates(using formatter: DateFormatter = Date.DefaultFormatter) -> Any {
+    func objectWithConvertedDates(using formatter: DateFormatter = Date.FullFormatter) -> Any {
         if let dict = dictionary {
-            return dict.mapValues { $0.lowercased().contains("date") ? formatter.date(from: $1.stringValue) as Any : $1.objectWithConvertedDates(using: formatter) }
+            return dict.mapValues { $0.lowercased().contains("date") || $0.lowercased().contains("updatedat") || $0.lowercased().contains("createdat") ? formatter.date(from: $1.stringValue) as Any : $1.objectWithConvertedDates(using: formatter) }
         }
         else if let array = array {
             return array.map { $0.objectWithConvertedDates(using: formatter) }
+        }
+        return object
+    }
+    
+    /// same as .object but with all 'description' replaced with descrName
+    func objectWithDescriptionMapped(to descrName: String) -> Any {
+        if let dict = dictionary {
+            var resultDict = [String: JSON]()
+            for (k, v) in dict {
+                resultDict[k.lowercased() == "description" ? descrName : k] = v
+            }
+            return resultDict.mapValues { $1.objectWithDescriptionMapped(to: descrName) }
+        }
+        else if let array = array {
+            return array.map { $0.objectWithDescriptionMapped(to: descrName) }
         }
         return object
     }
@@ -156,6 +185,8 @@ extension Dictionary {
         }
         return resultDict
     }
+    
+    
 }
 
 // MARK: - date extension
@@ -179,6 +210,41 @@ extension Date {
         if minutes > 0 { return "\(minutes)m ago" }
         if seconds > 0 { return "\(seconds)s ago" }
         return "Now"
+    }
+    
+}
+
+// MARK: - dictionary extension
+extension Dictionary where Value: Optionable {
+    
+    /// flattens dictionary values
+    ///
+    /// - Returns: flattened dictionary
+    func flattenValues() -> [Key: Value.Wrapped] {
+        var result = [Key: Value.Wrapped]()
+        for (k, v) in self {
+            if let v = v.value {
+                result[k] = v
+            }
+        }
+        return result
+    }
+    
+}
+
+// MARK: - shortcut extension
+extension Double {
+    
+    /// shortcut with k, M, G
+    var shortcut: String {
+        var convertedValue: Double = Double(self)
+        var multiplyFactor = 0
+        let tokens = ["", "k", "M", "G", "T"]
+        while convertedValue >= 1000 {
+            convertedValue /= 1000
+            multiplyFactor += 1
+        }
+        return multiplyFactor > 0 ? String(format: "%3.1f%@", convertedValue, tokens[multiplyFactor]) : String(format: "%.1f", self)
     }
     
 }

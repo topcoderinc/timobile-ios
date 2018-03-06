@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +13,9 @@ import UIKit
  * card popup
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class CardPopupViewController: UIViewController {
 
@@ -32,10 +35,10 @@ class CardPopupViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         titleLabel.text = card.name
-        congratsLabel.text = card.content
+        congratsLabel.text = card.descr
         if card.isEarned {
             cardImage.contentMode = .scaleAspectFill
-            cardImage.load(url: card.image)
+            cardImage.load(url: card.imageURL)
             shareButton.setTitle("SHARE".localized, for: .normal)
         }
         editButton.isEnabled = card.isEarned

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="I0J-ax-Tyb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="I0J-ax-Tyb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -82,13 +82,13 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="David Williams" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wo5-Dz-C8s">
-                                            <rect key="frame" x="97.5" y="120.5" width="111.5" height="20"/>
+                                            <rect key="frame" x="93" y="120.5" width="121" height="23.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="david.williams@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZM-zo-noC">
-                                            <rect key="frame" x="70.5" y="148.5" width="164" height="16.5"/>
+                                            <rect key="frame" x="67.5" y="152" width="172" height="19.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -131,7 +131,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="sectionHeader" text="SECTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nal-6A-fpa">
-                                                    <rect key="frame" x="16" y="8" width="343" height="16"/>
+                                                    <rect key="frame" x="23" y="11" width="329" height="10"/>
                                                     <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
                                                     <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -169,7 +169,7 @@
                                                     <rect key="frame" x="58.5" y="18" width="13" height="14"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NV-Md-7wB">
-                                                    <rect key="frame" x="33" y="16.5" width="332" height="18.5"/>
+                                                    <rect key="frame" x="33" y="15" width="332" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="15.699999809265137"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -266,7 +266,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. SET UP YOUR LOCATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uh5-JE-hVh">
-                                        <rect key="frame" x="91" y="22" width="193.5" height="17.5"/>
+                                        <rect key="frame" x="93" y="20.5" width="189.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -283,13 +283,13 @@
                                 <rect key="frame" x="80" y="150" width="214" height="153"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Areas Near You" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ik1-a2-tAg">
-                                <rect key="frame" x="125" y="335.5" width="124.5" height="21"/>
+                                <rect key="frame" x="120.5" y="335.5" width="133.5" height="25"/>
                                 <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let our App use your phone’s GPS to automatically add stories if they are near your location." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyn-Nu-KeW">
-                                <rect key="frame" x="62" y="369.5" width="250" height="45.5"/>
+                                <rect key="frame" x="62" y="373.5" width="250" height="53.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="6Wg-BC-xcs"/>
                                 </constraints>
@@ -442,7 +442,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Racetracks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="456-5O-khU">
-                                        <rect key="frame" x="13" y="29.5" width="143.5" height="16.5"/>
+                                        <rect key="frame" x="13" y="26.5" width="143.5" height="19.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -451,7 +451,7 @@
                                         <rect key="frame" x="166.5" y="22" width="11" height="7"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Racetracks" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilw-FS-pnY">
-                                        <rect key="frame" x="13" y="11.5" width="60" height="14"/>
+                                        <rect key="frame" x="13" y="11.5" width="60" height="16.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="12"/>
                                         <color key="textColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -463,7 +463,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nearest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTf-k7-TuQ">
-                                        <rect key="frame" x="203" y="29.5" width="141" height="16.5"/>
+                                        <rect key="frame" x="203" y="26.5" width="141" height="19.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -472,7 +472,7 @@
                                         <rect key="frame" x="355" y="22" width="11" height="7"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRM-Hb-ioA">
-                                        <rect key="frame" x="203" y="11.5" width="39" height="14"/>
+                                        <rect key="frame" x="203" y="11.5" width="39" height="16.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="12"/>
                                         <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -583,7 +583,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. SELECT THE STATES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2X-YK-2RR">
-                                        <rect key="frame" x="106.5" y="22" width="162.5" height="17.5"/>
+                                        <rect key="frame" x="111" y="20.5" width="153.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -648,7 +648,7 @@
                                                     <rect key="frame" x="333" y="16.5" width="14" height="10"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. SELECT THE STATES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLW-d8-gJy">
-                                                    <rect key="frame" x="26.5" y="14.5" width="141" height="15.5"/>
+                                                    <rect key="frame" x="26.5" y="13.5" width="131.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
                                                     <color key="textColor" red="0.2470588235" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -705,7 +705,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. SELECT THE RACETRACKS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rq4-UH-Hs7">
-                                        <rect key="frame" x="83" y="21.5" width="209" height="17.5"/>
+                                        <rect key="frame" x="89.5" y="20" width="196" height="20.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-SemiBold" family="Open Sans" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -770,7 +770,7 @@
                                                     <rect key="frame" x="333" y="16.5" width="14" height="10"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. SELECT THE STATES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FuM-6K-WGZ">
-                                                    <rect key="frame" x="26.5" y="14.5" width="141" height="15.5"/>
+                                                    <rect key="frame" x="26.5" y="13.5" width="131.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
                                                     <color key="textColor" red="0.2470588235" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -823,11 +823,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="184" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UpO-Wd-tRF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="184" estimatedRowHeight="184" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UpO-Wd-tRF">
                                 <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                                 <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoryCell" id="jUo-wl-gZe" customClass="StoryCell" customModule="ThoroughbredInsider" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoryCell" rowHeight="184" id="jUo-wl-gZe" customClass="StoryCell" customModule="ThoroughbredInsider" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="184"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jUo-wl-gZe" id="nIp-Ik-ibM">
@@ -844,13 +844,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Racetracks" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwX-Hp-NeX">
-                                                            <rect key="frame" x="123" y="51" width="55" height="13"/>
+                                                            <rect key="frame" x="123" y="56.5" width="54.5" height="15"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.899999618530273"/>
                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPM-Ic-ygg">
-                                                            <rect key="frame" x="123" y="74.5" width="208.5" height="42"/>
+                                                            <rect key="frame" x="123" y="82" width="208.5" height="49.5"/>
                                                             <string key="text">Ut wisi enim ad minim veniam quis 
 nostrud exerci tation ullamcorper 
 suscipit lobortis nisl ut aliquip ex ea...</string>
@@ -859,7 +859,7 @@ suscipit lobortis nisl ut aliquip ex ea...</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="999" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cih-kP-FuL">
-                                                            <rect key="frame" x="123" y="13" width="191" height="33"/>
+                                                            <rect key="frame" x="123" y="13" width="220" height="38.5"/>
                                                             <string key="text">Story Title Lorem Ipsum Dolor 
 Sit Amet</string>
                                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
@@ -876,7 +876,7 @@ Sit Amet</string>
                                                                             <rect key="frame" x="0.0" y="0.5" width="13" height="14"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.70000001192092898" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 chapters" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrL-UM-jjb">
-                                                                            <rect key="frame" x="19.5" y="2" width="51" height="12.5"/>
+                                                                            <rect key="frame" x="19.5" y="1" width="51" height="14.5"/>
                                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -898,7 +898,7 @@ Sit Amet</string>
                                                                             <rect key="frame" x="2" y="2.5" width="14" height="10"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 cards" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4u-tj-FBa">
-                                                                            <rect key="frame" x="19.5" y="2" width="35" height="12.5"/>
+                                                                            <rect key="frame" x="19.5" y="1" width="35" height="14.5"/>
                                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -920,7 +920,7 @@ Sit Amet</string>
                                                                             <rect key="frame" x="5" y="1.5" width="8" height="12"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="250 miles" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBI-Ya-aeE">
-                                                                            <rect key="frame" x="19.5" y="2" width="46.5" height="12.5"/>
+                                                                            <rect key="frame" x="19.5" y="1" width="46.5" height="14.5"/>
                                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -945,13 +945,15 @@ Sit Amet</string>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="iPM-Ic-ygg" secondAttribute="trailing" constant="19.5" id="004-F7-nqn"/>
                                                         <constraint firstItem="cih-kP-FuL" firstAttribute="top" secondItem="fyx-os-dDQ" secondAttribute="top" constant="13" id="6Jr-68-jmm"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="167.5" id="7LM-Q0-xEM"/>
                                                         <constraint firstItem="IwX-Hp-NeX" firstAttribute="leading" secondItem="iPM-Ic-ygg" secondAttribute="leading" id="Ae7-3q-skN"/>
                                                         <constraint firstAttribute="trailing" secondItem="7Sy-RX-O4k" secondAttribute="trailing" constant="8" id="FQU-6M-Myu"/>
                                                         <constraint firstItem="cih-kP-FuL" firstAttribute="leading" secondItem="fyx-os-dDQ" secondAttribute="leading" constant="123" id="Jxk-SM-I4O"/>
                                                         <constraint firstAttribute="bottom" secondItem="7Sy-RX-O4k" secondAttribute="bottom" constant="8.5" id="UW5-76-XNf"/>
                                                         <constraint firstItem="UkQ-nN-aji" firstAttribute="top" secondItem="fyx-os-dDQ" secondAttribute="top" id="YGq-TF-bt2"/>
                                                         <constraint firstItem="7Sy-RX-O4k" firstAttribute="leading" secondItem="iPM-Ic-ygg" secondAttribute="leading" id="glc-2Q-N8r"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iPM-Ic-ygg" secondAttribute="bottom" constant="40" id="hPZ-cL-ggH"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iPM-Ic-ygg" secondAttribute="bottom" constant="30" id="hPZ-cL-ggH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cih-kP-FuL" secondAttribute="trailing" constant="8" id="i9x-Ee-eOn"/>
                                                         <constraint firstItem="IwX-Hp-NeX" firstAttribute="leading" secondItem="cih-kP-FuL" secondAttribute="leading" id="kD3-hc-QYw"/>
                                                         <constraint firstItem="UkQ-nN-aji" firstAttribute="leading" secondItem="fyx-os-dDQ" secondAttribute="leading" id="pBc-Ef-NDJ"/>
                                                         <constraint firstItem="iPM-Ic-ygg" firstAttribute="top" secondItem="IwX-Hp-NeX" secondAttribute="bottom" constant="10" id="tcB-cI-Msg"/>
@@ -1046,13 +1048,13 @@ Sit Amet</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Racetracks" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUP-En-Wr8">
-                                        <rect key="frame" x="123" y="51" width="55" height="13"/>
+                                        <rect key="frame" x="123" y="56.5" width="54.5" height="15"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.899999618530273"/>
                                         <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jny-xe-2Kw">
-                                        <rect key="frame" x="123" y="74.5" width="208.5" height="42"/>
+                                        <rect key="frame" x="123" y="82" width="208.5" height="45.5"/>
                                         <string key="text">Ut wisi enim ad minim veniam quis 
 nostrud exerci tation ullamcorper 
 suscipit lobortis nisl ut aliquip ex ea...</string>
@@ -1061,7 +1063,7 @@ suscipit lobortis nisl ut aliquip ex ea...</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="999" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDy-EU-3rG">
-                                        <rect key="frame" x="123" y="13" width="191" height="33"/>
+                                        <rect key="frame" x="123" y="13" width="212.5" height="38.5"/>
                                         <string key="text">Story Title Lorem Ipsum Dolor 
 Sit Amet</string>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
@@ -1078,7 +1080,7 @@ Sit Amet</string>
                                                         <rect key="frame" x="0.0" y="0.5" width="13" height="14"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 chapters" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2v-g9-Nwb">
-                                                        <rect key="frame" x="19.5" y="2" width="51" height="12.5"/>
+                                                        <rect key="frame" x="19.5" y="1" width="51" height="14.5"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                         <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1100,7 +1102,7 @@ Sit Amet</string>
                                                         <rect key="frame" x="2" y="2.5" width="14" height="10"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 cards" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wr-uf-lh0">
-                                                        <rect key="frame" x="19.5" y="2" width="35" height="12.5"/>
+                                                        <rect key="frame" x="19.5" y="1" width="35" height="14.5"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                         <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1122,7 +1124,7 @@ Sit Amet</string>
                                                         <rect key="frame" x="5" y="1.5" width="8" height="12"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="250 miles" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05O-QW-bSb">
-                                                        <rect key="frame" x="19.5" y="2" width="46.5" height="12.5"/>
+                                                        <rect key="frame" x="19.5" y="1" width="46.5" height="14.5"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                         <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1190,7 +1192,7 @@ Sit Amet</string>
                                 <rect key="frame" x="0.0" y="619.5" width="375" height="47.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Displaying 5 of 5 stories in these area" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MC9-CK-zyx">
-                                        <rect key="frame" x="95.5" y="18" width="184" height="13"/>
+                                        <rect key="frame" x="92" y="17" width="191" height="15"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="11"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1252,7 +1254,7 @@ Sit Amet</string>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECENT SEARCHES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlL-Sv-viX">
-                                            <rect key="frame" x="13" y="10" width="114" height="14"/>
+                                            <rect key="frame" x="13" y="8" width="109" height="16.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <color key="textColor" red="0.49019607843137253" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1273,7 +1275,7 @@ Sit Amet</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nearest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-hl-vxX">
-                                                    <rect key="frame" x="37" y="16.5" width="45.5" height="15.5"/>
+                                                    <rect key="frame" x="37" y="14.5" width="47.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
                                                     <color key="textColor" red="0.24705882352941178" green="0.24313725490196078" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1378,7 +1380,7 @@ Sit Amet</string>
                                                     <rect key="frame" x="333" y="16.5" width="14" height="10"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. SELECT THE STATES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70D-Fl-ms2">
-                                                    <rect key="frame" x="26.5" y="14.5" width="141" height="15.5"/>
+                                                    <rect key="frame" x="26.5" y="13.5" width="131.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
                                                     <color key="textColor" red="0.2470588235" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1455,13 +1457,13 @@ Sit Amet</string>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Racetracks" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TK-K4-WPc">
-                                                            <rect key="frame" x="123" y="51" width="55" height="13"/>
+                                                            <rect key="frame" x="123" y="56.5" width="54.5" height="15"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.899999618530273"/>
                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grn-M7-kPo">
-                                                            <rect key="frame" x="123" y="74.5" width="208.5" height="42"/>
+                                                            <rect key="frame" x="123" y="82" width="208.5" height="45.5"/>
                                                             <string key="text">Ut wisi enim ad minim veniam quis 
 nostrud exerci tation ullamcorper 
 suscipit lobortis nisl ut aliquip ex ea...</string>
@@ -1470,7 +1472,7 @@ suscipit lobortis nisl ut aliquip ex ea...</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="999" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xA0-m7-Dxu">
-                                                            <rect key="frame" x="123" y="13" width="191" height="33"/>
+                                                            <rect key="frame" x="123" y="13" width="212.5" height="38.5"/>
                                                             <string key="text">Story Title Lorem Ipsum Dolor 
 Sit Amet</string>
                                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
@@ -1487,7 +1489,7 @@ Sit Amet</string>
                                                                             <rect key="frame" x="0.0" y="0.5" width="13" height="14"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 chapters" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3G-Hg-nvh">
-                                                                            <rect key="frame" x="19.5" y="2" width="51" height="12.5"/>
+                                                                            <rect key="frame" x="19.5" y="1" width="51" height="14.5"/>
                                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -1509,7 +1511,7 @@ Sit Amet</string>
                                                                             <rect key="frame" x="2" y="2.5" width="14" height="10"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 cards" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jd8-mD-gLH">
-                                                                            <rect key="frame" x="19.5" y="2" width="35" height="12.5"/>
+                                                                            <rect key="frame" x="19.5" y="1" width="35" height="14.5"/>
                                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -1531,7 +1533,7 @@ Sit Amet</string>
                                                                             <rect key="frame" x="5" y="1.5" width="8" height="12"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="250 miles" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSi-7G-nhg">
-                                                                            <rect key="frame" x="19.5" y="2" width="46.5" height="12.5"/>
+                                                                            <rect key="frame" x="19.5" y="1" width="46.5" height="14.5"/>
                                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="10.399999618530273"/>
                                                                             <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>

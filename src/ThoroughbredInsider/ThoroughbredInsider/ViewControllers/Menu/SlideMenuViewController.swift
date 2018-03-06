@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -210,7 +211,7 @@ class SlideMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     /// confirms logout and logouts if confirmed
     func confirmLogout() {
         confirm(action: "Logout".localized, message: "Are you sure you want to logout?".localized, confirmHandler: {
-            MockDataSource.logout()
+            RestDataSource.logout()
                 .subscribe(onNext: { [weak self] value in
                     self?.dismiss(animated: true, completion: nil)
                 }).disposed(by: self.rx.bag)

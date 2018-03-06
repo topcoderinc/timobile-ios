@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +21,9 @@ import UIComponents
  * settings
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class ProfileSettingsViewController: UIViewController {
 
@@ -37,9 +40,8 @@ class ProfileSettingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addBackButton()
         user.asObservable().subscribe(onNext: { [weak self] value in
-            self?.userImage.load(url: value.image)
+            self?.userImage.load(url: value.profilePhotoURL)
         }).disposed(by: rx.bag)
     }
 
@@ -65,6 +67,7 @@ class ProfileSettingsViewController: UIViewController {
             controller.user = user
         }
     }
+    
 }
 
 // MARK: - image select extension
@@ -110,7 +113,9 @@ extension ProfileSettingsViewController: UINavigationControllerDelegate, UIImage
  * Embed
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class ProfileSettingsTableViewController: UITableViewController {
     
@@ -129,7 +134,6 @@ class ProfileSettingsTableViewController: UITableViewController {
         didSet {
             nameField.isUserInteractionEnabled = isEditMode
             emailField.isUserInteractionEnabled = isEditMode
-            passwordField.isUserInteractionEnabled = isEditMode
             nameField.underlineColor = isEditMode ? .textDark : .clear
             emailField.underlineColor = isEditMode ? .textDark : .clear
             passwordField.underlineColor = isEditMode ? .textDark : .clear
@@ -149,7 +153,6 @@ class ProfileSettingsTableViewController: UITableViewController {
                     else {
                         user.email = self.emailField.textValue
                     }
-                    self.passwordField.text = user.name // just mock for now
                 }
             }
         }

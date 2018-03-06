@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/1/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +18,9 @@ import RxRealm
  * Story map screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class StoryMapViewController: UIViewController {
     
@@ -38,7 +41,7 @@ class StoryMapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupVM()
-        loadData(from: MockDataSource.getStories())
+        loadData(from: RestDataSource.getStories())
     }
     
     /// configure vm
@@ -51,7 +54,9 @@ class StoryMapViewController: UIViewController {
         vm.asObservable()
             .subscribe(onNext: { [weak self] value in
                 self?.mapView.removeAnnotations(self?.mapView.annotations ?? [])
-                self?.mapView.addAnnotations(value.map { StoryAnnotation(story: $0) })
+                let newAnnotations = value.map { StoryAnnotation(story: $0) }
+                self?.mapView.addAnnotations(newAnnotations)
+                self?.mapView.showAnnotations(newAnnotations, animated: true)
                 self?.countLabel.text = "Displaying \(value.count) of \(value.count) stories in these area"
             }).disposed(by: rx.bag)
     }
@@ -70,14 +75,14 @@ class StoryMapViewController: UIViewController {
     /// - Parameter value: selected story
     fileprivate func configureSelected(value: Story) {
         selected = value
-        storyView.storyImage.load(url: value.image)
-        storyView.titleLabel.text = value.name
-        storyView.racetrackLabel.text = value.race?.name
-        storyView.shortDescriptionLabel.text = value.content
+        storyView.storyImage.load(url: value.smallImageURL)
+        storyView.titleLabel.text = value.title
+        storyView.racetrackLabel.text = value.racetrack?.name
+        storyView.shortDescriptionLabel.text = "\(value.subtitle)\n\n\(value.summary)"
         storyView.shortDescriptionLabel.setLineHeight(16)
-        storyView.chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
-        storyView.cardsLabel.text = "\(value.cards) \("cards".localized)"
-        storyView.milesLabel.text = "\(value.miles) \("miles".localized)"
+        storyView.chaptersLabel.text = "\(value.chapters.count) \("chapters".localized)"
+        storyView.cardsLabel.text = "\(value.cards.count) \("cards".localized)"
+        storyView.milesLabel.text = value.racetrack.distanceText
     }
     
 }
@@ -133,7 +138,7 @@ class StoryAnnotation: NSObject, MKAnnotation {
     
     /// initializer
     init(story: Story) {
-        self.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(story.lat), longitude: CLLocationDegrees(story.long))
+        self.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(story.racetrack.locationLat), longitude: CLLocationDegrees(story.racetrack.locationLng))
         self.story = story
     }
     

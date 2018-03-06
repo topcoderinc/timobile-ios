@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +15,9 @@ import RxSwift
  * story completed screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class StoryCompleteViewController: UIViewController {
 
@@ -35,12 +38,13 @@ class StoryCompleteViewController: UIViewController {
         // Do any additional setup after loading the view.
         let layout = collection.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.itemSize.width = (SCREEN_SIZE.width - 100) / 3
-        titleLabel.text = "Congratulations!\nYou got \(story.cards) trading cards!".localized
         rewardsVM.configureCell = { _, value, _, cell in
             cell.titleLabel.text = value.name
-            cell.rewardImage.load(url: value.image)
+            cell.rewardImage.load(url: value.imageURL)
         }
-        let rewards = story.rewards.toArray()
+        let rewards = story.cards.toArray()
+        
+        titleLabel.text = "Congratulations!\nYou got \(rewards.count) trading cards!".localized
         let font = cardsDescription.font!
         let bold = UIFont(name: "OpenSans-Bold", size: 14.0)!
         let attributedString = NSMutableAttributedString(string: "Wow! You have unlocked ", attributes: [.font: font])
@@ -56,12 +60,6 @@ class StoryCompleteViewController: UIViewController {
         
         rewardsVM.bindData(to: collection)
         rewardsVM.entries.value = rewards
-        
-        Observable.just([]).delaySubscription(1.25, scheduler: MainScheduler.instance)
-            .showLoading(on: view)
-            .subscribe(onNext: { value in
-                
-            }).disposed(by: rx.bag)
     }
     
     /// back button tap handler

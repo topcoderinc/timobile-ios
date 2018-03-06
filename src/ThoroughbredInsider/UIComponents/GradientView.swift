@@ -3,7 +3,8 @@
 //  Thoroughbred
 //
 //  Created by TCCODER on 6/21/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit

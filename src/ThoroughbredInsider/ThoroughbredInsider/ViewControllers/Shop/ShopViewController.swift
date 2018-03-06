@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -43,7 +44,7 @@ class ShopViewController: RootViewController {
         let layout = collection.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.itemSize.width = SCREEN_SIZE.width / 2
         
-        loadData(from: MockDataSource.getShopItems())
+        loadData(from: RestDataSource.getShopItems())
         
         query.asObservable()
             .subscribe(onNext: { [weak self] value in
@@ -60,7 +61,7 @@ class ShopViewController: RootViewController {
         rewardsVM.configureCell = { _, value, _, cell in
             cell.titleLabel.text = value.name
             cell.rewardImage.contentMode = .scaleAspectFill
-            cell.rewardImage.load(url: value.image)
+            cell.rewardImage.load(url: value.imageURL)
             cell.ptsLabel.text = "\(value.pts) pts"
         }
         rewardsVM.onSelect = { [weak self] _, card in

@@ -3,11 +3,14 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
 import UIComponents
+import RxCocoa
+import RxSwift
 
 /**
  * pre-stroy screen protocol
@@ -28,7 +31,9 @@ protocol PreStoryScreen {
  * pre-story container
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class PreStoryViewController: RootViewController, StaticPagingContentProvider {
 
@@ -40,6 +45,7 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
     @IBOutlet weak var pageControl: PagerControl!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
+    var statesIds = Variable<[Int]>([])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +70,11 @@ class PreStoryViewController: RootViewController, StaticPagingContentProvider {
         return [
             { return self.create(viewController: PreStoryLocationViewController.self)! },
             { return self.create(viewController: PreStoryStateViewController.self)! },
-            { return self.create(viewController: PreStoryRacetrackViewController.self)! }
+            {
+                let vc = self.create(viewController: PreStoryRacetrackViewController.self)!
+                vc.statesIds = self.statesIds
+                return vc
+            }
         ]
     }
     

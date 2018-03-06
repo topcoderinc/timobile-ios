@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -15,17 +16,20 @@ import RealmSwift
  * racetracks selection
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
-class PreStoryRacetrackViewController: UIViewController {
+class PreStoryRacetrackViewController: InfiniteTableViewController {
 
     /// outlets
     @IBOutlet weak var filterField: UITextField!
-    @IBOutlet weak var tableView: UITableView!
     
     /// viewmodel
     var vm: RealmTableViewModel<Racetrack, SelectCell>!
     var selected = Set<Racetrack>()
+    var statesIds: Variable<[Int]>!
+    var needReload = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +43,33 @@ class PreStoryRacetrackViewController: UIViewController {
                 strongSelf.setupVM(filter: value)
             }).disposed(by: rx.bag)
         
-        loadData(from: MockDataSource.getRacetracks())
+        statesIds.asObservable().subscribe(onNext: { [weak self] value in
+            self?.needReload = true
+        }).disposed(by: rx.bag)
+    }
+    
+    /// View will appear
+    ///
+    /// - Parameter animated: the animation flag
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if needReload {
+            let stateIds = self.statesIds.value.map { "\($0)" }.joined(separator: ",")
+            setupPager(requestPager: RequestPager<Racetrack>(request: { (offset, limit) in
+                RestDataSource.getRacetracks(offset: offset, limit: limit, stateIds: stateIds)
+            }))            
+            setupVM()
+        }
     }
     
     /// configure vm
     ///
     /// - Parameter filter: current filter
     func setupVM(filter: String = "") {
-        selected.removeAll()
         vm = RealmTableViewModel<Racetrack, SelectCell>()
         vm.configureCell = { [weak self] _, value, _, cell in
-            cell.titleLabel.text = "\(value.code) - \(value.name)"
+            cell.titleLabel.text = "\(value.state.shortcut) - \(value.name)"
             cell.itemSelected = self?.selected.contains(value) == true
         }
         vm.onSelect = { [weak self] idx, value in
@@ -61,9 +81,9 @@ class PreStoryRacetrackViewController: UIViewController {
             }
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "code"), SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "stateId"), SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? NSPredicate(format: "stateId IN %@", statesIds.value) : NSPredicate(format: "name CONTAINS[cd] %@ AND stateId IN %@", filter, statesIds.value))
     }
-
+    
 }
 
 // MARK: - PreStoryScreen

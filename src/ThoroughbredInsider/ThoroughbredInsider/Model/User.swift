@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 9/1/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import Foundation
@@ -15,13 +16,15 @@ import RxSwift
  * data model
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class User: Object {
     
     /// fields
     @objc dynamic var id = 0
-    @objc dynamic var image = ""
+    @objc dynamic var profilePhotoURL: String?
     @objc dynamic var name = ""
     @objc dynamic var email = ""
     @objc dynamic var reviews = 0
@@ -51,11 +54,11 @@ extension User {
     /// avatar image
     var avatar: UIImage? {
         get {
-            return UIImage.init(contentsOfFile: image)
+            return UIImage.init(contentsOfFile: profilePhotoURL ?? "")
         }
         set {
             if let image = newValue {
-                self.image = FileUtil.saveContentFile("user-\(id)", data: UIImagePNGRepresentation(image)!)?.lastPathComponent ?? ""
+                self.profilePhotoURL = FileUtil.saveContentFile("user-\(id)", data: UIImagePNGRepresentation(image)!)?.lastPathComponent ?? ""
             }
         }
     }

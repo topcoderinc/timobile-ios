@@ -3,7 +3,7 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -25,7 +25,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     /// is already authorized
     var isAuthorized: Bool {
-        return CLLocationManager.authorizationStatus() == .authorizedAlways
+        return CLLocationManager.authorizationStatus() == .authorizedWhenInUse
     }
     
     /// are services enabled
@@ -63,6 +63,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: - CLLocationManager delegate
     
+    /// current location
+    var currentLocation: CLLocation?
+    
     /// location update
     ///
     /// - Parameters:
@@ -70,6 +73,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     ///   - locations: updated locations
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         stopUpdatingLocation()
+        currentLocation = locations.last!
     }
     
 }

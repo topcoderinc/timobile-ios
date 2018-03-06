@@ -2,7 +2,7 @@
 
 * MacOSX 10.12.6 or above
 * Xcode 9 or above
-* iPhone device/simulator with iOS 10+
+* iPhone device/simulator with iOS 11+
 
 ## Organization of Submission
 * src – this directory contains the source code
@@ -29,24 +29,29 @@ Make sure you deleted previous version of the app or app from different submissi
 ##Third-party libraries
 All libraries are managed through CocoaPods, the Podfile is available at src/ThoroughbredInsider/Podfile 
 
+The new additions in this challenge are
+- *KeychainAccess* - keychain wrapper
+- *AlamofireImage*, *Alamofire* - networking library
+- *RxAlamofire* - reactive wrapper for Alamofire
+- *RxPager* - reactive request pager
+
 ##Configuration
 
 Configuration file is located at 'src/ThoroughbredInsider/ThoroughbredInsider/configuration.plist'
 
-* *testEmail* - email for test login
-* *testPassword* - password for test login
+* *apiBaseUrl* - the base URL for API service
 
-Mock data is stored in json files at 'src/ThoroughbredInsider/ThoroughbredInsider/Resources/Mock'
+Remaining mock data is stored in json files at 'src/ThoroughbredInsider/ThoroughbredInsider/Resources/Mock'
 
 ##Verification
 
-Check out the video [demo](http://take.ms/zwXEe).
+It's important to note that all data changes are persisted through Realm and updated through Realm across the app. No explicit update delegation is allowed in current architecture. No explicit updates of screen model data are allowed (meaning even network requests should NOT yeild direct changes to a screen's content). I've fixed several cases of perpetrations and this rule should now be properly followed in all fully integrated screens.
 
-Refer to [forums](https://apps.topcoder.com/forums/?module=ThreadList&forumID=616409&mc=68) and [challenge description](https://www.topcoder.com/challenge-details/30060079/?type=develop).
+Check out the video overview for [onboarding & password change](http://take.ms/KfcW5u), [pre story](http://take.ms/4JGlN) and [story, chapters & comments](http://take.ms/vgCxx)
+you can also check the old [demo](http://take.ms/zwXEe) to understand that there're some existing differences between iOS & Android versions.
 
-The screens overview is available at [marvelapp](https://marvelapp.com/jfjdh2g/screen/32358810).
+Check that all list requests are appropriately paged.
 
-##Addionional notes
+Refer to [forums](https://apps.topcoder.com/forums/?module=Category&categoryID=40610) and [challenge description](https://www.topcoder.com/challenges/30063029/?type=develop&nocache=true).
 
-1. Mock data contains details & chapters only for the 1st story. You can setup additional chapters in the mock data.
-2. There're some caveats with data being overwritten by server - which is mock data - the fetching process has been developed in a way to make integration easier as specified in requirements, not in a way to imitate an actual backend easier
+The screens desing storyboard is available at [marvelapp](https://marvelapp.com/jfjdh2g/screen/32358810).

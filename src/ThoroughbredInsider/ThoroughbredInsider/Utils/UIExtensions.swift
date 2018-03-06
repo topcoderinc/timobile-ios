@@ -3,10 +3,12 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
+import AlamofireImage
 
 /// convenience shortcut
 func showAlert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
@@ -96,8 +98,8 @@ extension UIViewController {
      
      - parameter message: the message of the error alert
      */
-    func showErrorAlert(message: String) {
-        showAlert(title: "Error".localized, message: message)
+    func showErrorAlert(message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+        showAlert(title: "Error".localized, message: message, handler: handler)
     }
     
     /**
@@ -207,6 +209,22 @@ extension UIViewController {
                 self.navigationController?.setViewControllers(updatedStack, animated: false)
             }
         }
+    }
+ 
+    /// validates a single text field
+    ///
+    /// - Parameters:
+    ///   - field: text field
+    ///   - name: text field name
+    /// - Returns: validation status
+    func validateFieldNotEmpty(field: UITextField) -> Bool {
+        guard !field.textValue.isEmpty else {
+            showErrorAlert(message: "\(field.placeholder ?? "Field") cannot be empty".localized) { _ in
+                field.becomeFirstResponder()
+            }
+            return false
+        }
+        return true
     }
     
 }
@@ -364,9 +382,10 @@ extension UIImageView {
     /// load image from url
     ///
     /// - Parameter url: url
-    func load(url: String) {
+    func load(url: String?) {
+        guard let url = url else { return }
         if let imageUrl = URL(string: url), !(imageUrl.scheme ?? "").isEmpty {
-            image = UIImage(named: imageUrl.deletingPathExtension().lastPathComponent)
+            af_setImage(withURL: imageUrl)
         }
         else {
             image = UIImage(contentsOfFile: FileUtil.getLocalFileURL(url).path)

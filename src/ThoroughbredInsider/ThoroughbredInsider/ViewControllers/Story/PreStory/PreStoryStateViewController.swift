@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 10/31/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -16,13 +17,14 @@ import RealmSwift
  * state selection
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
-class PreStoryStateViewController: UIViewController {
+class PreStoryStateViewController: InfiniteTableViewController {
 
     /// outlets
-    @IBOutlet weak var filterField: UITextField!    
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var filterField: UITextField!
     
     /// viewmodel
     var vm: RealmTableViewModel<State, SelectCell>!
@@ -40,17 +42,19 @@ class PreStoryStateViewController: UIViewController {
                 strongSelf.setupVM(filter: value)
             }).disposed(by: rx.bag)
         
-        loadData(from: MockDataSource.getStates())
+        loadData(from: RestDataSource.getStates())
+        setupPager(requestPager: RequestPager<State>(request: { (offset, limit) in
+            RestDataSource.getStates(offset: offset, limit: limit)
+        }))
     }
     
     /// configure vm
     ///
     /// - Parameter filter: current filter
     func setupVM(filter: String = "") {
-        selected.removeAll()
         vm = RealmTableViewModel<State, SelectCell>()
         vm.configureCell = { [weak self] _, value, _, cell in
-            cell.titleLabel.text = value.name
+            cell.titleLabel.text = value.value
             cell.itemSelected = self?.selected.contains(value) == true
         }
         vm.onSelect = { [weak self] idx, value in
@@ -62,7 +66,7 @@ class PreStoryStateViewController: UIViewController {
             }
             self?.tableView.reloadRows(at: [IndexPath.init(row: idx, section: 0)], with: .fade)
         }
-        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "name")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        vm.bindData(to: tableView, sortDescriptors: [SortDescriptor(keyPath: "value")], predicate: filter.trim().isEmpty ? nil : NSPredicate(format: "value CONTAINS[cd] %@", filter))
     }
 
 }
@@ -94,6 +98,7 @@ extension PreStoryStateViewController: PreStoryScreen {
                 self.showErrorAlert(message: "Please select at least one".localized)
                 return
             }
+            vc.statesIds.value = self.selected.map { $0.id } 
             vc.next()
         }
     }

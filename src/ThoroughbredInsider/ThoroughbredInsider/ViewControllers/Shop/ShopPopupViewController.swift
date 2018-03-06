@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -31,9 +32,9 @@ class ShopPopupViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         titleLabel.text = card.name
-        congratsLabel.text = card.content
+        congratsLabel.text = card.descr
         cardImage.contentMode = .scaleAspectFill
-        cardImage.load(url: card.image)
+        cardImage.load(url: card.imageURL)
         ptsLabel.text = "\(card.pts) pts"
     }
     

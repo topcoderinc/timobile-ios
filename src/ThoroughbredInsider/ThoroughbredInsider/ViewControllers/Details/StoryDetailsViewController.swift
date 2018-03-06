@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +19,9 @@ import RxRealm
  * Story details screen
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class StoryDetailsViewController: UIViewController {
 
@@ -34,6 +37,8 @@ class StoryDetailsViewController: UIViewController {
     @IBOutlet weak var rewardsCollection: UICollectionView!
     @IBOutlet weak var additionalRewardView: UIView!
     @IBOutlet weak var additionalRewardLabel: UILabel!
+    @IBOutlet weak var additionalRewardTitleLabel: UILabel!
+    @IBOutlet weak var additionalRewardDescriptionLabel: UILabel!
     @IBOutlet weak var rewardsButton: UIButton!
     
     /// the story
@@ -41,6 +46,7 @@ class StoryDetailsViewController: UIViewController {
     
     /// the story
     var details = Variable<StoryDetails>(StoryDetails())
+    var progress = Variable<StoryProgress>(StoryProgress())
     
     /// viewmodels
     var tagsVM = CollectionViewModel<Tag, TagCell>()
@@ -51,23 +57,30 @@ class StoryDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         addBackButton()
-        loadData(from: MockDataSource.getStory(id: story.id))
+        loadData()
+        
         StoryDetails.get(with: story.id)
             .bind(to: details)
             .disposed(by: rx.bag)
-        details.asObservable().subscribe(onNext: { [weak self] value in
-            self?.setupUI(value: value)
+        story.realm?.fetch(type: StoryProgress.self, predicate: NSPredicate(format: "trackStoryId = %d", story.id))
+            .map { $0.last }
+            .flatten()
+            .bind(to: progress)
+            .disposed(by: rx.bag)
+        Observable.combineLatest(details.asObservable(), progress.asObservable())
+            .subscribe(onNext: { [weak self] details, progress in
+                self?.setupUI(details: details, progress: progress)
         }).disposed(by: rx.bag)
         
         tagsVM.configureCell = { _, value, _, cell in
-            cell.titleLabel.text = value.name
+            cell.titleLabel.text = value.value
         }
         tagsVM.bindData(to: tagsCollection)
         
         rewardsVM.configureCell = { [weak self] _, value, _, cell in
             cell.titleLabel.text = value.name
-            if self?.details.value.rewardsReceived == true {
-                cell.rewardImage.load(url: value.image)
+            if self?.progress.value.cardsAndRewardsReceived == true {
+                cell.rewardImage.load(url: value.imageURL)
                 cell.rewardImage.contentMode = .scaleAspectFill
             }
             else {
@@ -78,21 +91,55 @@ class StoryDetailsViewController: UIViewController {
         rewardsVM.bindData(to: rewardsCollection)
     }
     
+    /// loads data
+    private func loadData() {
+        let getDetails = RestDataSource.getStory(id: story.id)
+        getDetails.store()
+            .disposed(by: rx.bag)
+        let getProgress = RestDataSource.getStoryProgress(id: story.id)
+        getProgress.store()
+            .disposed(by: rx.bag)
+        Observable.combineLatest(getDetails, getProgress)
+            .showLoading(on: view)
+            .subscribe(onNext: { value in
+            }).disposed(by: rx.bag)
+    }
+    
     /// setup UI
     ///
     /// - Parameter value: details
-    private func setupUI(value: StoryDetails) {
-        storyImage.load(url: value.image)
-        titleLabel.text = value.name
-        summaryLabel.text = value.summary
-        chaptersLabel.text = "\(value.chapters) \("chapters".localized)"
-        cardsLabel.text = "\(value.cards) \("cards".localized)"
-        rewardsVM.entries.value = value.rewards.toArray()
-        tagsVM.entries.value = value.tags.toArray()
-        additionalRewardLabel.text = "\(value.additionalRewards) pts"
-        additionalRewardView.isHidden = value.rewardsReceived
-        rewardsButton.isEnabled = value.completed
-        bookmarkButton.image = value.bookmarked ? #imageLiteral(resourceName: "navIconStarSelected") : #imageLiteral(resourceName: "navIconStar")
+    private func setupUI(details: StoryDetails, progress: StoryProgress) {
+        storyImage.load(url: details.largeImageURL)
+        titleLabel.text = details.title
+        summaryLabel.text = details.summary
+        chaptersLabel.text = "\(details.chapters.count) \("chapters".localized)"
+        cardsLabel.text = "\(details.cards.count) \("cards".localized)"
+        rewardsVM.entries.value = details.cards.toArray()
+        tagsVM.entries.value = details.tags.toArray()
+        additionalRewardLabel.text = "\(details.additionalTask?.points ?? 0) pts"
+        additionalRewardTitleLabel.text = details.additionalTask?.name ?? ""
+        additionalRewardDescriptionLabel.text = details.additionalTask?.descr ?? ""
+        additionalRewardView.isHidden = progress.additionalTaskCompleted
+        rewardsButton.isEnabled = progress.completed
+        rewardsButton.isHidden = progress.cardsAndRewardsReceived
+        bookmarkButton.image = details.bookmarked ? #imageLiteral(resourceName: "navIconStarSelected") : #imageLiteral(resourceName: "navIconStar")
+        
+        // check if we need to mark the progress as completed
+        markCompletedIfNeeded(details: details, progress: progress)
+    }
+    
+    /// marks story as completed if all chapters are read
+    private func markCompletedIfNeeded(details: StoryDetails, progress: StoryProgress) {
+        guard progress.id > 0 && !progress.completed else { return }
+        if progress.chaptersUserProgress.toArray().filter({ $0.completed }).count == details.chapters.count {
+            RestDataSource.completeStory(id: progress.id)
+                .showLoading(on: self.view)
+                .subscribe(onNext: { [weak self] value in
+                    try? self?.progress.value.realm?.write {
+                        self?.progress.value.completed = true
+                    }
+                }).disposed(by: self.rx.bag)
+        }
     }
 
     /// View will appear
@@ -134,6 +181,7 @@ class StoryDetailsViewController: UIViewController {
     @IBAction func progressTapped(_ sender: Any) {
         guard let vc = create(viewController: StoryProgressViewController.self) else { return }
         vc.story = details.value
+        vc.progress = progress
         vc.onRewardsTap = { [unowned self] in
             self.dismiss(animated: false, completion: {
                 self.collectRewardsTapped(self)
@@ -143,6 +191,7 @@ class StoryDetailsViewController: UIViewController {
             guard let vc = self.create(viewController: StoryChapterViewController.self) else { return }
             vc.story = self.details.value
             vc.initial = idx
+            vc.progress = self.progress
             self.dismiss(animated: true) {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -160,6 +209,7 @@ class StoryDetailsViewController: UIViewController {
     @IBAction func readmoreTapped(_ sender: Any) {
         guard let vc = create(viewController: StoryChapterViewController.self) else { return }
         vc.story = details.value
+        vc.progress = progress
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -174,9 +224,18 @@ class StoryDetailsViewController: UIViewController {
     ///
     /// - Parameter sender: the button
     @IBAction func collectRewardsTapped(_ sender: Any) {
-        guard let vc = create(viewController: StoryCompleteViewController.self) else { return }
-        vc.story = details.value
-        present(vc, animated: true, completion: nil)
+        RestDataSource.receiveRewards(id: progress.value.id)
+            .showLoading(on: view)
+            .subscribe(onNext: { [weak self] rewards in
+                try? self?.progress.value.realm?.write {
+                    self?.progress.value.cardsAndRewardsReceived = true
+                }
+        
+                guard let vc = self?.create(viewController: StoryCompleteViewController.self) else { return }
+                vc.story = self?.details.value
+                vc.rewardsVM.entries.value = rewards.userCards.toArray()
+                self?.present(vc, animated: true, completion: nil)
+            }).disposed(by: rx.bag)
     }
 }
 
@@ -268,15 +327,20 @@ extension StoryDetailsViewController: UINavigationControllerDelegate, UIImagePic
                 }
             }
         }
+        
         if let resizedImage = resizedImage {
             picker.dismiss(animated: true, completion: {
                 guard let vc = self.create(viewController: SelfieSuccessViewController.self) else { return }
                 vc.image = resizedImage
+                vc.details = self.details.value
                 vc.onContinue = { [unowned self] in
-                    try? self.details.value.realm?.write {
-                        self.details.value.rewardsReceived = true
-                        self.details.value.completed = true
-                    }
+                    RestDataSource.completeAdditionalTask(id: self.progress.value.id)
+                        .showLoading(on: self.view)
+                        .subscribe(onNext: { [weak self] value in
+                            try? self?.progress.value.realm?.write {
+                                self?.progress.value.additionalTaskCompleted = true
+                            }
+                        }).disposed(by: self.rx.bag)
                 }
                 self.present(vc, animated: true, completion: nil)
             })

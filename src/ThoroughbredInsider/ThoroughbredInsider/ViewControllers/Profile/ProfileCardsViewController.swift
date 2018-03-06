@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 11/2/17.
-//  Copyright © 2017 Topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -37,7 +38,7 @@ class ProfileCardsViewController: UIViewController {
             cell.titleLabel.text = value.name
             if value.isEarned {
                 cell.rewardImage.contentMode = .scaleAspectFill
-                cell.rewardImage.load(url: value.image)
+                cell.rewardImage.load(url: value.imageURL)
             }
             else {
                 cell.rewardImage.contentMode = .scaleAspectFit

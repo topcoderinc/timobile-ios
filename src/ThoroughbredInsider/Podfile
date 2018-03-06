@@ -11,9 +11,13 @@ target 'ThoroughbredInsider' do
   pod 'RxDataSources'
   pod 'RxRealm'
   pod 'NSObject+Rx'
+  pod 'RxAlamofire'
+  pod 'RxPager', :git => 'https://github.com/N1k1tung/RxPager.git'
+  pod 'AlamofireImage'
   pod 'RealmSwift'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'
+  pod 'KeychainAccess'
 
 end
 

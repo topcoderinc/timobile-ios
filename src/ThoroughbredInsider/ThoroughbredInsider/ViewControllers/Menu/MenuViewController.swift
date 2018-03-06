@@ -3,7 +3,8 @@
 //  ThoroughbredInsider
 //
 //  Created by TCCODER on 30/10/17.
-//  Copyright © 2017 topcoder. All rights reserved.
+//  Modified by TCCODER on 2/23/18.
+//  Copyright © 2018  topcoder. All rights reserved.
 //
 
 import UIKit
@@ -60,7 +61,9 @@ struct MenuSection  {
  * menu view controller
  *
  * - author: TCCODER
- * - version: 1.0
+ * - version: 1.1
+ * 1.1:
+ * - updates for integration
  */
 class MenuViewController: UIViewController {
 
@@ -108,7 +111,7 @@ class MenuViewController: UIViewController {
         ]
         selected = IndexPath.init(row: 0, section: 0)
         
-        MockDataSource.getUser()
+        RestDataSource.getUser()
             .showLoading(on: userImage)
             .store()
             .disposed(by: rx.bag)
@@ -117,7 +120,7 @@ class MenuViewController: UIViewController {
             .subscribe(onNext: { [weak self] (value: User) in
                 self?.usernameLabel.text = value.name
                 self?.emailLabel.text = value.email
-                self?.userImage.load(url: value.image)
+                self?.userImage.load(url: value.profilePhotoURL)
         }).disposed(by: rx.bag)
     }
 
